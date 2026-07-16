@@ -21,8 +21,14 @@
     const q = $("search").value.trim().toLowerCase();
     const list = $("list");
     list.textContent = "";
+    // Match what the user sees: the prefixed shortcut ("/ty") as well as the
+    // stored shortcut ("ty") and the snippet text.
     const filtered = all.snippets.filter(
-      (s) => !q || s.shortcut.toLowerCase().includes(q) || s.text.toLowerCase().includes(q)
+      (s) =>
+        !q ||
+        s.shortcut.toLowerCase().includes(q) ||
+        (all.settings.prefix + s.shortcut).toLowerCase().includes(q) ||
+        s.text.toLowerCase().includes(q)
     );
     for (const s of filtered) {
       const li = document.createElement("li");
@@ -70,11 +76,13 @@
 
   $("addForm").addEventListener("submit", async (e) => {
     e.preventDefault();
+    let shortcut = $("newShortcut").value.trim();
+    // Users naturally type the trigger prefix too — strip it.
+    if (shortcut.startsWith(all.settings.prefix)) {
+      shortcut = shortcut.slice(all.settings.prefix.length);
+    }
     try {
-      await SnipKeyStore.addSnippet(
-        { shortcut: $("newShortcut").value.trim(), text: $("newText").value },
-        pay.paid
-      );
+      await SnipKeyStore.addSnippet({ shortcut, text: $("newText").value }, pay.paid);
       $("newShortcut").value = "";
       $("newText").value = "";
       $("addForm").hidden = true;

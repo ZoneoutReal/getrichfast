@@ -19,10 +19,18 @@
     const q = $("search").value.trim().toLowerCase();
     const rows = $("rows");
     rows.textContent = "";
+    // Match what the user sees: the prefixed shortcut ("/ty") as well as the
+    // stored shortcut ("ty") and the snippet text.
     const filtered = all.snippets
       .slice()
       .sort((a, b) => a.shortcut.localeCompare(b.shortcut))
-      .filter((s) => !q || s.shortcut.toLowerCase().includes(q) || s.text.toLowerCase().includes(q));
+      .filter(
+        (s) =>
+          !q ||
+          s.shortcut.toLowerCase().includes(q) ||
+          (all.settings.prefix + s.shortcut).toLowerCase().includes(q) ||
+          s.text.toLowerCase().includes(q)
+      );
 
     for (const s of filtered) {
       const tr = document.createElement("tr");
@@ -100,7 +108,11 @@
 
   $("editorForm").addEventListener("submit", async (e) => {
     e.preventDefault();
-    const shortcut = $("editShortcut").value.trim();
+    let shortcut = $("editShortcut").value.trim();
+    // Users naturally type the trigger prefix too — strip it.
+    if (shortcut.startsWith(all.settings.prefix)) {
+      shortcut = shortcut.slice(all.settings.prefix.length);
+    }
     const text = $("editText").value;
     try {
       if (editingId) {
