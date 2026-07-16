@@ -2,7 +2,7 @@
   "manifest_version": 3,
   "name": "SnipKey — Text Expander & Snippets",
   "short_name": "SnipKey",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Create snippets that expand anywhere you type — emails, forms, CRMs. 100% local and private. Pay once, no subscription.",
   "minimum_chrome_version": "105",
   "permissions": ["storage"],
