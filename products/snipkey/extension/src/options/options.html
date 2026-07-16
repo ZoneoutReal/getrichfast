@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>SnipKey — Snippet Manager</title>
+  <link rel="stylesheet" href="../lib/ui.css" />
+  <link rel="stylesheet" href="options.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">
+      <span class="logo-mark">/</span>
+      <h1>SnipKey</h1>
+      <span class="chip" id="planBadge">Free</span>
+    </div>
+    <nav class="small">
+      <a href="#" id="homeLink" target="_blank" rel="noreferrer">Help &amp; docs ↗</a>
+    </nav>
+  </header>
+
+  <div class="welcome card" id="welcome" hidden>
+    <div>
+      <h2>You're in 🎉</h2>
+      <p class="muted">
+        Click into any text field on any site and type <span class="chip">/ty</span> —
+        it expands the moment you finish typing it. Your snippets live only on this
+        device. Make your first one below.
+      </p>
+    </div>
+    <button class="btn btn-ghost" id="welcomeClose" title="Dismiss">✕</button>
+  </div>
+
+  <main class="layout">
+    <section class="manager card">
+      <div class="toolbar">
+        <input type="search" id="search" placeholder="Search snippets…" />
+        <button class="btn btn-primary" id="newBtn">+ New snippet</button>
+      </div>
+      <table class="snips">
+        <thead>
+          <tr><th>Shortcut</th><th>Expands to</th><th class="num">Uses</th><th></th></tr>
+        </thead>
+        <tbody id="rows"></tbody>
+      </table>
+      <div class="empty muted" id="empty" hidden>
+        No snippets yet — create your first one.
+      </div>
+    </section>
+
+    <aside class="side">
+      <div class="card pad" id="statusCard">
+        <h3>At a glance</h3>
+        <div class="stat-row"><span class="muted">Snippets</span><strong id="statCount">0</strong></div>
+        <div class="stat-row"><span class="muted">Total expansions</span><strong id="statUses">0</strong></div>
+        <div class="stat-row"><span class="muted">Plan</span><strong id="statPlan">Free</strong></div>
+      </div>
+
+      <div class="card pad pro" id="proCard" hidden>
+        <h3>SnipKey Pro</h3>
+        <p class="muted small">
+          Unlimited snippets. Pay once, own it forever — no subscription.
+        </p>
+        <button class="btn btn-primary wide" id="payBtn">Upgrade — <span id="priceLabel"></span></button>
+        <a href="#" class="small" id="restoreLink">Already paid? Restore purchase</a>
+      </div>
+
+      <div class="card pad">
+        <h3>Settings</h3>
+        <label class="field">
+          <span>Trigger prefix</span>
+          <select id="prefixSelect">
+            <option value="/">/ (slash)</option>
+            <option value=";">; (semicolon)</option>
+            <option value="#"># (hash)</option>
+            <option value="\">\ (backslash)</option>
+            <option value=":">: (colon)</option>
+          </select>
+        </label>
+        <label class="field">
+          <span>Expand</span>
+          <select id="modeSelect">
+            <option value="instant">Instantly, as I finish the shortcut</option>
+            <option value="delimiter">After I press space</option>
+          </select>
+        </label>
+        <label class="field row">
+          <span>Expansion enabled</span>
+          <span class="switch"><input type="checkbox" id="enabledToggle" /><span class="track"></span></span>
+        </label>
+      </div>
+
+      <div class="card pad">
+        <h3>Your data</h3>
+        <p class="muted small">Everything is stored on this device only. No account, no cloud, no tracking.</p>
+        <div class="btn-row">
+          <button class="btn" id="exportBtn">Export JSON</button>
+          <button class="btn" id="importBtn">Import JSON</button>
+          <input type="file" id="importFile" accept="application/json" hidden />
+        </div>
+      </div>
+    </aside>
+  </main>
+
+  <dialog id="editor">
+    <form id="editorForm" method="dialog">
+      <h2 id="editorTitle">New snippet</h2>
+      <label class="field">
+        <span>Shortcut</span>
+        <div class="shortcut-row">
+          <span class="chip" id="editorPrefix">/</span>
+          <input type="text" id="editShortcut" placeholder="e.g. addr" maxlength="32" spellcheck="false" autocomplete="off" />
+        </div>
+      </label>
+      <label class="field">
+        <span>Expands to</span>
+        <textarea id="editText" rows="8" placeholder="The full text…"></textarea>
+      </label>
+      <p class="muted small">
+        Dynamic bits: <span class="chip">{date}</span> <span class="chip">{date+7}</span>
+        <span class="chip">{time}</span> <span class="chip">{datetime}</span>
+        <span class="chip">{cursor}</span> (where your caret lands)
+      </p>
+      <div class="editor-actions">
+        <span class="form-error small" id="editorError"></span>
+        <button type="button" class="btn btn-danger" id="deleteBtn" hidden>Delete</button>
+        <button type="button" class="btn btn-ghost" id="cancelBtn">Cancel</button>
+        <button type="submit" class="btn btn-primary" id="saveBtn">Save snippet</button>
+      </div>
+    </form>
+  </dialog>
+
+  <div class="toast" id="toast"></div>
+
+  <script src="../lib/config.js"></script>
+  <script src="../lib/ExtPay.js"></script>
+  <script src="../lib/payments.js"></script>
+  <script src="../lib/storage.js"></script>
+  <script src="options.js"></script>
+</body>
+</html>

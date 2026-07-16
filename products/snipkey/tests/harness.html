@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>SnipKey test harness</title>
+  <style>
+    body { font-family: sans-serif; padding: 20px; display: grid; gap: 12px; max-width: 640px; }
+    input, textarea, [contenteditable] { border: 1px solid #999; padding: 6px; font-size: 14px; }
+    [contenteditable] { min-height: 40px; }
+    label { font-size: 12px; color: #555; display: block; }
+  </style>
+  <script>
+    // chrome.* stub so the real content script runs on a plain page.
+    // Seed data can be injected by the test runner via window.__SEED
+    // (addInitScript) before this executes.
+    window.__SEED = window.__SEED || { snippets: [], settings: {} };
+    window.__onChanged = [];
+    window.chrome = {
+      runtime: { getURL: (p) => p },
+      storage: {
+        local: {
+          __data: window.__SEED,
+          get(defaults, cb) {
+            const out = {};
+            for (const k of Object.keys(defaults)) {
+              out[k] = k in this.__data ? this.__data[k] : defaults[k];
+            }
+            setTimeout(() => cb(out), 0);
+          },
+          set(obj, cb) {
+            Object.assign(this.__data, obj);
+            const changes = {};
+            for (const [k, v] of Object.entries(obj)) changes[k] = { newValue: v };
+            window.__onChanged.forEach((f) => f(changes, "local"));
+            if (cb) cb();
+          }
+        },
+        onChanged: {
+          addListener(f) {
+            window.__onChanged.push(f);
+          }
+        }
+      }
+    };
+  </script>
+</head>
+<body>
+  <div><label>plain text input</label><input type="text" id="plain" /></div>
+  <div><label>second text input</label><input type="text" id="plain2" /></div>
+  <div><label>textarea</label><textarea id="ta" rows="3"></textarea></div>
+  <div><label>textarea 2</label><textarea id="ta2" rows="3"></textarea></div>
+  <div><label>contenteditable</label><div id="ce" contenteditable="true"></div></div>
+  <div><label>react-style controlled input</label><input type="text" id="react" /></div>
+  <div><label>password</label><input type="password" id="pw" /></div>
+
+  <script>
+    // Minimal React-controlled-input simulation: state mirrors the input via
+    // the input event; a "re-render" writes state back into the DOM value.
+    const reactState = { value: "" };
+    const reactEl = document.getElementById("react");
+    reactEl.addEventListener("input", (e) => {
+      reactState.value = e.target.value;
+      window.__reactValue = reactState.value;
+      reactEl.value = reactState.value; // controlled re-render
+    });
+  </script>
+  <script src="../extension/src/content.js"></script>
+</body>
+</html>
