@@ -8,6 +8,7 @@
     "test": "node tests/run-tests.mjs",
     "icons": "node scripts/make-icons.mjs",
     "shots": "node scripts/make-screenshots.mjs",
+    "tiles": "node scripts/make-promo-tiles.mjs",
     "build": "bash scripts/build.sh"
   },
   "devDependencies": {
