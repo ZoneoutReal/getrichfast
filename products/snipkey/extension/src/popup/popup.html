@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <link rel="stylesheet" href="../lib/ui.css" />
+  <link rel="stylesheet" href="popup.css" />
+</head>
+<body>
+  <header class="head">
+    <span class="logo-mark">/</span>
+    <h1>SnipKey</h1>
+    <label class="switch" title="Enable or disable expansion">
+      <input type="checkbox" id="enabledToggle" checked />
+      <span class="track"></span>
+    </label>
+  </header>
+
+  <div class="search-row">
+    <input type="search" id="search" placeholder="Search snippets…" autocomplete="off" />
+    <button class="btn btn-primary" id="newBtn" title="New snippet">+</button>
+  </div>
+
+  <form id="addForm" class="add-form" hidden>
+    <div class="shortcut-row">
+      <span class="prefix chip" id="prefixLabel">/</span>
+      <input type="text" id="newShortcut" placeholder="shortcut" autocomplete="off" spellcheck="false" maxlength="32" />
+    </div>
+    <textarea id="newText" rows="3" placeholder="Text to expand… supports {date}, {time}, {cursor}"></textarea>
+    <div class="form-actions">
+      <span class="form-error small" id="formError"></span>
+      <button type="button" class="btn btn-ghost" id="cancelAdd">Cancel</button>
+      <button type="submit" class="btn btn-primary">Save</button>
+    </div>
+  </form>
+
+  <div id="upgradeBanner" class="upgrade" hidden>
+    <div>
+      <strong>Snippet limit almost reached</strong>
+      <div class="small muted">Go unlimited — pay once, keep it forever.</div>
+    </div>
+    <button class="btn btn-primary" id="upgradeBtn">Upgrade</button>
+  </div>
+
+  <ul id="list" class="list"></ul>
+  <div id="empty" class="empty muted" hidden>
+    No snippets yet.<br />Create one with the + button.
+  </div>
+
+  <footer class="foot">
+    <span class="small muted" id="countLabel"></span>
+    <span class="small muted" id="statsLabel"></span>
+    <a href="#" id="manageLink" class="small">Manage ↗</a>
+  </footer>
+
+  <div class="toast" id="toast"></div>
+
+  <script src="../lib/config.js"></script>
+  <script src="../lib/ExtPay.js"></script>
+  <script src="../lib/payments.js"></script>
+  <script src="../lib/storage.js"></script>
+  <script src="popup.js"></script>
+</body>
+</html>
