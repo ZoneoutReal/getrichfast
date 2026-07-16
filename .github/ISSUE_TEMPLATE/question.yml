@@ -1,0 +1,20 @@
+name: 💬 Question or feature request
+description: Ask anything, or tell us what the product should do next
+labels: ["question"]
+body:
+  - type: dropdown
+    id: product
+    attributes:
+      label: Product
+      options:
+        - SnipKey (text expander)
+        - SnipShot (screenshot & annotate)
+        - Other / general
+    validations:
+      required: true
+  - type: textarea
+    id: q
+    attributes:
+      label: Your question or idea
+    validations:
+      required: true

@@ -1,5 +1,16 @@
 # Founder Setup — the only human steps in the pipeline
 
+> **Product #2 (SnipShot) shortcut:** the accounts below already exist after
+> setting up SnipKey, so shipping SnipShot is ~25 minutes total:
+> 1. ExtensionPay → "Add extension" → name/ID `getsnipshot` → one-time $15
+>    plan (nickname `pro`) → paste the ID into chat (it gets wired into
+>    `products/snipshot/extension/src/lib/config.js` and a final zip built).
+> 2. Dev console → New item → upload `products/snipshot/release/` zip →
+>    copy-paste everything from `products/snipshot/store/listing.md`
+>    (including both promo tiles) → Submit for review.
+> Same privacy-first answers, same flow — narrower permissions this time
+> (`activeTab`), so review may be faster.
+
 Everything in this repo is built, tested, and packaged. These are the steps
 that legally and practically require a human identity — forms, not
 conversations. **Total: roughly 60–75 minutes, once.** After this, the

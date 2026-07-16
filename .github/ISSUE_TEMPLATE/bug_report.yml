@@ -1,0 +1,35 @@
+name: 🐛 Bug report
+description: Something isn't working in SnipKey or SnipShot
+labels: ["bug"]
+body:
+  - type: dropdown
+    id: product
+    attributes:
+      label: Product
+      options:
+        - SnipKey (text expander)
+        - SnipShot (screenshot & annotate)
+    validations:
+      required: true
+  - type: textarea
+    id: what
+    attributes:
+      label: What happened?
+      description: What did you do, what did you expect, what happened instead?
+      placeholder: "I typed /addr in Gmail and…"
+    validations:
+      required: true
+  - type: input
+    id: site
+    attributes:
+      label: Website where it happened (if relevant)
+      placeholder: "mail.google.com"
+  - type: input
+    id: version
+    attributes:
+      label: Extension version + Chrome version
+      placeholder: "SnipKey 1.0.1, Chrome 141"
+  - type: markdown
+    attributes:
+      value: |
+        Thanks! Bug reports are usually answered within a day, and fixes ship as automatic updates.

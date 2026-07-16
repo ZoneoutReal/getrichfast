@@ -1,0 +1,38 @@
+{
+  "manifest_version": 3,
+  "name": "SnipShot — Screenshot & Annotate",
+  "short_name": "SnipShot",
+  "version": "1.0.0",
+  "description": "Capture the page, mark it up — arrows, boxes, text, blur — then copy or download. 100% local and private. Pay once, no subscription.",
+  "minimum_chrome_version": "105",
+  "permissions": ["activeTab", "storage", "clipboardWrite"],
+  "background": {
+    "service_worker": "src/background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": ["https://extensionpay.com/*"],
+      "js": ["src/lib/ExtPay.js"],
+      "run_at": "document_start"
+    }
+  ],
+  "action": {
+    "default_title": "SnipShot: capture this page (Alt+Shift+S)",
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "48": "icons/icon48.png",
+      "128": "icons/icon128.png"
+    }
+  },
+  "commands": {
+    "take-screenshot": {
+      "suggested_key": { "default": "Alt+Shift+S" },
+      "description": "Capture the visible page"
+    }
+  },
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  }
+}
