@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>SnipShot — Annotate</title>
+  <link rel="stylesheet" href="../lib/ui.css" />
+  <link rel="stylesheet" href="editor.css" />
+</head>
+<body>
+  <header class="bar">
+    <div class="brand"><span class="logo-mark">▣</span><b>SnipShot</b></div>
+
+    <div class="group" id="tools">
+      <button class="tool active" data-tool="select" title="Select / move (V)">↖</button>
+      <button class="tool" data-tool="arrow" title="Arrow (A)">↗</button>
+      <button class="tool" data-tool="rect" title="Rectangle (R)">▢</button>
+      <button class="tool" data-tool="ellipse" data-pro="1" title="Ellipse — Pro (E)">◯</button>
+      <button class="tool" data-tool="highlight" title="Highlighter (H)">▧</button>
+      <button class="tool" data-tool="text" title="Text (T)">T</button>
+      <button class="tool" data-tool="blur" data-pro="1" title="Blur / redact — Pro (B)">▩</button>
+      <button class="tool" data-tool="step" data-pro="1" title="Numbered step — Pro (S)">①</button>
+      <button class="tool" data-tool="crop" title="Crop (C)">⬚</button>
+    </div>
+
+    <div class="group" id="swatches"></div>
+    <label class="group custom-color" id="customColorWrap" title="Custom color — Pro">
+      <input type="color" id="customColor" value="#ef4444" />
+      <span class="pro-chip">PRO</span>
+    </label>
+
+    <select id="strokeSelect" class="group" title="Stroke width">
+      <option value="2">Thin</option>
+      <option value="4" selected>Medium</option>
+      <option value="8">Bold</option>
+    </select>
+
+    <div class="group">
+      <button class="tool" id="undoBtn" title="Undo (Ctrl+Z)">↩</button>
+      <button class="tool" id="redoBtn" title="Redo (Ctrl+Shift+Z)">↪</button>
+      <button class="tool" id="resetCropBtn" title="Remove crop" hidden>Uncrop</button>
+    </div>
+
+    <div class="spacer"></div>
+
+    <span id="proBadge" class="chip" hidden>Pro</span>
+    <button class="btn" id="upgradeBtn" hidden>Go Pro</button>
+    <button class="btn" id="copyBtn">Copy</button>
+    <button class="btn btn-primary" id="downloadBtn">Download PNG</button>
+  </header>
+
+  <div class="notice" id="notice" hidden></div>
+
+  <main class="stage">
+    <div class="canvas-wrap" id="canvasWrap">
+      <canvas id="canvas"></canvas>
+      <input id="textEditor" class="text-editor" hidden autocomplete="off" spellcheck="false" />
+      <div class="crop-bar" id="cropBar" hidden>
+        <button class="btn btn-primary" id="cropApply">Apply crop</button>
+        <button class="btn" id="cropCancel">Cancel</button>
+      </div>
+    </div>
+  </main>
+
+  <dialog id="proDialog">
+    <h2>SnipShot Pro</h2>
+    <p class="muted">
+      Blur/redact sensitive info, numbered step badges, ellipses, and custom
+      colors. <strong>Pay once, own it forever</strong> — no subscription.
+    </p>
+    <div class="pro-actions">
+      <button class="btn btn-primary" id="proBuyBtn">Upgrade — <span id="proPrice"></span></button>
+      <button class="btn" id="proRestoreBtn">Already paid? Restore</button>
+      <button class="btn btn-ghost" id="proCloseBtn">Not now</button>
+    </div>
+    <p class="muted small" id="proUnavailable" hidden>
+      Purchasing isn't enabled in this build.
+    </p>
+  </dialog>
+
+  <div class="toast" id="toast"></div>
+
+  <script src="../lib/config.js"></script>
+  <script src="../lib/ExtPay.js"></script>
+  <script src="../lib/payments.js"></script>
+  <script src="editor.js"></script>
+</body>
+</html>

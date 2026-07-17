@@ -1,0 +1,11 @@
+blank_issues_enabled: true
+contact_links:
+  - name: 💳 Billing / refunds
+    url: https://github.com/ZoneoutReal/getrichfast/issues/new?labels=billing&template=question.yml
+    about: Purchases are handled by ExtensionPay + Stripe. Open an issue with the email you paid with (never post card numbers) — refunds are granted on request, no questions asked.
+  - name: 📖 SnipKey FAQ
+    url: https://zoneoutreal.github.io/getrichfast/snipkey/#faq
+    about: Answers to the most common SnipKey questions.
+  - name: 📖 SnipShot FAQ
+    url: https://zoneoutreal.github.io/getrichfast/snipshot/#faq
+    about: Answers to the most common SnipShot questions.

@@ -34,5 +34,24 @@ npm run build   # produce the uploadable zip in dist/
 - `store/` — listing copy kit + generated 1280×800 screenshots
 - `scripts/` — icon/screenshot generators, zip packager
 
-Site: `docs/` (GitHub Pages) — portfolio page, SnipKey landing, privacy
-policy.
+### 2. SnipShot — Screenshot & Annotate (`products/snipshot/`)
+
+Chrome extension (Manifest V3). One click captures the page and opens a
+local annotation editor — arrows, boxes, highlights, text, crop, undo, plus
+Pro blur/redaction and numbered step badges. Images never leave the device.
+Free core, $15 one-time Pro.
+
+```bash
+cd products/snipshot
+npm install
+npm test        # 29 tests: canvas editor logic + real-extension smoke suite
+npm run icons && npm run shots && npm run tiles
+npm run build   # produce the uploadable zip in dist/
+```
+
+Both products share the same factory: Playwright test harnesses, generated
+store assets, listing kits, and a `release/` folder carrying the current
+store-upload zip.
+
+Site: `docs/` (GitHub Pages) — portfolio page, per-product landing pages and
+privacy policies. Support: GitHub issue templates in `.github/ISSUE_TEMPLATE/`.

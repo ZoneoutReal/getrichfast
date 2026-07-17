@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://zoneoutreal.github.io/getrichfast/sitemap.xml
