@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <link rel="stylesheet" href="../lib/ui.css" />
+  <link rel="stylesheet" href="popup.css" />
+</head>
+<body>
+  <header class="brand">
+    <img src="../../icons/icon48.png" width="26" height="26" alt="" />
+    <b>FocusFence</b>
+    <span id="proBadge" class="badge" hidden>PRO</span>
+    <span id="statusDot" class="dot off" title="Blocking status"></span>
+  </header>
+
+  <div id="sessionBox" class="session" hidden>
+    <div class="big" id="countdown">25:00</div>
+    <div class="lab">focus session running</div>
+    <button id="endBtn" class="ghost danger">End early</button>
+    <div id="strictNote" class="strictnote" hidden>🔒 Strict mode — the fence stays up until the timer ends.</div>
+  </div>
+
+  <div id="startBox">
+    <div class="lab">Start a focus session</div>
+    <div class="sessrow">
+      <button class="sess" data-mins="25">25 min</button>
+      <button class="sess" data-mins="50">50 min</button>
+      <button class="sess" data-mins="90">90 min</button>
+    </div>
+    <label class="always"><input id="alwaysOn" type="checkbox" /> <span>Always-on blocking (no timer)</span></label>
+  </div>
+
+  <div class="quickadd">
+    <div class="lab">Block list <span id="count" class="counttag"></span></div>
+    <div id="siteRow" class="siterow" hidden>
+      <span id="curHost" class="host"></span>
+      <button id="addCurrent" class="ghost">+ Block this site</button>
+    </div>
+    <div id="sites" class="sites"></div>
+  </div>
+
+  <div class="row">
+    <button id="optionsBtn" class="ghost">All settings</button>
+    <button id="upgradeBtn" class="ghost accent" hidden>Pro — <span id="price"></span></button>
+  </div>
+
+  <script src="../lib/config.js"></script>
+  <script src="../lib/ExtPay.js"></script>
+  <script src="../lib/payments.js"></script>
+  <script src="../lib/rules.js"></script>
+  <script src="popup.js"></script>
+</body>
+</html>

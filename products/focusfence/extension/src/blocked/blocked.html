@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Blocked — FocusFence</title>
+  <link rel="stylesheet" href="../lib/ui.css" />
+  <style>
+    body {
+      margin: 0;
+      font-family: var(--font);
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .card {
+      text-align: center;
+      max-width: 460px;
+      padding: 40px 32px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      box-shadow: var(--shadow);
+      margin: 24px;
+    }
+    .fence {
+      font-size: 44px;
+      margin-bottom: 12px;
+    }
+    h1 {
+      font-size: 22px;
+      letter-spacing: -0.01em;
+      margin: 0 0 6px;
+    }
+    .site {
+      font-family: var(--mono);
+      color: var(--danger);
+      font-weight: 600;
+    }
+    p {
+      color: var(--muted);
+      font-size: 14.5px;
+      line-height: 1.6;
+    }
+    #msg {
+      font-size: 15.5px;
+      color: var(--text);
+      font-weight: 550;
+      margin-top: 14px;
+    }
+    #left {
+      margin-top: 16px;
+      font-size: 13px;
+      color: var(--muted);
+    }
+    #left b {
+      color: var(--text);
+    }
+    .settingsLink {
+      display: inline-block;
+      margin-top: 18px;
+      font-size: 13px;
+      color: var(--accent);
+      cursor: pointer;
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <div class="fence">🛡️</div>
+    <h1><span class="site" id="site">This site</span> is fenced off</h1>
+    <p>You put it on your block list — future you says thanks.</p>
+    <div id="msg" hidden></div>
+    <div id="left" hidden>Focus session: <b id="mins"></b> remaining</div>
+    <span class="settingsLink" id="settings">FocusFence settings</span>
+  </div>
+  <script src="blocked.js"></script>
+</body>
+</html>

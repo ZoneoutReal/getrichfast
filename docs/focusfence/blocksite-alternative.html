@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>FocusFence vs. BlockSite — an honest comparison (2026)</title>
+  <meta name="description" content="BlockSite charges $10.99/month, limits free users to a few sites, and has a privacy history. FocusFence blocks locally for $15 once." />
+  <style>
+    body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+           color: #16182d; background: #f6f7fb; line-height: 1.65; }
+    .wrap { max-width: 760px; margin: 0 auto; padding: 48px 24px; }
+    h1 { letter-spacing: -0.022em; font-size: 34px; line-height: 1.15; }
+    h2 { margin-top: 34px; font-size: 21px; }
+    p, li { color: #3d4152; }
+    .muted { color: #5b6070; font-size: 14px; }
+    a { color: #dc2626; }
+    table { border-collapse: collapse; width: 100%; margin: 22px 0; font-size: 14.5px; }
+    th, td { text-align: left; padding: 10px 12px; border-bottom: 1px solid #e3e6ef; }
+    th { font-size: 12.5px; text-transform: uppercase; letter-spacing: 0.04em; color: #5b6070; }
+    td:first-child { color: #5b6070; }
+    .yes { color: #059669; font-weight: 650; }
+    .no { color: #9ca3af; }
+    .cta { display: inline-block; margin-top: 18px; padding: 13px 22px; border-radius: 12px; font-weight: 650;
+           text-decoration: none; font-size: 16px; color: #fff;
+           background: linear-gradient(135deg, #dc2626, #ea580c); }
+    .fair { background: #fff; border: 1px solid #e3e6ef; border-radius: 12px; padding: 18px 20px; margin-top: 26px; }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <p class="muted"><a href="./">← FocusFence</a></p>
+    <h1>FocusFence vs. BlockSite: who owns your focus — and your data?</h1>
+    <p class="muted">Last updated July 2026</p>
+
+    <p>BlockSite is the biggest name in site blocking — 5M+ users. It's also a subscription (<b>$10.99/month</b>, or ~$4/month on a 3-year commitment), its free tier stops at a handful of sites, users report aggressive upgrade pop-ups, and the product has a documented history of privacy concerns. FocusFence takes the opposite bet: <b>$15 once</b>, a genuinely useful free tier, and an architecture that never sees your browsing at all.</p>
+
+    <h2>Side by side</h2>
+    <table>
+      <tr><th></th><th>FocusFence</th><th>BlockSite</th></tr>
+      <tr><td>Free tier</td><td class="yes">7 sites, all core features</td><td>~3 sites, upgrade prompts</td></tr>
+      <tr><td>Focus sessions with countdown</td><td class="yes">✓ Free</td><td class="yes">✓</td></tr>
+      <tr><td>Schedules</td><td class="yes">✓ Pro ($15 once)</td><td class="yes">✓ Paid</td></tr>
+      <tr><td>Strict / locked mode</td><td class="yes">✓ Pro</td><td class="yes">✓ Paid ("password protection")</td></tr>
+      <tr><td>Where blocking happens</td><td class="yes">Chrome's own rule engine, locally</td><td>Extension code + account features</td></tr>
+      <tr><td>Account required for sync features</td><td class="yes">No accounts at all</td><td>Yes</td></tr>
+      <tr><td>Analytics / tracking</td><td class="yes">None — nothing to send, nowhere to send it</td><td>Has required broad data access; past privacy controversies</td></tr>
+      <tr><td>Cross-device sync</td><td class="no">— (local by design)</td><td class="yes">✓ Paid</td></tr>
+      <tr><td>Mobile app</td><td class="no">—</td><td class="yes">✓</td></tr>
+      <tr><td>Price</td><td class="yes">$15 once</td><td>$10.99/month ($395/3yr)</td></tr>
+    </table>
+
+    <div class="fair">
+      <b>When BlockSite is the better choice:</b> if you need blocking synced to a phone app and across devices under one account, BlockSite has that whole ecosystem and FocusFence deliberately doesn't. If cross-device enforcement matters more to you than privacy and price, it's the fit.
+    </div>
+
+    <h2>What FocusFence does differently</h2>
+    <ul>
+      <li><b>The browser blocks, not us.</b> FocusFence writes declarative rules; Chrome's engine enforces them. The extension never observes your requests — there is no browsing data to collect, mishandle, or sell.</li>
+      <li><b>A free tier you can actually live on.</b> Seven fenced sites covers most people's real distraction list.</li>
+      <li><b>Commitment that holds.</b> Strict mode freezes settings until the session ends — no "just this once."</li>
+      <li><b>One price.</b> $15 once. BlockSite's monthly price passes that in five weeks.</li>
+    </ul>
+
+    <a class="cta" href="./">Get FocusFence — free, Pro $15 once →</a>
+  </div>
+</body>
+</html>
