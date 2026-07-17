@@ -84,25 +84,31 @@ impressions, installs, weekly users, Pro conversions. Apply kill/feed rules.
 - Crash-grade bugs get fixed and shipped as an update; everything else is
   weekly-batched.
 
-## Candidate shortlist for product #2+ (validate before building)
+## Candidate shortlist — status after the July 2026 build sprint
 
-Run each through the qualification checklist on scan day:
+The original shortlist is now mostly shipped (validation evidence recorded in
+each product's PR):
 
-1. **Developer/QA form filler** — one keystroke fills any form with valid
-   fake data (names, emails, cards-that-validate). Devs/QA pay for tools;
-   local-only is easy. Validate: install counts on "fake filler" incumbents.
-2. **Copy-as-Markdown everywhere** — copy a selection/page as clean Markdown
-   for Notion/Obsidian users. Validate: demand strong, but check how many
-   free tools already satisfy it.
-3. **Local screenshot annotator** — capture + arrows/blur/crop, no upload, no
-   account (the privacy wedge vs. cloud incumbents). Validate: crowded; only
-   enter if reviews of the top 3 show real privacy/pricing pain.
-4. **JSON/CSV viewer-formatter with big-file support** — devs hit free-tool
-   limits; local processing is the wedge. Validate: monetization is the open
-   question.
-5. **Recurring-invoice text generator for freelancers** — templates + smart
-   dates (reuses SnipKey's engine). Validate: may be a SnipKey *feature*
-   marketed as its own listing rather than a separate product.
+1. ~~**Developer/QA form filler**~~ → **shipped as MockFill (#3)**. Validated:
+   Fake Filler ~120k users charging $3.99/mo for custom fields.
+2. ~~**Copy-as-Markdown everywhere**~~ → **shipped as CopyMark (#4)**. Demand
+   proven (MarkDownload/Copy-as-Markdown/MarkSnip); monetization is the
+   riskiest of the batch, priced at impulse-tier $9.
+3. ~~**Local screenshot annotator**~~ → **shipped as SnipShot (#2)**.
+4. ~~**JSON viewer-formatter with big-file support**~~ → **shipped as
+   JSONPeek (#5)**. Validated: subscription incumbent at $4.99/mo.
+5. **Recurring-invoice text generator for freelancers** — still open;
+   likely a SnipKey feature marketed as its own listing.
+
+Two additional niches were validated and shipped the same sprint:
+
+6. **Site blocker / focus mode** → **FocusFence (#6)**. Validated: BlockSite
+   5M+ users at $10.99/mo, ~3-site free cap, privacy complaints.
+7. **Auto refresh + page monitor** → **PagePulse (#7)**. Validated:
+   Auto Refresh Plus category in the millions, monitoring paywalled.
+
+**Portfolio: 7 products shipped.** The 6–10 shot target below is met — the
+job now shifts to Friday uploads, Monday scoreboards, and kill/feed calls.
 
 ## Boundaries (non-negotiable)
 

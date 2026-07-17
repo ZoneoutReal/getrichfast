@@ -14,6 +14,16 @@ human interaction in the sales loop.
 
 ## Products
 
+| # | Product | Category | Pro | Tests |
+|---|---------|----------|-----|-------|
+| 1 | [SnipKey](products/snipkey/) | Text expander & snippets | $15 | 14 |
+| 2 | [SnipShot](products/snipshot/) | Screenshot & annotate | $15 | 29 |
+| 3 | [MockFill](products/mockfill/) | Test data form filler | $15 | 57 |
+| 4 | [CopyMark](products/copymark/) | Copy as Markdown | $9 | 51 |
+| 5 | [JSONPeek](products/jsonpeek/) | JSON viewer & formatter | $12 | 44 |
+| 6 | [FocusFence](products/focusfence/) | Site blocker & focus | $15 | 58 |
+| 7 | [PagePulse](products/pagepulse/) | Auto refresh & monitor | $9 | 42 |
+
 ### 1. SnipKey — Text Expander & Snippets (`products/snipkey/`)
 
 Chrome extension (Manifest V3). Type `/addr` and it expands into your full
