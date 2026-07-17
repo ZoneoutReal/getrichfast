@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>CopyMark test harness — A Guide to Widgets</title>
+</head>
+<body>
+  <article id="article">
+    <h1>A Guide to Widgets</h1>
+    <p>Widgets are <strong>important</strong> and <em>occasionally</em> <strong><em>both</em></strong>. Use <code>widget.spin()</code> to start.</p>
+    <p>Read the <a href="/docs/intro">intro docs</a> or the <a href="https://example.com/full">full manual</a>. Ignore <a href="javascript:void(0)">this link</a>.</p>
+
+    <h2>Installation</h2>
+    <pre><code class="language-bash">npm install widgets
+widgets init --fast</code></pre>
+
+    <ul>
+      <li>First item</li>
+      <li>Second with <code>code</code>
+        <ul>
+          <li>Nested one</li>
+          <li>Nested two</li>
+        </ul>
+      </li>
+      <li>Third item</li>
+    </ul>
+
+    <ol start="3">
+      <li>Step three</li>
+      <li>Step four</li>
+    </ol>
+
+    <ul class="tasks">
+      <li><input type="checkbox" checked /> Done thing</li>
+      <li><input type="checkbox" /> Pending thing</li>
+    </ul>
+
+    <blockquote>
+      <p>Widgets change everything.</p>
+      <p>— <em>Widget Weekly</em></p>
+    </blockquote>
+
+    <table>
+      <thead>
+        <tr><th>Name</th><th>Speed</th><th>Price</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Alpha</td><td>Fast | furious</td><td>$9</td></tr>
+        <tr><td>Beta</td><td>Slow</td><td>$5</td></tr>
+      </tbody>
+    </table>
+
+    <hr />
+    <p>Special chars: 5 * 3 = 15, a_b_c, [not a link], `tick`.</p>
+    <p>Line one<br />line two after break.</p>
+    <p style="display:none">HIDDEN TEXT MUST NOT APPEAR</p>
+    <script>document.write("");</script>
+    <p><img src="/img/widget.png" alt="A widget" /> and <del>old text</del>.</p>
+    <div>
+      <div>
+        <p>Deeply nested paragraph.</p>
+      </div>
+    </div>
+  </article>
+  <script src="../extension/src/md/serializer.js"></script>
+</body>
+</html>

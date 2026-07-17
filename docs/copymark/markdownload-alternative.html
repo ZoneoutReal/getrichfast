@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>CopyMark vs. MarkDownload — an honest comparison (2026)</title>
+  <meta name="description" content="MarkDownload clips whole pages to .md files. CopyMark copies selections as clean Markdown with GFM tables and templates for $9 once. An honest side-by-side." />
+  <style>
+    body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+           color: #16182d; background: #f6f7fb; line-height: 1.65; }
+    .wrap { max-width: 760px; margin: 0 auto; padding: 48px 24px; }
+    h1 { letter-spacing: -0.022em; font-size: 34px; line-height: 1.15; }
+    h2 { margin-top: 34px; font-size: 21px; }
+    p, li { color: #3d4152; }
+    .muted { color: #5b6070; font-size: 14px; }
+    a { color: #3b82f6; }
+    table { border-collapse: collapse; width: 100%; margin: 22px 0; font-size: 14.5px; }
+    th, td { text-align: left; padding: 10px 12px; border-bottom: 1px solid #e3e6ef; }
+    th { font-size: 12.5px; text-transform: uppercase; letter-spacing: 0.04em; color: #5b6070; }
+    td:first-child { color: #5b6070; }
+    .yes { color: #059669; font-weight: 650; }
+    .no { color: #9ca3af; }
+    .cta { display: inline-block; margin-top: 18px; padding: 13px 22px; border-radius: 12px; font-weight: 650;
+           text-decoration: none; font-size: 16px; color: #fff;
+           background: linear-gradient(135deg, #3b82f6, #6366f1); }
+    .fair { background: #fff; border: 1px solid #e3e6ef; border-radius: 12px; padding: 18px 20px; margin-top: 26px; }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <p class="muted"><a href="./">← CopyMark</a></p>
+    <h1>CopyMark vs. MarkDownload: which Markdown clipper fits you?</h1>
+    <p class="muted">Last updated July 2026</p>
+
+    <p>MarkDownload is a well-loved free clipper built around one flow: turn the whole page into a .md file download. CopyMark is built around a different one: <b>select → copy → paste into your notes</b>, with the conversion quality of a hand-written Markdown document. Free covers selections and page links; Pro ($9 once) adds GFM tables, templated full-page clips, and all-tabs link lists.</p>
+
+    <h2>Side by side</h2>
+    <table>
+      <tr><th></th><th>CopyMark</th><th>MarkDownload</th></tr>
+      <tr><td>Copy selection as Markdown</td><td class="yes">✓ Free, one keystroke</td><td class="yes">✓ via popup</td></tr>
+      <tr><td>Copy page as [title](url) link</td><td class="yes">✓ Free</td><td class="no">—</td></tr>
+      <tr><td>Full-page clip</td><td class="yes">✓ Pro, with front-matter templates</td><td class="yes">✓ Free (.md download)</td></tr>
+      <tr><td>Tables → GFM pipes</td><td class="yes">✓ Pro, with cell escaping</td><td>Partial</td></tr>
+      <tr><td>All tabs → Markdown link list</td><td class="yes">✓ Pro</td><td class="no">—</td></tr>
+      <tr><td>Language-tagged code fences</td><td class="yes">✓</td><td class="yes">✓</td></tr>
+      <tr><td>Background page access</td><td class="yes">None — activeTab only</td><td>Reads pages via content script</td></tr>
+      <tr><td>Price</td><td class="yes">Free / $9 once</td><td class="yes">Free</td></tr>
+    </table>
+
+    <div class="fair">
+      <b>When MarkDownload is the better choice:</b> if your whole workflow is "save complete articles as .md files on disk" and you never copy fragments, its download-first flow is exactly that — and it's free. CopyMark's free tier is clipboard-first by design.
+    </div>
+
+    <h2>What CopyMark does differently</h2>
+    <ul>
+      <li><b>Selection-first.</b> Most real clipping is a paragraph, a table, a code block — not the whole page. One keystroke, clean Markdown, straight to your clipboard.</li>
+      <li><b>Invoke-only access.</b> CopyMark uses activeTab: it cannot see any page until the moment you invoke it there. No always-on content scripts.</li>
+      <li><b>Templates that match your vault.</b> Pro front-matter with {{title}}, {{url}}, {{date}} and a one-click Obsidian preset.</li>
+      <li><b>Honest table handling.</b> Cells with pipes get escaped so your table renders instead of breaking.</li>
+    </ul>
+
+    <a class="cta" href="./">Get CopyMark — free, Pro $9 once →</a>
+  </div>
+</body>
+</html>

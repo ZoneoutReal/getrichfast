@@ -10,6 +10,7 @@ body:
         - SnipKey (text expander)
         - SnipShot (screenshot & annotate)
         - MockFill (test data form filler)
+        - CopyMark (copy as Markdown)
     validations:
       required: true
   - type: textarea

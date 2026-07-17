@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <link rel="stylesheet" href="../lib/ui.css" />
+  <link rel="stylesheet" href="popup.css" />
+</head>
+<body>
+  <header class="brand">
+    <img src="../../icons/icon48.png" width="26" height="26" alt="" />
+    <b>CopyMark</b>
+    <span id="proBadge" class="badge" hidden>PRO</span>
+  </header>
+
+  <button id="selBtn" class="action">✂️ Copy selection as Markdown</button>
+  <button id="linkBtn" class="action">🔗 Copy page as Markdown link</button>
+  <button id="pageBtn" class="action">📄 Copy full page <span class="pro-tag" data-protag>Pro</span></button>
+  <button id="tabsBtn" class="action">🗂️ Copy all tabs as link list <span class="pro-tag" data-protag>Pro</span></button>
+
+  <div id="result" class="result" hidden></div>
+  <div id="restricted" class="result warn" hidden>Chrome doesn't allow extensions on this page (chrome:// pages, the Web Store). Try any normal website.</div>
+
+  <div class="hint">Shortcut: <kbd>Alt</kbd>+<kbd>Shift</kbd>+<kbd>M</kbd> copies the selection (or the page link if nothing is selected).</div>
+
+  <div class="row">
+    <button id="optionsBtn" class="ghost">Settings</button>
+    <button id="upgradeBtn" class="ghost accent" hidden>Upgrade — <span id="price"></span></button>
+  </div>
+
+  <script src="../lib/config.js"></script>
+  <script src="../lib/ExtPay.js"></script>
+  <script src="../lib/payments.js"></script>
+  <script src="popup.js"></script>
+</body>
+</html>

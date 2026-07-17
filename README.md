@@ -66,6 +66,22 @@ npm run icons && npm run shots && npm run tiles
 npm run build   # produce the uploadable zip in dist/
 ```
 
+### 4. CopyMark — Copy as Markdown (`products/copymark/`)
+
+Chrome extension (Manifest V3). Select anything and Alt+Shift+M copies it as
+clean Markdown — headings, nested lists, links (absolutized), language-tagged
+code fences, quotes, task lists, escaping. Free: selection + page-link
+copying; $9 one-time Pro adds GFM tables, full-page clips with front-matter
+templates (Obsidian preset), and all-tabs link lists.
+
+```bash
+cd products/copymark
+npm install
+npm test        # 51 tests: serializer suite + real-extension smoke suite
+npm run icons && npm run shots && npm run tiles
+npm run build   # produce the uploadable zip in dist/
+```
+
 All products share the same factory: Playwright test harnesses, generated
 store assets, listing kits, and a `release/` folder carrying the current
 store-upload zip.

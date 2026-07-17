@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>CopyMark — Copy as Markdown for Chrome. Pay once, own it forever.</title>
+  <meta name="description" content="Copy any selection or page as clean Markdown — headings, lists, links, code, tables. Perfect for Obsidian & Notion. 100% local. $9 once." />
+  <style>
+    :root {
+      --accent: #3b82f6; --accent2: #6366f1; --text: #16182d; --muted: #5b6070;
+      --border: #e3e6ef; --soft: #e0e7ff; --ok: #10b981;
+    }
+    * { box-sizing: border-box; margin: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      color: var(--text); line-height: 1.6;
+      background:
+        radial-gradient(1000px 500px at 100% -5%, #dbeafe 0%, transparent 55%),
+        radial-gradient(800px 400px at -5% 20%, #e0e7ff 0%, transparent 50%),
+        #f6f7fb;
+    }
+    .wrap { max-width: 1020px; margin: 0 auto; padding: 0 24px; }
+    header { display: flex; align-items: center; gap: 10px; padding: 22px 0; }
+    .mark {
+      width: 34px; height: 34px; border-radius: 10px; position: relative; flex: none;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      display: flex; align-items: center; justify-content: center;
+      color: #fff; font-weight: 800; font-size: 19px;
+    }
+    .mark::after { content: "↓"; position: absolute; right: 2px; bottom: -2px; font-size: 13px; color: #a5f3fc; font-weight: 800; }
+    header b { font-size: 19px; }
+    header nav { margin-left: auto; display: flex; gap: 22px; }
+    header a { color: var(--muted); text-decoration: none; font-weight: 550; font-size: 15px; }
+    header a:hover { color: var(--text); }
+
+    .hero { text-align: center; padding: 52px 0 30px; }
+    h1 { font-size: 50px; line-height: 1.08; letter-spacing: -0.025em; margin-bottom: 18px; }
+    .hl { background: linear-gradient(135deg, var(--accent), var(--accent2)); -webkit-background-clip: text; background-clip: text; color: transparent; }
+    .sub { font-size: 19px; color: var(--muted); margin: 0 auto 28px; max-width: 600px; }
+    .cta-row { display: flex; gap: 12px; align-items: center; justify-content: center; flex-wrap: wrap; }
+    .btn {
+      display: inline-block; padding: 13px 22px; border-radius: 12px; font-weight: 650;
+      text-decoration: none; font-size: 16px; transition: filter .12s ease;
+    }
+    .btn-primary { background: linear-gradient(135deg, var(--accent), var(--accent2)); color: #fff; box-shadow: 0 10px 24px rgba(99,102,241,.35); }
+    .btn-primary:hover { filter: brightness(1.07); }
+    .btn-ghost { color: var(--text); border: 1px solid var(--border); background: #fff; }
+    .note { font-size: 13.5px; color: var(--muted); margin-top: 12px; }
+    .shot { border-radius: 18px; border: 1px solid var(--border); box-shadow: 0 30px 70px rgba(79,70,229,.22); width: 100%; height: auto; background:#fff; margin-top: 40px; }
+
+    section { padding: 56px 0; }
+    h2 { font-size: 32px; letter-spacing: -0.02em; margin-bottom: 10px; }
+    .lead { color: var(--muted); font-size: 17px; max-width: 620px; margin-bottom: 36px; }
+    .grid3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+    @media (max-width: 820px) { .grid3 { grid-template-columns: 1fr; } h1 { font-size: 38px; } }
+    .feat { background: #fff; border: 1px solid var(--border); border-radius: 16px; padding: 22px; }
+    .feat .ico { font-size: 22px; margin-bottom: 10px; }
+    .feat h3 { font-size: 16.5px; margin-bottom: 6px; }
+    .feat p { color: var(--muted); font-size: 14.5px; }
+
+    .pricing { display: flex; gap: 22px; justify-content: center; flex-wrap: wrap; }
+    .plan { background: #fff; border: 1px solid var(--border); border-radius: 18px; padding: 28px; width: 320px; }
+    .plan.pro { outline: 3px solid var(--accent2); outline-offset: -3px; }
+    .plan .name { font-weight: 700; color: var(--muted); margin-bottom: 4px; }
+    .plan .price { font-size: 40px; font-weight: 780; letter-spacing: -0.02em; margin-bottom: 14px; }
+    .plan .price small { font-size: 15px; color: var(--muted); font-weight: 600; }
+    .plan ul { list-style: none; padding: 0; }
+    .plan li { padding: 5px 0; font-size: 15px; }
+    .plan li::before { content: "✓  "; color: var(--ok); font-weight: 800; }
+
+    details { background: #fff; border: 1px solid var(--border); border-radius: 12px; padding: 16px 20px; margin-bottom: 10px; }
+    summary { font-weight: 620; cursor: pointer; font-size: 15.5px; }
+    details p { color: var(--muted); padding-top: 8px; font-size: 15px; }
+
+    footer.site { padding: 40px 0 56px; color: var(--muted); font-size: 14px; display: flex; gap: 18px; flex-wrap: wrap; }
+    footer.site a { color: inherit; }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <div class="mark">M</div><b>CopyMark</b>
+      <nav>
+        <a href="#features">Features</a>
+        <a href="#pricing">Pricing</a>
+        <a href="#faq">FAQ</a>
+      </nav>
+    </header>
+
+    <div class="hero">
+      <h1>The web, <span class="hl">as clean Markdown.</span></h1>
+      <p class="sub">Select anything — headings, lists, links, code, tables — and copy it as tidy Markdown for Obsidian, Notion, GitHub, or your notes. Nothing leaves your browser.</p>
+      <div class="cta-row">
+        <!-- ADD_TO_CHROME: replace href with the Chrome Web Store URL after the listing is approved -->
+        <a class="btn btn-primary" id="install" href="#pricing">Add to Chrome — Free</a>
+        <a class="btn btn-ghost" href="#features">What it converts</a>
+      </div>
+      <p class="note">Free forever for selection &amp; link copying · Pro is $9 once — no subscription, ever</p>
+      <img class="shot" src="convert.png" alt="A web article on the left converted to clean Markdown on the right by CopyMark" />
+    </div>
+
+    <section id="features">
+      <h2>Paste Markdown, not a formatting mess.</h2>
+      <p class="lead">Every paste from the web into your notes app either loses structure or drags along broken HTML. CopyMark converts properly — the way you'd have written it by hand.</p>
+      <div class="grid3">
+        <div class="feat"><div class="ico">✂️</div><h3>Copy selection</h3><p>Alt+Shift+M or right-click. Headings, bold/italic, nested lists, quotes, task lists — all faithfully converted.</p></div>
+        <div class="feat"><div class="ico">💻</div><h3>Real code blocks</h3><p>Code fences with language tags detected from the page (```bash, ```js), inline code preserved.</p></div>
+        <div class="feat"><div class="ico">🔗</div><h3>Cite in one click</h3><p>"Copy page as Markdown link" puts [Page title](url) on your clipboard — the fastest source citation.</p></div>
+        <div class="feat"><div class="ico">📊</div><h3>GFM tables <small>(Pro)</small></h3><p>HTML tables become real pipe tables with escaped cells, ready for GitHub and Obsidian.</p></div>
+        <div class="feat"><div class="ico">📄</div><h3>Full-page clip <small>(Pro)</small></h3><p>Convert the whole article with your front-matter template — {{title}}, {{url}}, {{date}} — Obsidian preset included.</p></div>
+        <div class="feat"><div class="ico">🗂️</div><h3>All tabs → list <small>(Pro)</small></h3><p>Copy every open tab as a Markdown link list. Research session, saved in one keystroke.</p></div>
+      </div>
+    </section>
+
+    <section id="pricing">
+      <h2 style="text-align:center">Pay once. Clip forever.</h2>
+      <p class="lead" style="text-align:center; margin-left:auto; margin-right:auto;">Your notes pipeline shouldn't have a monthly bill.</p>
+      <div class="pricing">
+        <div class="plan">
+          <div class="name">Free</div>
+          <div class="price">$0</div>
+          <ul>
+            <li>Copy any selection as Markdown</li>
+            <li>Copy page as Markdown link</li>
+            <li>Headings, lists, code, quotes, images</li>
+            <li>Keyboard shortcut &amp; context menu</li>
+          </ul>
+        </div>
+        <div class="plan pro">
+          <div class="name">Pro</div>
+          <div class="price">$9 <small>one-time</small></div>
+          <ul>
+            <li>Everything in Free</li>
+            <li>Tables → GFM pipes</li>
+            <li>Full-page clip + front-matter templates</li>
+            <li>All tabs → Markdown link list</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section id="faq">
+      <h2>Questions, answered.</h2>
+      <p class="lead"></p>
+      <details>
+        <summary>Does the page content go anywhere?</summary>
+        <p>No. The conversion runs inside your browser, on your machine. CopyMark has no servers, no account system, and no analytics — your clippings exist only on your clipboard.</p>
+      </details>
+      <details>
+        <summary>When can CopyMark see a page?</summary>
+        <p>Only at the moment you invoke it there (Chrome's activeTab permission). It cannot read pages in the background or track your browsing.</p>
+      </details>
+      <details>
+        <summary>Is Pro really one-time?</summary>
+        <p>Yes. $9 once, all Pro features forever, every future update included. Payments are processed by Stripe via ExtensionPay; we never see your card details.</p>
+      </details>
+      <details>
+        <summary>Why do tables come out as plain rows on the free tier?</summary>
+        <p>Free converts tables to readable plain-text rows; Pro upgrades them to real GFM pipe tables with escaping. Everything else — headings, lists, code, quotes — is fully converted in Free.</p>
+      </details>
+      <details>
+        <summary>Does it work with Obsidian and Notion?</summary>
+        <p>Yes — the output is standard Markdown (GFM flavored). Pro adds a front-matter template with an Obsidian preset so full-page clips land with title, source URL, and date already filled in.</p>
+      </details>
+    </section>
+
+    <section id="switching" style="padding-top:24px">
+      <h2>Switching from another clipper?</h2>
+      <p class="lead">See how CopyMark compares — honestly, including when the other tool is the better fit.</p>
+      <div style="display:flex; gap:12px; flex-wrap:wrap">
+        <a class="btn btn-ghost" href="markdownload-alternative.html">CopyMark vs. MarkDownload →</a>
+      </div>
+    </section>
+
+    <footer class="site">
+      <span>© 2026 CopyMark</span>
+      <a href="privacy.html">Privacy policy</a>
+      <a href="https://github.com/ZoneoutReal/getrichfast/issues">Support</a>
+      <a href="../">All tools</a>
+    </footer>
+  </div>
+</body>
+</html>
