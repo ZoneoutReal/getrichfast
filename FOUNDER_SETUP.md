@@ -20,9 +20,14 @@
 > | 5 | JSONPeek (JSON viewer & formatter) | `jsonpeek` | $12 | `products/jsonpeek/release/` |
 > | 6 | FocusFence (site blocker & focus) | `focusfence` | $15 | `products/focusfence/release/` |
 > | 7 | PagePulse (auto refresh & monitor) | `pagepulse` | $9 | `products/pagepulse/release/` |
+> | 8 | TypeVault (draft & version recovery) | `typevault` | $12 | `products/typevault/release/` |
+> | 9 | Recall (search history by content) | `recall` | $15 | `products/recall/release/` |
+> | 10 | ClipStack (clipboard history) | `clipstack` | $9 | `products/clipstack/release/` |
 >
 > All listings use the same privacy-first answers; permission justifications
-> are pre-written in each product's `store/listing.md`.
+> are pre-written in each product's `store/listing.md`. (If an ExtensionPay ID
+> is already taken, prefix with `get`, e.g. `gettypevault` — same as SnipKey
+> became `getsnipkey`.)
 
 Everything in this repo is built, tested, and packaged. These are the steps
 that legally and practically require a human identity — forms, not
