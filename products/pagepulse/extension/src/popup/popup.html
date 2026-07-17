@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <link rel="stylesheet" href="../lib/ui.css" />
+  <link rel="stylesheet" href="popup.css" />
+</head>
+<body>
+  <header class="brand">
+    <img src="../../icons/icon48.png" width="26" height="26" alt="" />
+    <b>PagePulse</b>
+    <span id="proBadge" class="badge" hidden>PRO</span>
+  </header>
+
+  <div id="restricted" class="warn" hidden>Chrome doesn't allow extensions on this page. Try any normal website tab.</div>
+
+  <div id="controls">
+    <div class="lab">Refresh <b id="host">this tab</b> every…</div>
+    <div id="presets" class="presets"></div>
+    <div class="customrow">
+      <input id="custom" type="text" placeholder="custom: 45s · 2m · 1.5h (Pro)" spellcheck="false" />
+      <button id="customGo" class="ghost">Set</button>
+    </div>
+    <div id="err" class="err" hidden></div>
+
+    <div class="prorow">
+      <label class="check"><input id="jitter" type="checkbox" /> <span>±20% jitter <i class="protag" data-protag>PRO</i></span></label>
+      <label class="check"><input id="hardReload" type="checkbox" /> <span>Bypass cache (hard reload)</span></label>
+    </div>
+    <div class="prorow">
+      <label class="check"><input id="monitorOn" type="checkbox" /> <span>Alert me when the page changes <i class="protag" data-protag>PRO</i></span></label>
+      <input id="keyword" type="text" placeholder='only when this text appears/disappears (optional)' hidden spellcheck="false" />
+    </div>
+  </div>
+
+  <div id="running" class="running" hidden>
+    <div class="big" id="nextIn">–</div>
+    <div class="lab2">until next refresh · every <span id="curInterval"></span> · <span id="reloadCount">0</span> reloads</div>
+    <button id="stopBtn" class="danger">■ Stop refreshing this tab</button>
+  </div>
+
+  <div id="jobsWrap" hidden>
+    <div class="lab">All refreshing tabs <button id="stopAll" class="tiny">stop all</button></div>
+    <div id="jobs"></div>
+  </div>
+
+  <div class="row">
+    <a id="homeLink" class="ghost btnlink" target="_blank" rel="noreferrer">Help</a>
+    <button id="upgradeBtn" class="ghost accent" hidden>Pro — <span id="price"></span></button>
+    <button id="restoreBtn" class="ghost" hidden>Restore</button>
+  </div>
+  <div id="proNote" class="warn" hidden></div>
+
+  <script src="../lib/config.js"></script>
+  <script src="../lib/ExtPay.js"></script>
+  <script src="../lib/payments.js"></script>
+  <script src="../lib/timing.js"></script>
+  <script src="popup.js"></script>
+</body>
+</html>

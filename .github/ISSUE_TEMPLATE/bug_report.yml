@@ -13,6 +13,7 @@ body:
         - CopyMark (copy as Markdown)
         - JSONPeek (JSON viewer & formatter)
         - FocusFence (site blocker & focus)
+        - PagePulse (auto refresh & monitor)
     validations:
       required: true
   - type: textarea
