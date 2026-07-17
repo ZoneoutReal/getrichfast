@@ -11,6 +11,7 @@ body:
         - SnipShot (screenshot & annotate)
         - MockFill (test data form filler)
         - CopyMark (copy as Markdown)
+        - JSONPeek (JSON viewer & formatter)
     validations:
       required: true
   - type: textarea

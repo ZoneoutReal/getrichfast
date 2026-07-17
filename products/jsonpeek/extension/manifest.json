@@ -1,0 +1,38 @@
+{
+  "manifest_version": 3,
+  "name": "JSONPeek — JSON Viewer & Formatter",
+  "short_name": "JSONPeek",
+  "version": "1.0.0",
+  "description": "Fast JSON viewer: collapsible tree, search, paths, big files. Pro adds queries, CSV export & diff. 100% local, pay once.",
+  "minimum_chrome_version": "105",
+  "permissions": ["activeTab", "scripting", "storage"],
+  "background": {
+    "service_worker": "src/background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": ["https://extensionpay.com/*"],
+      "js": ["src/lib/ExtPay.js"],
+      "run_at": "document_start"
+    }
+  ],
+  "action": {
+    "default_title": "JSONPeek: view this tab's JSON",
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "48": "icons/icon48.png",
+      "128": "icons/icon128.png"
+    }
+  },
+  "commands": {
+    "open-viewer": {
+      "suggested_key": { "default": "Alt+Shift+J" },
+      "description": "Open the JSONPeek viewer"
+    }
+  },
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  }
+}
