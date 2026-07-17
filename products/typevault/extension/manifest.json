@@ -3,7 +3,7 @@
   "name": "TypeVault — Draft & Version Recovery",
   "short_name": "TypeVault",
   "version": "1.0.0",
-  "description": "Never lose what you typed. TypeVault auto-saves versioned drafts of every field, on-device. Scrub the timeline, diff versions, restore in one click.",
+  "description": "Never lose what you typed. TypeVault auto-saves versioned drafts of every field, on-device. Scrub the timeline, diff, restore.",
   "minimum_chrome_version": "105",
   "permissions": ["storage"],
   "background": {
