@@ -1,0 +1,40 @@
+{
+  "manifest_version": 3,
+  "name": "TypeVault — Draft & Version Recovery",
+  "short_name": "TypeVault",
+  "version": "1.0.0",
+  "description": "Never lose what you typed. TypeVault auto-saves versioned drafts of every field, on-device. Scrub the timeline, diff versions, restore in one click.",
+  "minimum_chrome_version": "105",
+  "permissions": ["storage"],
+  "background": {
+    "service_worker": "src/background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": ["https://extensionpay.com/*"],
+      "js": ["src/lib/ExtPay.js"],
+      "run_at": "document_start"
+    },
+    {
+      "matches": ["<all_urls>"],
+      "js": ["src/lib/store.js", "src/content.js"],
+      "run_at": "document_idle",
+      "all_frames": true
+    }
+  ],
+  "action": {
+    "default_title": "TypeVault: drafts saved on this page",
+    "default_popup": "src/popup/popup.html",
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "48": "icons/icon48.png",
+      "128": "icons/icon128.png"
+    }
+  },
+  "options_page": "src/options/options.html",
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  }
+}

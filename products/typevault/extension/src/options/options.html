@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>TypeVault — Draft Manager</title>
+  <link rel="stylesheet" href="../lib/ui.css" />
+  <link rel="stylesheet" href="options.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">
+      <span class="logo-mark" aria-hidden="true">⟲</span>
+      <h1>TypeVault</h1>
+      <span class="chip" id="planBadge">Free</span>
+    </div>
+    <nav class="small">
+      <a href="#" id="homeLink" target="_blank" rel="noreferrer">Help &amp; docs ↗</a>
+    </nav>
+  </header>
+
+  <div class="welcome card" id="welcome" hidden>
+    <div>
+      <h2>Your drafts are safe now 🛟</h2>
+      <p class="muted">
+        TypeVault quietly saves versioned snapshots of everything you type into forms, editors and
+        comment boxes — on this device only. Clear a form by accident or lose a tab, then come back
+        here (or the toolbar popup) to scrub the timeline and restore any version. Nothing is ever
+        uploaded.
+      </p>
+    </div>
+    <button class="btn btn-ghost" id="welcomeClose" title="Dismiss">✕</button>
+  </div>
+
+  <main class="layout">
+    <section class="manager card">
+      <div class="toolbar">
+        <input type="search" id="search" placeholder="Search all drafts by field, site or text…" />
+        <span class="small muted" id="managerCount"></span>
+      </div>
+      <div id="sites" class="sites"></div>
+      <div class="empty muted" id="empty" hidden>
+        No drafts captured yet. Type into a field on any site and it shows up here.
+      </div>
+    </section>
+
+    <aside class="side">
+      <div class="card pad" id="statusCard">
+        <h3>At a glance</h3>
+        <div class="stat-row"><span class="muted">Drafts</span><strong id="statFields">0</strong></div>
+        <div class="stat-row"><span class="muted">Versions</span><strong id="statVersions">0</strong></div>
+        <div class="stat-row"><span class="muted">Sites</span><strong id="statSites">0</strong></div>
+        <div class="stat-row"><span class="muted">Plan</span><strong id="statPlan">Free</strong></div>
+      </div>
+
+      <div class="card pad pro" id="proCard" hidden>
+        <h3>TypeVault Pro</h3>
+        <p class="muted small">
+          Full cross-site history, unlimited version timeline &amp; diff, unlimited retention, and JSON
+          export. Pay once, own it forever — no subscription.
+        </p>
+        <button class="btn btn-primary wide" id="payBtn">Upgrade — <span id="priceLabel"></span></button>
+        <a href="#" class="small" id="restoreLink">Already paid? Restore purchase</a>
+      </div>
+
+      <div class="card pad">
+        <h3>Settings</h3>
+        <label class="field row">
+          <span>Pause capturing everywhere</span>
+          <span class="switch"><input type="checkbox" id="globalPause" /><span class="track"></span></span>
+        </label>
+        <label class="field">
+          <span>Versions kept per field</span>
+          <select id="retention">
+            <option value="10">10</option>
+            <option value="20">20</option>
+            <option value="30">30</option>
+            <option value="50">50</option>
+          </select>
+        </label>
+        <label class="field">
+          <span>Ignore text shorter than</span>
+          <select id="minLen">
+            <option value="10">10 characters</option>
+            <option value="15">15 characters</option>
+            <option value="25">25 characters</option>
+            <option value="40">40 characters</option>
+          </select>
+        </label>
+        <div class="field">
+          <span>Paused sites</span>
+          <div id="pausedSites" class="paused-list"></div>
+          <span class="small muted" id="noPaused" hidden>No paused sites.</span>
+        </div>
+      </div>
+
+      <div class="card pad">
+        <h3>Your data</h3>
+        <p class="muted small">Everything is stored on this device only. No account, no cloud, no tracking.</p>
+        <div class="btn-row">
+          <button class="btn" id="exportBtn">Export JSON <span class="protag" id="exportTag">PRO</span></button>
+          <button class="btn btn-danger" id="clearBtn">Clear all…</button>
+        </div>
+      </div>
+    </aside>
+  </main>
+
+  <dialog id="timeline">
+    <div class="tl-dialog-head">
+      <div>
+        <h2 id="tlLabel">Field</h2>
+        <span class="small muted" id="tlSub"></span>
+      </div>
+      <button type="button" class="btn btn-ghost" id="tlClose" title="Close">✕</button>
+    </div>
+    <ol id="versions" class="timeline"></ol>
+  </dialog>
+
+  <dialog id="confirm">
+    <form method="dialog">
+      <h2>Clear all drafts?</h2>
+      <p class="muted">
+        This permanently deletes every saved draft and version on this device. This can't be undone.
+      </p>
+      <div class="editor-actions">
+        <button type="button" class="btn btn-ghost" id="confirmCancel">Cancel</button>
+        <button type="button" class="btn btn-danger" id="confirmClear">Delete everything</button>
+      </div>
+    </form>
+  </dialog>
+
+  <div class="toast" id="toast"></div>
+
+  <script src="../lib/config.js"></script>
+  <script src="../lib/ExtPay.js"></script>
+  <script src="../lib/payments.js"></script>
+  <script src="../lib/diff.js"></script>
+  <script src="../lib/store.js"></script>
+  <script src="options.js"></script>
+</body>
+</html>

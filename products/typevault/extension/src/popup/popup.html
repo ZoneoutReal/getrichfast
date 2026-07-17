@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <link rel="stylesheet" href="../lib/ui.css" />
+  <link rel="stylesheet" href="popup.css" />
+</head>
+<body>
+  <header class="head">
+    <span class="logo-mark" aria-hidden="true">⟲</span>
+    <h1>TypeVault</h1>
+    <span class="chip pro-badge" id="proBadge" hidden>PRO</span>
+  </header>
+
+  <!-- ===================== LIST VIEW ===================== -->
+  <section id="listView">
+    <div class="siterow">
+      <div class="sitemeta">
+        <span class="lab">Drafts on</span>
+        <b id="siteHost">this page</b>
+      </div>
+      <label class="pauserow" title="Pause capturing on this site">
+        <span class="switch"><input type="checkbox" id="pauseToggle" /><span class="track"></span></span>
+        <span class="small muted">Pause here</span>
+      </label>
+    </div>
+
+    <div class="search-row">
+      <input type="search" id="search" placeholder="Search drafts on this page…" autocomplete="off" />
+    </div>
+
+    <ul id="drafts" class="draftlist"></ul>
+    <div id="empty" class="empty muted" hidden>
+      No drafts saved on this page yet.<br />
+      Start typing in any field — TypeVault saves it automatically.
+    </div>
+    <div id="restricted" class="warn" hidden>
+      TypeVault can't capture on this page (Chrome blocks extensions here). Open any normal website.
+    </div>
+  </section>
+
+  <!-- ===================== TIMELINE VIEW ===================== -->
+  <section id="timelineView" hidden>
+    <div class="tlhead">
+      <button class="btn btn-ghost back" id="backBtn" title="Back to drafts">←</button>
+      <div class="tlmeta">
+        <b id="tlLabel">Field</b>
+        <span class="small muted" id="tlCount"></span>
+      </div>
+    </div>
+    <ol id="versions" class="timeline"></ol>
+    <div class="tlfoot small muted" id="tlHint">
+      Newest at the top. Diff compares each version to the one before it.
+    </div>
+  </section>
+
+  <footer class="foot">
+    <span class="small muted" id="totalLabel"></span>
+    <a href="#" id="manageLink" class="small">Manage all ↗</a>
+    <button class="btn btn-primary tiny" id="upgradeBtn" hidden>Pro — <span id="price"></span></button>
+  </footer>
+
+  <div id="proNote" class="warn" hidden></div>
+  <div class="toast" id="toast"></div>
+
+  <script src="../lib/config.js"></script>
+  <script src="../lib/ExtPay.js"></script>
+  <script src="../lib/payments.js"></script>
+  <script src="../lib/diff.js"></script>
+  <script src="../lib/store.js"></script>
+  <script src="popup.js"></script>
+</body>
+</html>
