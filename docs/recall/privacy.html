@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Recall — Privacy Policy</title>
+  <style>
+    body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+           color: #16182d; background: #f6f7fb; line-height: 1.65; }
+    .wrap { max-width: 720px; margin: 0 auto; padding: 56px 24px; }
+    h1 { letter-spacing: -0.02em; } h2 { margin-top: 32px; font-size: 20px; }
+    p, li { color: #3d4152; } .muted { color: #5b6070; font-size: 14px; }
+    a { color: #0ea5a3; }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <h1>Recall Privacy Policy</h1>
+    <p class="muted">Effective date: July 17, 2026</p>
+
+    <h2>The short version</h2>
+    <p>Recall collects nothing and transmits nothing. It reads the text of the pages you visit only to build a search index that lives on your own device, and it makes no network requests of any kind (aside from the optional Pro purchase, which you initiate).</p>
+
+    <h2>How it works</h2>
+    <ul>
+      <li>As you browse, Recall extracts the readable text of the page (title, meta description, and visible body text — with navigation, scripts and styling stripped out) and folds it into a full-text index stored in Chrome's local extension storage on your device.</li>
+      <li>When you search, the query runs against that local index inside your browser and returns ranked matches with a snippet. Clicking a result reopens the page.</li>
+      <li>The index — the extracted text, the tokens, and page metadata (URL, title, host, visit time) — never leaves your device. There is no server to receive it, and the extension makes no network requests to transmit it.</li>
+      <li>Pages that look sensitive (URLs involving login, authentication, banking, checkout and similar) are automatically skipped and never indexed. Non-http(s) pages are ignored.</li>
+      <li>You are always in control: pause indexing at any time, add sites to an ignore list, remove individual pages, or clear the entire index in one click from the options page.</li>
+    </ul>
+
+    <h2>Data collection</h2>
+    <p>Recall operates no servers and includes no analytics, telemetry, advertising, or tracking of any kind. Nothing about your browsing is sent anywhere. The extension requests only the "storage" permission (for the local index) and content-script access to read page text for that local index.</p>
+
+    <h2>Payments (Pro upgrade)</h2>
+    <p>The optional one-time Pro upgrade is processed by <a href="https://extensionpay.com">ExtensionPay</a> and Stripe. ExtensionPay handles your email address and payment status; card details are handled by Stripe. Recall never sees or stores your payment information, and no browsing data is involved in the payment. See the <a href="https://extensionpay.com/privacy">ExtensionPay privacy policy</a> and the <a href="https://stripe.com/privacy">Stripe privacy policy</a>.</p>
+
+    <h2>Changes</h2>
+    <p>If this policy changes, the new version will be posted at this address with an updated effective date.</p>
+
+    <h2>Contact</h2>
+    <p>Questions or issues: <a href="https://github.com/ZoneoutReal/getrichfast/issues">open an issue on GitHub</a>.</p>
+  </div>
+</body>
+</html>
