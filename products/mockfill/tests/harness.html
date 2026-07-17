@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>MockFill test harness</title>
+</head>
+<body>
+  <h1>Signup</h1>
+  <form id="signup">
+    <label for="first">First name</label><input id="first" name="first_name" type="text" />
+    <label for="last">Last name</label><input id="last" name="last_name" type="text" />
+    <input id="fullname" placeholder="Full name" type="text" />
+    <input id="email" name="email" type="email" />
+    <input id="phone" type="tel" name="phone" />
+    <input id="user" autocomplete="username" type="text" />
+    <input id="pw" type="password" name="password" />
+    <input id="site" type="url" name="website" />
+    <input id="company" placeholder="Company" type="text" />
+    <input id="job" name="job_title" type="text" />
+    <input id="camel" name="streetAddress" type="text" />
+    <label>Bio <textarea id="bio" name="bio"></textarea></label>
+
+    <input id="street" autocomplete="street-address" type="text" />
+    <input id="city" name="city" type="text" />
+    <select id="state" name="state">
+      <option value="">Choose a state…</option>
+      <option value="CA">California</option>
+      <option value="NY">New York</option>
+      <option value="TX">Texas</option>
+    </select>
+    <input id="zip" name="zip_code" type="text" maxlength="5" />
+
+    <input id="birth" type="date" name="date_of_birth" />
+    <input id="appt" type="date" name="appointment" />
+    <input id="when" type="time" name="when" />
+    <input id="qty" type="number" name="quantity" min="2" max="9" />
+    <input id="volume" type="range" min="10" max="20" />
+    <input id="shade" type="color" />
+
+    <input id="cardnum" autocomplete="cc-number" type="text" />
+    <input id="cvc" name="cvv" type="text" maxlength="4" />
+    <input id="exp" placeholder="MM/YY expiry" type="text" />
+
+    <input id="terms" type="checkbox" name="agree_terms" />
+    <input id="promo" type="checkbox" name="promo_optin" />
+    <fieldset>
+      <input type="radio" name="plan" value="free" id="planFree" />
+      <input type="radio" name="plan" value="pro" id="planPro" />
+      <input type="radio" name="plan" value="team" id="planTeam" />
+    </fieldset>
+
+    <!-- must be left alone -->
+    <input id="hidden" type="hidden" name="csrf" value="token123" />
+    <input id="ro" type="text" readonly value="readonly-keep" />
+    <input id="dis" type="text" disabled value="disabled-keep" />
+    <input id="skipme" type="text" data-mockfill="skip" value="" />
+    <input id="file" type="file" />
+    <input id="submitBtn" type="submit" value="Go" />
+
+    <!-- custom-rule targets -->
+    <input id="coupon" name="coupon_code" type="text" />
+    <input id="internal" name="internal_ref" type="text" />
+  </form>
+
+  <!-- React-style controlled input: framework tracks value via its own
+       listener; native-setter + dispatched input event must reach it. -->
+  <input id="reactish" type="text" name="tracked" />
+
+  <script>
+    window.frameworkSaw = [];
+    const el = document.getElementById("reactish");
+    el.addEventListener("input", (e) => window.frameworkSaw.push(e.target.value));
+    window.eventLog = {};
+    for (const id of ["email", "state", "terms"]) {
+      const t = document.getElementById(id);
+      for (const evt of ["input", "change", "focus"]) {
+        t.addEventListener(evt, () => {
+          window.eventLog[id] = window.eventLog[id] || [];
+          window.eventLog[id].push(evt);
+        });
+      }
+    }
+  </script>
+  <script src="../extension/src/fill/engine.js"></script>
+</body>
+</html>

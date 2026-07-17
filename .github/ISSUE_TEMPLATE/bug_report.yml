@@ -9,6 +9,7 @@ body:
       options:
         - SnipKey (text expander)
         - SnipShot (screenshot & annotate)
+        - MockFill (test data form filler)
     validations:
       required: true
   - type: textarea

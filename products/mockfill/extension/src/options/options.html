@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>MockFill Settings</title>
+  <link rel="stylesheet" href="../lib/ui.css" />
+  <link rel="stylesheet" href="options.css" />
+</head>
+<body>
+  <div class="wrap">
+    <header class="brand">
+      <img src="../../icons/icon48.png" width="34" height="34" alt="" />
+      <div>
+        <b>MockFill</b>
+        <div class="sub">Test data form filler — settings</div>
+      </div>
+      <span id="proBadge" class="badge" hidden>PRO</span>
+    </header>
+
+    <section class="card">
+      <h2>General</h2>
+      <label class="field">
+        <span>Email domain <small>emails are always generated as fake addresses on this domain</small></span>
+        <input id="emailDomain" type="text" placeholder="example.com" spellcheck="false" />
+      </label>
+      <label class="check">
+        <input id="checkAllBoxes" type="checkbox" />
+        <span>Always tick checkboxes (instead of randomly)</span>
+      </label>
+    </section>
+
+    <section class="card" id="proCard">
+      <h2>Pro <span id="proLockNote" class="locknote">— unlock with <b id="price"></b></span></h2>
+
+      <div class="prorow">
+        <label class="check">
+          <input id="fillCards" type="checkbox" data-pro />
+          <span>Fill card fields with official <b>test card numbers</b> (Luhn-valid, never chargeable)</span>
+        </label>
+        <label class="field inline">
+          <span>Brand</span>
+          <select id="cardBrand" data-pro>
+            <option value="visa">Visa 4242…</option>
+            <option value="mastercard">Mastercard 5555…</option>
+            <option value="amex">Amex 3782…</option>
+            <option value="discover">Discover 6011…</option>
+          </select>
+        </label>
+      </div>
+
+      <div class="prorow">
+        <label class="check">
+          <input id="seedEnabled" type="checkbox" data-pro />
+          <span>Deterministic mode — same seed, same data, every run <small>(reproducible bug reports)</small></span>
+        </label>
+        <label class="field inline">
+          <span>Seed</span>
+          <input id="seed" type="text" placeholder="sprint-42" data-pro />
+        </label>
+      </div>
+
+      <h3>Custom field rules</h3>
+      <p class="muted">When a field's name/id/label matches a pattern, use your value instead of the guess. First match wins.</p>
+      <table id="rulesTable">
+        <thead>
+          <tr><th>Pattern (regex)</th><th>Action</th><th>Value / preset</th><th></th></tr>
+        </thead>
+        <tbody id="rulesBody"></tbody>
+      </table>
+      <button id="addRuleBtn" class="ghost" data-pro>+ Add rule</button>
+    </section>
+
+    <section class="card" id="upsell" hidden>
+      <h2>MockFill Pro</h2>
+      <p>Custom field rules, official test cards, deterministic seed mode. <b id="price2"></b>, forever — no subscription.</p>
+      <div class="row">
+        <button id="upgradeBtn" class="primary">Upgrade to Pro</button>
+        <button id="restoreBtn" class="ghost">Restore purchase</button>
+      </div>
+      <p id="proUnavailable" class="muted" hidden>Pro isn't purchasable in this build yet — it will activate in a future update. Everything free stays free.</p>
+    </section>
+
+    <footer class="muted">
+      MockFill runs 100% locally. No analytics, no accounts, nothing leaves your machine.
+      <a id="homeLink" href="#" target="_blank" rel="noreferrer">Website</a> ·
+      <a href="https://github.com/ZoneoutReal/getrichfast/issues" target="_blank" rel="noreferrer">Support</a>
+    </footer>
+  </div>
+
+  <div id="savedToast" class="toast" hidden>Saved</div>
+
+  <script src="../lib/config.js"></script>
+  <script src="../lib/ExtPay.js"></script>
+  <script src="../lib/payments.js"></script>
+  <script src="options.js"></script>
+</body>
+</html>
