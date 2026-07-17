@@ -82,6 +82,21 @@ npm run icons && npm run shots && npm run tiles
 npm run build   # produce the uploadable zip in dist/
 ```
 
+### 5. JSONPeek — JSON Viewer & Formatter (`products/jsonpeek/`)
+
+Chrome extension (Manifest V3). One click on any JSON tab (or paste/drop)
+opens a fast lazy-rendered collapsible tree with search-that-expands, exact
+path breadcrumbs, raw view, copy/download. Free up to 2 MB; $12 one-time Pro
+removes the limit and adds JSONPath queries, CSV export, structural diff.
+
+```bash
+cd products/jsonpeek
+npm install
+npm test        # 44 tests: viewer/engine suite + real-extension smoke suite
+npm run icons && npm run shots && npm run tiles
+npm run build   # produce the uploadable zip in dist/
+```
+
 All products share the same factory: Playwright test harnesses, generated
 store assets, listing kits, and a `release/` folder carrying the current
 store-upload zip.

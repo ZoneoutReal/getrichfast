@@ -17,6 +17,7 @@
 > | 2 | SnipShot (screenshot & annotate) | `getsnipshot` | $15 | `products/snipshot/release/` |
 > | 3 | MockFill (test data form filler) | `mockfill` | $15 | `products/mockfill/release/` |
 > | 4 | CopyMark (copy as Markdown) | `copymark` | $9 | `products/copymark/release/` |
+> | 5 | JSONPeek (JSON viewer & formatter) | `jsonpeek` | $12 | `products/jsonpeek/release/` |
 >
 > All listings use the same privacy-first answers; permission justifications
 > are pre-written in each product's `store/listing.md`.

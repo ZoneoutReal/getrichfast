@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>JSONPeek</title>
+  <link rel="stylesheet" href="../lib/ui.css" />
+  <link rel="stylesheet" href="viewer.css" />
+</head>
+<body>
+  <header id="topbar">
+    <div class="brand">
+      <img src="../../icons/icon48.png" width="24" height="24" alt="" />
+      <b>JSONPeek</b>
+      <span id="proBadge" class="badge" hidden>PRO</span>
+    </div>
+    <input id="search" type="search" placeholder="Search keys & values…" spellcheck="false" hidden />
+    <input id="query" type="text" placeholder='Query: $.items[*].name or $..email  (Pro)' spellcheck="false" hidden />
+    <nav id="actions" hidden>
+      <button id="treeTab" class="tab active">Tree</button>
+      <button id="rawTab" class="tab">Raw</button>
+      <button id="copyBtn" title="Copy formatted JSON">Copy</button>
+      <button id="downloadBtn" title="Download formatted .json">Download</button>
+      <button id="csvBtn" title="Export as CSV" data-pro>CSV</button>
+      <button id="diffBtn" title="Diff against another JSON" data-pro>Diff</button>
+      <button id="newBtn" title="Load different JSON">New</button>
+    </nav>
+  </header>
+
+  <div id="notice" class="notice" hidden></div>
+
+  <main id="input">
+    <div class="inputcard">
+      <h1>Paste JSON, drop a file, or open one</h1>
+      <p class="muted">Everything happens locally — your data never leaves this tab.</p>
+      <textarea id="pasteBox" placeholder='{"paste": "your JSON here"}' spellcheck="false"></textarea>
+      <div class="inputrow">
+        <button id="viewBtn" class="primary">View JSON</button>
+        <button id="fileBtn">Open file…</button>
+        <input id="fileInput" type="file" accept=".json,.txt,application/json" hidden />
+        <span id="inputErr" class="err" hidden></span>
+      </div>
+      <p class="muted small">Tip: click the JSONPeek icon on any JSON API tab to load it instantly. Free up to 2 MB — Pro removes the limit.</p>
+    </div>
+  </main>
+
+  <main id="output" hidden>
+    <div id="crumbwrap"><code id="crumb">$</code><button id="copyPathBtn" title="Copy path">copy path</button><span id="stats"></span></div>
+    <div id="tree" tabindex="0"></div>
+    <pre id="raw" hidden></pre>
+    <div id="queryResults" hidden>
+      <div class="qhead"><b id="qCount"></b> <button id="qBack">← back to tree</button></div>
+      <div id="qList"></div>
+    </div>
+    <div id="diffPane" hidden>
+      <div class="qhead"><b>Diff</b> — paste the other JSON below <button id="diffClose">✕ close</button></div>
+      <textarea id="diffBox" placeholder='{"the": "other JSON"}' spellcheck="false"></textarea>
+      <button id="diffRun" class="primary">Compare</button>
+      <div id="diffOut"></div>
+    </div>
+  </main>
+
+  <dialog id="proDialog">
+    <h2>JSONPeek Pro</h2>
+    <p>Unlimited file size, JSONPath queries, CSV export, and structural diff. <b id="proPrice"></b> — one-time, forever.</p>
+    <p id="proUnavailable" class="muted" hidden>Pro isn't purchasable in this build yet — it will activate in a future update. Everything free stays free.</p>
+    <div class="row">
+      <button id="proBuyBtn" class="primary">Upgrade</button>
+      <button id="proRestoreBtn">Restore purchase</button>
+      <button id="proCloseBtn">Close</button>
+    </div>
+  </dialog>
+
+  <script src="../lib/config.js"></script>
+  <script src="../lib/ExtPay.js"></script>
+  <script src="../lib/payments.js"></script>
+  <script src="../lib/query.js"></script>
+  <script src="../lib/csv.js"></script>
+  <script src="../lib/jdiff.js"></script>
+  <script src="viewer.js"></script>
+</body>
+</html>

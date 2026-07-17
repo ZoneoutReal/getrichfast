@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>JSONPeek — JSON Viewer & Formatter for Chrome. Pay once, own it forever.</title>
+  <meta name="description" content="Fast JSON viewer with collapsible tree, search, paths and big-file support. Pro adds JSONPath queries, CSV export and diff. 100% local. $12 once." />
+  <style>
+    :root {
+      --accent: #f59e0b; --accent2: #f97316; --text: #16182d; --muted: #5b6070;
+      --border: #e3e6ef; --soft: #ffedd5; --ok: #10b981;
+    }
+    * { box-sizing: border-box; margin: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      color: var(--text); line-height: 1.6;
+      background:
+        radial-gradient(1000px 500px at 100% -5%, #fef3c7 0%, transparent 55%),
+        radial-gradient(800px 400px at -5% 20%, #ffedd5 0%, transparent 50%),
+        #f6f7fb;
+    }
+    .wrap { max-width: 1020px; margin: 0 auto; padding: 0 24px; }
+    header { display: flex; align-items: center; gap: 10px; padding: 22px 0; }
+    .mark {
+      width: 34px; height: 34px; border-radius: 10px; position: relative; flex: none;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      display: flex; align-items: center; justify-content: center; gap: 2px;
+      color: #fff; font-weight: 700; font-size: 15px; font-family: ui-monospace, Menlo, monospace;
+    }
+    .mark i { width: 5px; height: 5px; border-radius: 50%; background: #fff; }
+    header b { font-size: 19px; }
+    header nav { margin-left: auto; display: flex; gap: 22px; }
+    header a { color: var(--muted); text-decoration: none; font-weight: 550; font-size: 15px; }
+    header a:hover { color: var(--text); }
+
+    .hero { text-align: center; padding: 52px 0 30px; }
+    h1 { font-size: 50px; line-height: 1.08; letter-spacing: -0.025em; margin-bottom: 18px; }
+    .hl { background: linear-gradient(135deg, var(--accent), var(--accent2)); -webkit-background-clip: text; background-clip: text; color: transparent; }
+    .sub { font-size: 19px; color: var(--muted); margin: 0 auto 28px; max-width: 600px; }
+    .cta-row { display: flex; gap: 12px; align-items: center; justify-content: center; flex-wrap: wrap; }
+    .btn {
+      display: inline-block; padding: 13px 22px; border-radius: 12px; font-weight: 650;
+      text-decoration: none; font-size: 16px; transition: filter .12s ease;
+    }
+    .btn-primary { background: linear-gradient(135deg, var(--accent), var(--accent2)); color: #fff; box-shadow: 0 10px 24px rgba(249,115,22,.35); }
+    .btn-primary:hover { filter: brightness(1.07); }
+    .btn-ghost { color: var(--text); border: 1px solid var(--border); background: #fff; }
+    .note { font-size: 13.5px; color: var(--muted); margin-top: 12px; }
+    .shot { border-radius: 18px; border: 1px solid var(--border); box-shadow: 0 30px 70px rgba(217,119,6,.22); width: 100%; height: auto; background:#fff; margin-top: 40px; }
+
+    section { padding: 56px 0; }
+    h2 { font-size: 32px; letter-spacing: -0.02em; margin-bottom: 10px; }
+    .lead { color: var(--muted); font-size: 17px; max-width: 620px; margin-bottom: 36px; }
+    .grid3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+    @media (max-width: 820px) { .grid3 { grid-template-columns: 1fr; } h1 { font-size: 38px; } }
+    .feat { background: #fff; border: 1px solid var(--border); border-radius: 16px; padding: 22px; }
+    .feat .ico { font-size: 22px; margin-bottom: 10px; }
+    .feat h3 { font-size: 16.5px; margin-bottom: 6px; }
+    .feat p { color: var(--muted); font-size: 14.5px; }
+
+    .pricing { display: flex; gap: 22px; justify-content: center; flex-wrap: wrap; }
+    .plan { background: #fff; border: 1px solid var(--border); border-radius: 18px; padding: 28px; width: 320px; }
+    .plan.pro { outline: 3px solid var(--accent2); outline-offset: -3px; }
+    .plan .name { font-weight: 700; color: var(--muted); margin-bottom: 4px; }
+    .plan .price { font-size: 40px; font-weight: 780; letter-spacing: -0.02em; margin-bottom: 14px; }
+    .plan .price small { font-size: 15px; color: var(--muted); font-weight: 600; }
+    .plan ul { list-style: none; padding: 0; }
+    .plan li { padding: 5px 0; font-size: 15px; }
+    .plan li::before { content: "✓  "; color: var(--ok); font-weight: 800; }
+
+    details { background: #fff; border: 1px solid var(--border); border-radius: 12px; padding: 16px 20px; margin-bottom: 10px; }
+    summary { font-weight: 620; cursor: pointer; font-size: 15.5px; }
+    details p { color: var(--muted); padding-top: 8px; font-size: 15px; }
+
+    footer.site { padding: 40px 0 56px; color: var(--muted); font-size: 14px; display: flex; gap: 18px; flex-wrap: wrap; }
+    footer.site a { color: inherit; }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <div class="mark">{<i></i>}</div><b>JSONPeek</b>
+      <nav>
+        <a href="#features">Features</a>
+        <a href="#pricing">Pricing</a>
+        <a href="#faq">FAQ</a>
+      </nav>
+    </header>
+
+    <div class="hero">
+      <h1>JSON you can <span class="hl">actually read.</span></h1>
+      <p class="sub">One click on any API tab — or paste and drop files — and get a fast collapsible tree with search, exact paths, queries and diff. Nothing leaves your browser.</p>
+      <div class="cta-row">
+        <!-- ADD_TO_CHROME: replace href with the Chrome Web Store URL after the listing is approved -->
+        <a class="btn btn-primary" id="install" href="#pricing">Add to Chrome — Free</a>
+        <a class="btn btn-ghost" href="#features">See the viewer</a>
+      </div>
+      <p class="note">Free forever up to 2 MB · Pro is $12 once — no subscription, ever</p>
+      <img class="shot" src="tree.png" alt="JSONPeek collapsible tree view of an API response with search and path breadcrumb" />
+    </div>
+
+    <section id="features">
+      <h2>Built for the hundredth payload of the day.</h2>
+      <p class="lead">Webhook bodies, API responses, config dumps — JSONPeek turns them into something your eyes can navigate.</p>
+      <div class="grid3">
+        <div class="feat"><div class="ico">🌳</div><h3>Fast collapsible tree</h3><p>Lazy rendering with item counts and type-colored values — deep, wide payloads stay smooth.</p></div>
+        <div class="feat"><div class="ico">🔎</div><h3>Search that unfolds</h3><p>Type a fragment; the tree expands to every match and highlights it. No node-by-node digging.</p></div>
+        <div class="feat"><div class="ico">🧭</div><h3>Exact paths</h3><p>Click any node → $.users[2].email in the breadcrumb, one click to copy. Paste it straight into your code.</p></div>
+        <div class="feat"><div class="ico">🔍</div><h3>JSONPath queries <small>(Pro)</small></h3><p>$.items[*].price, $..email, negative indexes — get answers, not scrolling.</p></div>
+        <div class="feat"><div class="ico">📊</div><h3>CSV export <small>(Pro)</small></h3><p>Flatten arrays of objects into spreadsheet-ready CSV with proper escaping.</p></div>
+        <div class="feat"><div class="ico">🆚</div><h3>Structural diff <small>(Pro)</small></h3><p>Paste two payloads, see every added, removed and changed path color-coded.</p></div>
+      </div>
+      <img class="shot" src="diff.png" alt="JSONPeek structural diff showing added, removed and changed paths" />
+    </section>
+
+    <section id="pricing">
+      <h2 style="text-align:center">Pay once. Peek forever.</h2>
+      <p class="lead" style="text-align:center; margin-left:auto; margin-right:auto;">The subscription incumbent charges $4.99/month for big files. JSONPeek Pro is $12, once.</p>
+      <div class="pricing">
+        <div class="plan">
+          <div class="name">Free</div>
+          <div class="price">$0</div>
+          <ul>
+            <li>Tree view, search, paths</li>
+            <li>One-click grab from API tabs</li>
+            <li>Copy &amp; download formatted JSON</li>
+            <li>Files up to 2 MB</li>
+          </ul>
+        </div>
+        <div class="plan pro">
+          <div class="name">Pro</div>
+          <div class="price">$12 <small>one-time</small></div>
+          <ul>
+            <li>Everything in Free</li>
+            <li>No size limit</li>
+            <li>JSONPath queries</li>
+            <li>CSV export + structural diff</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section id="faq">
+      <h2>Questions, answered.</h2>
+      <p class="lead"></p>
+      <details>
+        <summary>Do my payloads go anywhere?</summary>
+        <p>No. Parsing, search, queries, CSV and diff all run inside the viewer tab on your machine. JSONPeek has no servers, no account system, and no analytics.</p>
+      </details>
+      <details>
+        <summary>When can JSONPeek see a page?</summary>
+        <p>Only at the moment you click its icon or press Alt+Shift+J on that tab (Chrome's activeTab permission). It cannot read pages in the background.</p>
+      </details>
+      <details>
+        <summary>How big a file can it handle?</summary>
+        <p>Free parses files up to 2 MB — covering the vast majority of API responses. Pro removes the limit; the lazy tree keeps large payloads responsive by rendering nodes as you expand them.</p>
+      </details>
+      <details>
+        <summary>Is Pro really one-time?</summary>
+        <p>Yes. $12 once, all Pro features forever, every future update included. Payments are processed by Stripe via ExtensionPay; we never see your card details.</p>
+      </details>
+      <details>
+        <summary>Which query syntax is supported?</summary>
+        <p>A practical JSONPath subset: dot keys ($.a.b), bracket keys ($["odd key"]), indexes including negative ([0], [-1]), wildcards ([*], .*), and recursive descent ($..email). That covers day-to-day API spelunking.</p>
+      </details>
+    </section>
+
+    <section id="switching" style="padding-top:24px">
+      <h2>Comparing JSON viewers?</h2>
+      <p class="lead">See how JSONPeek stacks up against the subscription option — honestly.</p>
+      <div style="display:flex; gap:12px; flex-wrap:wrap">
+        <a class="btn btn-ghost" href="json-formatter-pro-alternative.html">JSONPeek vs. subscription JSON formatters →</a>
+      </div>
+    </section>
+
+    <footer class="site">
+      <span>© 2026 JSONPeek</span>
+      <a href="privacy.html">Privacy policy</a>
+      <a href="https://github.com/ZoneoutReal/getrichfast/issues">Support</a>
+      <a href="../">All tools</a>
+    </footer>
+  </div>
+</body>
+</html>
