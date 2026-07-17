@@ -1,0 +1,34 @@
+{
+  "manifest_version": 3,
+  "name": "PagePulse — Auto Refresh & Page Monitor",
+  "short_name": "PagePulse",
+  "version": "1.0.0",
+  "description": "Auto-refresh any tab on your schedule, with a live countdown badge. Pro adds custom intervals, jitter & change alerts. 100% local.",
+  "minimum_chrome_version": "105",
+  "permissions": ["storage", "alarms", "scripting", "notifications"],
+  "optional_host_permissions": ["<all_urls>"],
+  "background": {
+    "service_worker": "src/background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": ["https://extensionpay.com/*"],
+      "js": ["src/lib/ExtPay.js"],
+      "run_at": "document_start"
+    }
+  ],
+  "action": {
+    "default_title": "PagePulse: auto refresh this tab",
+    "default_popup": "src/popup/popup.html",
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "48": "icons/icon48.png",
+      "128": "icons/icon128.png"
+    }
+  },
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  }
+}

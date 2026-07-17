@@ -113,6 +113,22 @@ npm run icons && npm run shots && npm run tiles
 npm run build   # produce the uploadable zip in dist/
 ```
 
+### 7. PagePulse — Auto Refresh & Page Monitor (`products/pagepulse/`)
+
+Chrome extension (Manifest V3). Per-tab auto refresh (presets 10s–30m) with
+a live countdown badge, driven by a service-worker timer chain with an alarm
+safety net; jobs survive restarts and clean up on tab close. $9 one-time Pro
+adds custom second-level intervals, ±20% jitter, and change/keyword alerts
+with per-site opt-in permissions.
+
+```bash
+cd products/pagepulse
+npm install
+npm test        # 42 tests: timing engine + real observed-reloads smoke suite
+npm run icons && npm run shots && npm run tiles
+npm run build   # produce the uploadable zip in dist/
+```
+
 All products share the same factory: Playwright test harnesses, generated
 store assets, listing kits, and a `release/` folder carrying the current
 store-upload zip.

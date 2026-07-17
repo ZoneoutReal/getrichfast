@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>PagePulse — Auto Refresh & Page Monitor for Chrome. Pay once, own it forever.</title>
+  <meta name="description" content="Auto-refresh any tab with a live countdown badge. Pro adds custom intervals, jitter and change/keyword alerts. 100% local. $9 once." />
+  <style>
+    :root {
+      --accent: #0891b2; --accent2: #2563eb; --text: #16182d; --muted: #5b6070;
+      --border: #e3e6ef; --soft: #dbeafe; --ok: #10b981;
+    }
+    * { box-sizing: border-box; margin: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      color: var(--text); line-height: 1.6;
+      background:
+        radial-gradient(1000px 500px at 100% -5%, #cffafe 0%, transparent 55%),
+        radial-gradient(800px 400px at -5% 20%, #dbeafe 0%, transparent 50%),
+        #f6f7fb;
+    }
+    .wrap { max-width: 1020px; margin: 0 auto; padding: 0 24px; }
+    header { display: flex; align-items: center; gap: 10px; padding: 22px 0; }
+    .mark {
+      width: 34px; height: 34px; border-radius: 10px; position: relative; flex: none;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      display: flex; align-items: center; justify-content: center;
+      color: #fff; font-size: 21px; font-weight: 700;
+    }
+    header b { font-size: 19px; }
+    header nav { margin-left: auto; display: flex; gap: 22px; }
+    header a { color: var(--muted); text-decoration: none; font-weight: 550; font-size: 15px; }
+    header a:hover { color: var(--text); }
+
+    .hero { text-align: center; padding: 52px 0 30px; }
+    h1 { font-size: 50px; line-height: 1.08; letter-spacing: -0.025em; margin-bottom: 18px; }
+    .hl { background: linear-gradient(135deg, var(--accent), var(--accent2)); -webkit-background-clip: text; background-clip: text; color: transparent; }
+    .sub { font-size: 19px; color: var(--muted); margin: 0 auto 28px; max-width: 600px; }
+    .cta-row { display: flex; gap: 12px; align-items: center; justify-content: center; flex-wrap: wrap; }
+    .btn {
+      display: inline-block; padding: 13px 22px; border-radius: 12px; font-weight: 650;
+      text-decoration: none; font-size: 16px; transition: filter .12s ease;
+    }
+    .btn-primary { background: linear-gradient(135deg, var(--accent), var(--accent2)); color: #fff; box-shadow: 0 10px 24px rgba(37,99,235,.35); }
+    .btn-primary:hover { filter: brightness(1.07); }
+    .btn-ghost { color: var(--text); border: 1px solid var(--border); background: #fff; }
+    .note { font-size: 13.5px; color: var(--muted); margin-top: 12px; }
+    .shot { border-radius: 18px; border: 1px solid var(--border); box-shadow: 0 30px 70px rgba(8,145,178,.22); width: 100%; height: auto; background:#fff; margin-top: 40px; }
+
+    section { padding: 56px 0; }
+    h2 { font-size: 32px; letter-spacing: -0.02em; margin-bottom: 10px; }
+    .lead { color: var(--muted); font-size: 17px; max-width: 620px; margin-bottom: 36px; }
+    .grid3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+    @media (max-width: 820px) { .grid3 { grid-template-columns: 1fr; } h1 { font-size: 38px; } }
+    .feat { background: #fff; border: 1px solid var(--border); border-radius: 16px; padding: 22px; }
+    .feat .ico { font-size: 22px; margin-bottom: 10px; }
+    .feat h3 { font-size: 16.5px; margin-bottom: 6px; }
+    .feat p { color: var(--muted); font-size: 14.5px; }
+
+    .pricing { display: flex; gap: 22px; justify-content: center; flex-wrap: wrap; }
+    .plan { background: #fff; border: 1px solid var(--border); border-radius: 18px; padding: 28px; width: 320px; }
+    .plan.pro { outline: 3px solid var(--accent2); outline-offset: -3px; }
+    .plan .name { font-weight: 700; color: var(--muted); margin-bottom: 4px; }
+    .plan .price { font-size: 40px; font-weight: 780; letter-spacing: -0.02em; margin-bottom: 14px; }
+    .plan .price small { font-size: 15px; color: var(--muted); font-weight: 600; }
+    .plan ul { list-style: none; padding: 0; }
+    .plan li { padding: 5px 0; font-size: 15px; }
+    .plan li::before { content: "✓  "; color: var(--ok); font-weight: 800; }
+
+    details { background: #fff; border: 1px solid var(--border); border-radius: 12px; padding: 16px 20px; margin-bottom: 10px; }
+    summary { font-weight: 620; cursor: pointer; font-size: 15.5px; }
+    details p { color: var(--muted); padding-top: 8px; font-size: 15px; }
+
+    footer.site { padding: 40px 0 56px; color: var(--muted); font-size: 14px; display: flex; gap: 18px; flex-wrap: wrap; }
+    footer.site a { color: inherit; }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <div class="mark">↻</div><b>PagePulse</b>
+      <nav>
+        <a href="#features">Features</a>
+        <a href="#pricing">Pricing</a>
+        <a href="#faq">FAQ</a>
+      </nav>
+    </header>
+
+    <div class="hero">
+      <h1>Set it. Forget it. <span class="hl">Stay fresh.</span></h1>
+      <p class="sub">Auto-refresh any tab on your schedule — queues, dashboards, drops, scores — with a live countdown on the toolbar badge. Nothing leaves your machine.</p>
+      <div class="cta-row">
+        <!-- ADD_TO_CHROME: replace href with the Chrome Web Store URL after the listing is approved -->
+        <a class="btn btn-primary" id="install" href="#pricing">Add to Chrome — Free</a>
+        <a class="btn btn-ghost" href="#features">How it works</a>
+      </div>
+      <p class="note">Free forever with presets 10s–30m · Pro is $9 once — no subscription, ever</p>
+      <img class="shot" src="popup.png" alt="PagePulse popup with a live refresh countdown and the list of refreshing tabs" style="max-width:420px" />
+    </div>
+
+    <section id="features">
+      <h2>Stop hammering F5.</h2>
+      <p class="lead">Whatever you\'re waiting on — the ticket queue, the deploy, the restock — PagePulse keeps the tab current and tells you how long until the next pulse.</p>
+      <div class="grid3">
+        <div class="feat"><div class="ico">↻</div><h3>Per-tab refresh</h3><p>Each tab gets its own interval, from 10 seconds to 30 minutes. Close the tab and its job cleans up.</p></div>
+        <div class="feat"><div class="ico">⏱️</div><h3>Live countdown badge</h3><p>The toolbar badge ticks down to the next refresh — 9s, 45s, 3m — so you know the pulse is alive.</p></div>
+        <div class="feat"><div class="ico">🗂️</div><h3>All tabs, one list</h3><p>Every refreshing tab with host and interval. Stop one, stop all. Jobs survive browser restarts.</p></div>
+        <div class="feat"><div class="ico">🔔</div><h3>Change alerts <small>(Pro)</small></h3><p>Get a notification when the page changes — or only when "in stock" appears or "sold out" disappears.</p></div>
+        <div class="feat"><div class="ico">⌨️</div><h3>Custom intervals <small>(Pro)</small></h3><p>Type 45s, 2m, or 1.5h. Down to seconds for the drops that matter.</p></div>
+        <div class="feat"><div class="ico">🎲</div><h3>Polite jitter <small>(Pro)</small></h3><p>±20% randomization so your polling doesn\'t look like a metronome hitting the same second.</p></div>
+      </div>
+      <img class="shot" src="monitor.png" alt="PagePulse monitor setup with keyword alert and a Chrome notification" style="max-width:420px" />
+    </section>
+
+    <section id="pricing">
+      <h2 style="text-align:center">Pay once. Refresh forever.</h2>
+      <p class="lead" style="text-align:center; margin-left:auto; margin-right:auto;">The free tier covers most people. Pro is an impulse price, once.</p>
+      <div class="pricing">
+        <div class="plan">
+          <div class="name">Free</div>
+          <div class="price">$0</div>
+          <ul>
+            <li>Per-tab auto refresh</li>
+            <li>Presets 10s – 30m</li>
+            <li>Live countdown badge</li>
+            <li>Hard reload (cache bypass)</li>
+          </ul>
+        </div>
+        <div class="plan pro">
+          <div class="name">Pro</div>
+          <div class="price">$9 <small>one-time</small></div>
+          <ul>
+            <li>Everything in Free</li>
+            <li>Custom intervals (seconds → hours)</li>
+            <li>Change &amp; keyword alerts</li>
+            <li>±20% jitter</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section id="faq">
+      <h2>Questions, answered.</h2>
+      <p class="lead"></p>
+      <details>
+        <summary>Does PagePulse read the pages it refreshes?</summary>
+        <p>No — refreshing uses the tab\'s id only. The Pro monitor feature is the one exception: it reads the text of pages you explicitly enabled monitoring on, after asking for permission for that specific site.</p>
+      </details>
+      <details>
+        <summary>How precise are the intervals?</summary>
+        <p>Second-level. A recovery alarm re-arms the timers if Chrome suspends the extension in the background, so long intervals stay accurate too — jobs even survive full browser restarts.</p>
+      </details>
+      <details>
+        <summary>What does the keyword alert do exactly?</summary>
+        <p>After each refresh, PagePulse checks the page text. With a keyword set, you\'re notified when it appears or disappears ("in stock", "tickets available", "passed"). Without one, any content change triggers the alert.</p>
+      </details>
+      <details>
+        <summary>Will fast refreshing get me blocked by sites?</summary>
+        <p>Use judgment — refreshing a page every few seconds is the same as pressing F5 that often, and some sites rate-limit it. Pro\'s ±20% jitter helps your polling look human, but respect each site\'s terms.</p>
+      </details>
+      <details>
+        <summary>Is Pro really one-time?</summary>
+        <p>Yes. $9 once, all Pro features forever, every future update included. Payments are processed by Stripe via ExtensionPay; we never see your card details.</p>
+      </details>
+    </section>
+
+    <section id="switching" style="padding-top:24px">
+      <h2>Comparing auto-refreshers?</h2>
+      <p class="lead">See how PagePulse stacks up against the ad-supported incumbents — honestly.</p>
+      <div style="display:flex; gap:12px; flex-wrap:wrap">
+        <a class="btn btn-ghost" href="auto-refresh-alternative.html">PagePulse vs. Auto Refresh Plus →</a>
+      </div>
+    </section>
+
+    <footer class="site">
+      <span>© 2026 PagePulse</span>
+      <a href="privacy.html">Privacy policy</a>
+      <a href="https://github.com/ZoneoutReal/getrichfast/issues">Support</a>
+      <a href="../">All tools</a>
+    </footer>
+  </div>
+</body>
+</html>

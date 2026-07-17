@@ -19,6 +19,7 @@
 > | 4 | CopyMark (copy as Markdown) | `copymark` | $9 | `products/copymark/release/` |
 > | 5 | JSONPeek (JSON viewer & formatter) | `jsonpeek` | $12 | `products/jsonpeek/release/` |
 > | 6 | FocusFence (site blocker & focus) | `focusfence` | $15 | `products/focusfence/release/` |
+> | 7 | PagePulse (auto refresh & monitor) | `pagepulse` | $9 | `products/pagepulse/release/` |
 >
 > All listings use the same privacy-first answers; permission justifications
 > are pre-written in each product's `store/listing.md`.
