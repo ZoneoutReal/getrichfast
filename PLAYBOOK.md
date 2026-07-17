@@ -66,6 +66,32 @@ impressions, installs, weekly users, Pro conversions. Apply kill/feed rules.
 5. **Never:** cold DMs, comment spam, review swaps, fake reviews. Besides
    being wrong, they're account-level death sentences.
 
+## Growth ladder — from Chrome extension to owned business
+
+The Chrome Web Store is a **channel, not the strategy.** The real asset is the
+ability to produce local-first, privacy-native, pay-once software cheaply and
+repeatedly. Extensions are the cheapest first shelf for it — but we're a tenant
+on Google's platform (MV3 already erased whole categories; a policy change or a
+wrongful takedown can vaporize distribution *and* revenue overnight). So each
+product climbs a ladder that trades platform risk for ownership as it proves out:
+
+1. **Chrome Web Store** (rung 0) — cheapest discovery + built-in payments; where
+   every product starts. Ceiling: single-platform risk, small-tool economics.
+2. **Cross-store the same code** (near-zero cost) — Edge Add-ons, then Firefox.
+   Same MV3 zip, free dev accounts, more organic surface, less single-Google
+   dependency. Trigger: a product's first sales (the feed rule).
+3. **Owned web app** (own domain + own Stripe) — reimplement the winner's core as
+   a standalone web tool we fully control; Google can't deplatform it and we keep
+   100% of the funnel. The SEO/comparison pages already double as its
+   distribution. Extensions become top-of-funnel; the web app is home base.
+4. **Desktop app** (Tauri/Electron) for heavy local-ML tools — transcription,
+   video, OCR run better off the browser's memory limits and command $30–100
+   instead of $15. Own distribution (Gumroad / our site). The ceiling-raiser.
+
+Rule: **don't climb a rung until the current one shows real conversion data.** A
+$15 extension that actually converts earns the web-app/desktop investment; one
+that doesn't gets killed, not ported.
+
 ## Kill / feed rules (pre-committed)
 
 - **Kill:** live + indexed for 30 days AND <50 installs AND $0 revenue →
@@ -109,6 +135,35 @@ Two additional niches were validated and shipped the same sprint:
 
 **Portfolio: 7 products shipped.** The 6–10 shot target below is met — the
 job now shifts to Friday uploads, Monday scoreboards, and kill/feed calls.
+
+## Next wave — differentiate on capability, not just price (2026 H2)
+
+The first 7 products won on the *pay-once + local* wedge against commodity
+capabilities. The next wave adds a second moat: **capabilities that are normally
+cloud-based, done locally** — harder to build, so far fewer me-too clones, and
+the privacy story becomes load-bearing. In-browser ML (transformers.js / ONNX
+Runtime Web / WASM) makes this newly feasible while incumbents still upload your
+data and bill monthly.
+
+Shipping now (products #8–#10) — a coherent "your private local memory across the
+web" family, all local-only:
+
+- **#8 TypeVault** — universal draft & version recovery: timeline scrubber +
+  word-level diff + one-click restore for anything you type. Revives the dead
+  "Lazarus" category with versioning. The flagship "innovative" bet.
+- **#9 Recall** — full-text search of your own browsing history by page
+  *content*, indexed 100% locally (Chrome history only matches titles/URLs).
+- **#10 ClipStack** — private, local clipboard history (text now, images Pro).
+
+Queued, higher-moat (need the in-browser-ML plumbing #8–#10 don't):
+
+- **Voice-typing into any field** — click a text box, speak, text appears, all
+  local (Whisper WASM). HARD REQUIREMENT: sub-second, zero-friction, no
+  "processing" spinner — if it can't hit that latency bar, it doesn't ship.
+  Reuses SnipKey's field-injection engine.
+- **Local OCR / screenshot-to-text** (pairs with SnipShot), **local
+  transcription** (audio/video → text), **local background remover**, **local
+  document scanner** — each a "cloud capability, done privately" play.
 
 ## Boundaries (non-negotiable)
 
