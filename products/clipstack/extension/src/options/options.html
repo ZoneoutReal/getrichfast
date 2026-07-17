@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>ClipStack — History &amp; Settings</title>
+  <link rel="stylesheet" href="../lib/ui.css" />
+  <link rel="stylesheet" href="options.css" />
+</head>
+<body>
+  <div class="wrap">
+    <header class="brand">
+      <img src="../../icons/icon48.png" width="34" height="34" alt="" />
+      <div>
+        <b>ClipStack</b>
+        <div class="sub">Clipboard history — manager &amp; settings</div>
+      </div>
+      <span id="proBadge" class="badge" hidden>PRO</span>
+    </header>
+
+    <div id="welcome" class="banner" hidden>👋 Welcome to ClipStack! Copy anything on any page and it shows up here. Everything stays on this device.</div>
+
+    <section class="card">
+      <div class="toolbar">
+        <input id="search" type="search" placeholder="Search history…" spellcheck="false" autocomplete="off" />
+        <span id="count" class="muted small"></span>
+        <div class="spacer"></div>
+        <button id="exportBtn" class="ghost" data-pro>Export JSON</button>
+        <button id="clearUnpinnedBtn" class="ghost">Delete unpinned</button>
+        <button id="clearBtn" class="ghost danger">Clear all</button>
+      </div>
+      <p id="proNote" class="err" hidden></p>
+      <div id="rows" class="rows"></div>
+      <div id="emptyRows" class="emptyrows" hidden>No clips yet — copy something on any page and it will appear here.</div>
+    </section>
+
+    <section class="card">
+      <h2>Capture</h2>
+      <label class="check"><input id="pause" type="checkbox" /> <span><b>Pause capturing</b> — keep the history you have, stop adding new copies</span></label>
+
+      <div class="field inline">
+        <span>History size <small>clips kept before the oldest unpinned are dropped</small></span>
+        <input id="maxItems" type="number" min="5" max="100000" step="5" />
+      </div>
+      <p id="maxNote" class="muted small"></p>
+
+      <div class="field">
+        <span>Ignore these sites <small>copies made on these hosts are never captured</small></span>
+        <div class="addrow">
+          <input id="ignoreInput" type="text" placeholder="e.g. mybank.com" spellcheck="false" />
+          <button id="ignoreAdd" class="primary">Add</button>
+        </div>
+        <div id="ignoreList" class="chips"></div>
+      </div>
+    </section>
+
+    <section class="card" id="proCard">
+      <h2>Pro <span id="proLockNote" class="locknote">— unlock with <b id="price"></b></span></h2>
+      <p class="muted">Free keeps your most recent <b id="freeMax"></b> text clips. Pro removes the cap and adds pinned collections, image clips, and JSON export.</p>
+      <ul class="prolist">
+        <li>Unlimited history — every copy, kept</li>
+        <li>Image clips — small copied images saved locally</li>
+        <li>Export your whole history as JSON</li>
+      </ul>
+    </section>
+
+    <section class="card" id="upsell" hidden>
+      <h2>ClipStack Pro</h2>
+      <p>Unlimited history, image clips, and JSON export. <b id="price2"></b>, forever — no subscription, no account.</p>
+      <div class="row">
+        <button id="upgradeBtn" class="primary">Upgrade to Pro</button>
+        <button id="restoreBtn" class="ghost">Restore purchase</button>
+      </div>
+      <p id="proUnavailable" class="muted" hidden>Pro isn't purchasable in this build yet — it will activate in a future update. Everything free stays free.</p>
+    </section>
+
+    <footer class="muted">
+      ClipStack runs 100% locally. No analytics, no accounts, your clipboard never leaves your machine.
+      <a id="homeLink" href="#" target="_blank" rel="noreferrer">Website</a> ·
+      <a href="https://github.com/ZoneoutReal/getrichfast/issues" target="_blank" rel="noreferrer">Support</a>
+    </footer>
+  </div>
+
+  <div id="savedToast" class="toast" hidden>Saved</div>
+
+  <script src="../lib/config.js"></script>
+  <script src="../lib/ExtPay.js"></script>
+  <script src="../lib/payments.js"></script>
+  <script src="../lib/store.js"></script>
+  <script src="options.js"></script>
+</body>
+</html>

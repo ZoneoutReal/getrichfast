@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <link rel="stylesheet" href="../lib/ui.css" />
+  <link rel="stylesheet" href="popup.css" />
+</head>
+<body>
+  <header class="brand">
+    <img src="../../icons/icon48.png" width="26" height="26" alt="" />
+    <b>ClipStack</b>
+    <span id="proBadge" class="badge" hidden>PRO</span>
+    <button id="addSel" class="tiny" title="Add the current page selection to history">+ Add selection</button>
+  </header>
+
+  <div class="searchrow">
+    <input id="search" type="search" placeholder="Search your clipboard history…" spellcheck="false" autocomplete="off" />
+  </div>
+
+  <div id="pausedNote" class="warn" hidden>Capture is paused. <a id="resumeLink" href="#">Resume</a> or manage in <a id="pausedManage" href="#">settings</a>.</div>
+
+  <div id="list" class="list" tabindex="0"></div>
+
+  <div id="empty" class="empty" hidden>
+    <div class="emoji">📋</div>
+    <div class="emptybig">Nothing copied yet</div>
+    <div class="emptysub">Copy any text on a page and it lands here — searchable, one click to paste it back.</div>
+  </div>
+
+  <footer class="foot">
+    <span id="count" class="muted small"></span>
+    <a id="manageLink" class="ghost btnlink" href="#" target="_blank" rel="noreferrer">Manage</a>
+    <button id="upgradeBtn" class="ghost accent" hidden>Pro — <span id="price"></span></button>
+  </footer>
+
+  <div id="toast" class="toast">Copied</div>
+
+  <script src="../lib/config.js"></script>
+  <script src="../lib/ExtPay.js"></script>
+  <script src="../lib/payments.js"></script>
+  <script src="../lib/store.js"></script>
+  <script src="popup.js"></script>
+</body>
+</html>
