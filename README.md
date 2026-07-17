@@ -49,7 +49,24 @@ npm run icons && npm run shots && npm run tiles
 npm run build   # produce the uploadable zip in dist/
 ```
 
-Both products share the same factory: Playwright test harnesses, generated
+### 3. MockFill — Test Data Form Filler (`products/mockfill/`)
+
+Chrome extension (Manifest V3), built for devs & QA. One keystroke
+(Alt+Shift+F) fills every field on the page with realistic fake data —
+smart detection via autocomplete/names/labels, framework-safe native-setter
+events, safe-by-design values (reserved example domains, 555-01xx phones).
+Free unlimited filling; $15 one-time Pro adds custom field rules, official
+test cards, and deterministic seed mode.
+
+```bash
+cd products/mockfill
+npm install
+npm test        # 57 tests: engine suite + real-extension smoke suite
+npm run icons && npm run shots && npm run tiles
+npm run build   # produce the uploadable zip in dist/
+```
+
+All products share the same factory: Playwright test harnesses, generated
 store assets, listing kits, and a `release/` folder carrying the current
 store-upload zip.
 

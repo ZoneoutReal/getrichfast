@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>MockFill vs. Fake Filler — an honest comparison (2026)</title>
+  <meta name="description" content="Fake Filler charges $3.99/month for custom fields. MockFill does custom rules, test cards and seeded runs for $15 once. An honest side-by-side." />
+  <style>
+    body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+           color: #16182d; background: #f6f7fb; line-height: 1.65; }
+    .wrap { max-width: 760px; margin: 0 auto; padding: 48px 24px; }
+    h1 { letter-spacing: -0.022em; font-size: 34px; line-height: 1.15; }
+    h2 { margin-top: 34px; font-size: 21px; }
+    p, li { color: #3d4152; }
+    .muted { color: #5b6070; font-size: 14px; }
+    a { color: #0ea5a3; }
+    table { border-collapse: collapse; width: 100%; margin: 22px 0; font-size: 14.5px; }
+    th, td { text-align: left; padding: 10px 12px; border-bottom: 1px solid #e3e6ef; }
+    th { font-size: 12.5px; text-transform: uppercase; letter-spacing: 0.04em; color: #5b6070; }
+    td:first-child { color: #5b6070; }
+    .yes { color: #059669; font-weight: 650; }
+    .no { color: #9ca3af; }
+    .cta { display: inline-block; margin-top: 18px; padding: 13px 22px; border-radius: 12px; font-weight: 650;
+           text-decoration: none; font-size: 16px; color: #fff;
+           background: linear-gradient(135deg, #0ea5a3, #10b981); }
+    .fair { background: #fff; border: 1px solid #e3e6ef; border-radius: 12px; padding: 18px 20px; margin-top: 26px; }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <p class="muted"><a href="./">← MockFill</a></p>
+    <h1>MockFill vs. Fake Filler: pay once, or every month?</h1>
+    <p class="muted">Last updated July 2026</p>
+
+    <p>Fake Filler is the best-known form filler for testing — around 120k users, and deservedly so. But its Pro plan (custom fields beyond a small allowance, sync) is a <b>$3.99/month subscription</b>. MockFill exists for people who think a form-filling dev tool shouldn't be a recurring bill: <b>$15 once</b>, and the free tier has no fill limits at all.</p>
+
+    <h2>Side by side</h2>
+    <table>
+      <tr><th></th><th>MockFill</th><th>Fake Filler</th></tr>
+      <tr><td>Unlimited one-keystroke filling</td><td class="yes">✓ Free</td><td class="yes">✓ Free</td></tr>
+      <tr><td>Smart field detection</td><td class="yes">✓ autocomplete, names, labels, camelCase/snake_case</td><td class="yes">✓</td></tr>
+      <tr><td>Custom field rules</td><td class="yes">✓ Pro — $15 once</td><td>Limited free, more on $3.99/mo</td></tr>
+      <tr><td>Official test credit cards</td><td class="yes">✓ Pro</td><td class="no">—</td></tr>
+      <tr><td>Deterministic seed mode</td><td class="yes">✓ Pro</td><td class="no">—</td></tr>
+      <tr><td>Cross-device settings sync</td><td class="no">— (local by design)</td><td class="yes">✓ Pro</td></tr>
+      <tr><td>Pricing model</td><td class="yes">$15 one-time</td><td>$3.99/month</td></tr>
+      <tr><td>Cost over 3 years</td><td class="yes">$15</td><td>$143</td></tr>
+    </table>
+
+    <div class="fair">
+      <b>When Fake Filler is the better choice:</b> if you need your custom-field setup synced across many machines through their account system, Fake Filler has that today and MockFill deliberately doesn't (we keep everything local; you can copy settings manually). If you're already happy on its free tier, stay — switching costs attention.
+    </div>
+
+    <h2>What MockFill does differently</h2>
+    <ul>
+      <li><b>Test data that can't escape the lab.</b> Emails land on reserved example domains and phone numbers use the fictional 555-01xx block — a misfired test can never email or call a real person.</li>
+      <li><b>Reproducible runs.</b> Seed mode generates identical data every time — attach the seed to a bug ticket and anyone can replay the exact fill.</li>
+      <li><b>Real test cards.</b> The official processor test numbers (Luhn-valid, never chargeable) go straight into your checkout forms.</li>
+      <li><b>Invoke-only access.</b> MockFill uses Chrome's activeTab permission: it cannot see any page until the moment you invoke it there.</li>
+    </ul>
+
+    <a class="cta" href="./">Get MockFill — free, Pro $15 once →</a>
+  </div>
+</body>
+</html>

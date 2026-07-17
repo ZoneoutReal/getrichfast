@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>MockFill — Test Data Form Filler for Chrome. Pay once, own it forever.</title>
+  <meta name="description" content="Fill any form with realistic fake data in one keystroke. Smart field detection, custom rules, test cards. 100% local. $15 once, no subscription." />
+  <style>
+    :root {
+      --accent: #0ea5a3; --accent2: #10b981; --text: #16182d; --muted: #5b6070;
+      --border: #e3e6ef; --soft: #e6f7f2; --ok: #10b981;
+    }
+    * { box-sizing: border-box; margin: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      color: var(--text); line-height: 1.6;
+      background:
+        radial-gradient(1000px 500px at 100% -5%, #d8f5ec 0%, transparent 55%),
+        radial-gradient(800px 400px at -5% 20%, #d9f2f1 0%, transparent 50%),
+        #f6f7fb;
+    }
+    .wrap { max-width: 1020px; margin: 0 auto; padding: 0 24px; }
+    header { display: flex; align-items: center; gap: 10px; padding: 22px 0; }
+    .mark {
+      width: 34px; height: 34px; border-radius: 10px; position: relative; flex: none;
+      background: linear-gradient(135deg, var(--accent), var(--accent2)); overflow: hidden;
+    }
+    .mark s { position: absolute; left: 8px; height: 3px; border-radius: 3px; background: rgba(255,255,255,.94); }
+    .mark .s1 { top: 8px; width: 18px; } .mark .s2 { top: 14px; width: 12px; } .mark .s3 { top: 20px; width: 8px; }
+    .mark u { position: absolute; right: 4px; bottom: 3px; width: 11px; height: 13px; background: #fde047; clip-path: polygon(56% 0, 12% 56%, 40% 56%, 30% 100%, 88% 40%, 55% 40%); }
+    header b { font-size: 19px; }
+    header nav { margin-left: auto; display: flex; gap: 22px; }
+    header a { color: var(--muted); text-decoration: none; font-weight: 550; font-size: 15px; }
+    header a:hover { color: var(--text); }
+
+    .hero { text-align: center; padding: 52px 0 30px; }
+    h1 { font-size: 50px; line-height: 1.08; letter-spacing: -0.025em; margin-bottom: 18px; }
+    .hl { background: linear-gradient(135deg, var(--accent), var(--accent2)); -webkit-background-clip: text; background-clip: text; color: transparent; }
+    .sub { font-size: 19px; color: var(--muted); margin: 0 auto 28px; max-width: 600px; }
+    .cta-row { display: flex; gap: 12px; align-items: center; justify-content: center; flex-wrap: wrap; }
+    .btn {
+      display: inline-block; padding: 13px 22px; border-radius: 12px; font-weight: 650;
+      text-decoration: none; font-size: 16px; transition: filter .12s ease;
+    }
+    .btn-primary { background: linear-gradient(135deg, var(--accent), var(--accent2)); color: #fff; box-shadow: 0 10px 24px rgba(16,185,129,.35); }
+    .btn-primary:hover { filter: brightness(1.07); }
+    .btn-ghost { color: var(--text); border: 1px solid var(--border); background: #fff; }
+    .note { font-size: 13.5px; color: var(--muted); margin-top: 12px; }
+    .shot { border-radius: 18px; border: 1px solid var(--border); box-shadow: 0 30px 70px rgba(13,148,136,.22); width: 100%; height: auto; background:#fff; margin-top: 40px; }
+
+    section { padding: 56px 0; }
+    h2 { font-size: 32px; letter-spacing: -0.02em; margin-bottom: 10px; }
+    .lead { color: var(--muted); font-size: 17px; max-width: 620px; margin-bottom: 36px; }
+    .grid3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+    @media (max-width: 820px) { .grid3 { grid-template-columns: 1fr; } h1 { font-size: 38px; } }
+    .feat { background: #fff; border: 1px solid var(--border); border-radius: 16px; padding: 22px; }
+    .feat .ico { font-size: 22px; margin-bottom: 10px; }
+    .feat h3 { font-size: 16.5px; margin-bottom: 6px; }
+    .feat p { color: var(--muted); font-size: 14.5px; }
+
+    .pricing { display: flex; gap: 22px; justify-content: center; flex-wrap: wrap; }
+    .plan { background: #fff; border: 1px solid var(--border); border-radius: 18px; padding: 28px; width: 320px; }
+    .plan.pro { outline: 3px solid var(--accent2); outline-offset: -3px; }
+    .plan .name { font-weight: 700; color: var(--muted); margin-bottom: 4px; }
+    .plan .price { font-size: 40px; font-weight: 780; letter-spacing: -0.02em; margin-bottom: 14px; }
+    .plan .price small { font-size: 15px; color: var(--muted); font-weight: 600; }
+    .plan ul { list-style: none; padding: 0; }
+    .plan li { padding: 5px 0; font-size: 15px; }
+    .plan li::before { content: "✓  "; color: var(--ok); font-weight: 800; }
+
+    details { background: #fff; border: 1px solid var(--border); border-radius: 12px; padding: 16px 20px; margin-bottom: 10px; }
+    summary { font-weight: 620; cursor: pointer; font-size: 15.5px; }
+    details p { color: var(--muted); padding-top: 8px; font-size: 15px; }
+
+    footer.site { padding: 40px 0 56px; color: var(--muted); font-size: 14px; display: flex; gap: 18px; flex-wrap: wrap; }
+    footer.site a { color: inherit; }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <div class="mark"><s class="s1"></s><s class="s2"></s><s class="s3"></s><u></u></div><b>MockFill</b>
+      <nav>
+        <a href="#features">Features</a>
+        <a href="#pricing">Pricing</a>
+        <a href="#faq">FAQ</a>
+      </nav>
+    </header>
+
+    <div class="hero">
+      <h1>Every form. <span class="hl">One keystroke.</span> Filled.</h1>
+      <p class="sub">Realistic fake data for testing signup flows, checkouts and admin forms — names, emails, phones, addresses, dates. Built for developers &amp; QA. Nothing leaves your machine.</p>
+      <div class="cta-row">
+        <!-- ADD_TO_CHROME: replace href with the Chrome Web Store URL after the listing is approved -->
+        <a class="btn btn-primary" id="install" href="#pricing">Add to Chrome — Free</a>
+        <a class="btn btn-ghost" href="#features">How it works</a>
+      </div>
+      <p class="note">Free forever for unlimited smart filling · Pro is $15 once — no subscription, ever</p>
+      <img class="shot" src="form.png" alt="A signup form completely filled with realistic fake test data by MockFill" />
+    </div>
+
+    <section id="features">
+      <h2>Stop typing "asdf asdf" into your own forms.</h2>
+      <p class="lead">You've tested that signup flow a hundred times. MockFill makes run 101 take one keystroke — with data realistic enough to exercise your validation.</p>
+      <div class="grid3">
+        <div class="feat"><div class="ico">⚡</div><h3>One keystroke</h3><p>Alt+Shift+F, the toolbar button, or right-click → Fill. Instant on any page you invoke it on.</p></div>
+        <div class="feat"><div class="ico">🧠</div><h3>Smart detection</h3><p>Reads autocomplete attributes, names, ids, placeholders and labels — snake_case, camelCase, whatever your code uses.</p></div>
+        <div class="feat"><div class="ico">⚛️</div><h3>Framework-safe</h3><p>Native setters + real input/change events, so React, Vue and Angular see values exactly as if you typed them.</p></div>
+        <div class="feat"><div class="ico">🛡️</div><h3>Can't hit real people</h3><p>Emails land on reserved example domains and phones use the fictional 555-01xx block. Test data stays test data.</p></div>
+        <div class="feat"><div class="ico">🎯</div><h3>Custom rules <small>(Pro)</small></h3><p>Match your field names with a regex and fill exactly what your app expects — fixed value, preset, or skip.</p></div>
+        <div class="feat"><div class="ico">🔁</div><h3>Reproducible <small>(Pro)</small></h3><p>Seed mode generates identical data every run — attach the seed to a bug report and QA can replay it.</p></div>
+      </div>
+      <img class="shot" src="rules.png" alt="MockFill settings with custom field rules, official test cards and seed mode" />
+    </section>
+
+    <section id="pricing">
+      <h2 style="text-align:center">Pay once. Test forever.</h2>
+      <p class="lead" style="text-align:center; margin-left:auto; margin-right:auto;">The incumbent charges $3.99/month for custom fields. MockFill Pro costs less than four months of that — once.</p>
+      <div class="pricing">
+        <div class="plan">
+          <div class="name">Free</div>
+          <div class="price">$0</div>
+          <ul>
+            <li>Unlimited smart form filling</li>
+            <li>All field types &amp; frameworks</li>
+            <li>Shortcut, button &amp; context menu</li>
+            <li>Safe fake data by design</li>
+          </ul>
+        </div>
+        <div class="plan pro">
+          <div class="name">Pro</div>
+          <div class="price">$15 <small>one-time</small></div>
+          <ul>
+            <li>Everything in Free</li>
+            <li>Custom field rules for your app</li>
+            <li>Official test credit cards</li>
+            <li>Deterministic seed mode</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section id="faq">
+      <h2>Questions, answered.</h2>
+      <p class="lead"></p>
+      <details>
+        <summary>Does MockFill ever fill or submit forms on its own?</summary>
+        <p>Never. It only acts when you press the shortcut, click the button, or use the context menu — and it never submits anything. Chrome's activeTab permission means it can't even see a page until you invoke it there.</p>
+      </details>
+      <details>
+        <summary>Where does the fake data come from?</summary>
+        <p>It's generated locally, on your machine, every time. There's no server, no dataset download, no account, and no analytics. Emails use reserved example domains and phone numbers use the 555-01xx block reserved for fiction, so test data can never reach a real person.</p>
+      </details>
+      <details>
+        <summary>Are the Pro test credit cards real?</summary>
+        <p>No — they're the official, publicly documented test numbers from payment processors (like 4242 4242 4242 4242). They're Luhn-valid so your validation accepts them, but they can never be charged.</p>
+      </details>
+      <details>
+        <summary>Is Pro really one-time?</summary>
+        <p>Yes. $15 once, all Pro features forever, every future update included. Payments are processed by Stripe via ExtensionPay; we never see your card details.</p>
+      </details>
+      <details>
+        <summary>Does it work with React / Vue / Angular forms?</summary>
+        <p>Yes. Values are set through native setters and followed by real input/change events, which is exactly what framework change-tracking listens for.</p>
+      </details>
+    </section>
+
+    <section id="switching" style="padding-top:24px">
+      <h2>Switching from another form filler?</h2>
+      <p class="lead">See how MockFill compares — honestly, including when the other tool is the better fit.</p>
+      <div style="display:flex; gap:12px; flex-wrap:wrap">
+        <a class="btn btn-ghost" href="fake-filler-alternative.html">MockFill vs. Fake Filler →</a>
+      </div>
+    </section>
+
+    <footer class="site">
+      <span>© 2026 MockFill</span>
+      <a href="privacy.html">Privacy policy</a>
+      <a href="https://github.com/ZoneoutReal/getrichfast/issues">Support</a>
+      <a href="../">All tools</a>
+    </footer>
+  </div>
+</body>
+</html>
