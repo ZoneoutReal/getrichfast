@@ -97,6 +97,22 @@ npm run icons && npm run shots && npm run tiles
 npm run build   # produce the uploadable zip in dist/
 ```
 
+### 6. FocusFence — Site Blocker & Focus Mode (`products/focusfence/`)
+
+Chrome extension (Manifest V3). Block distracting sites via Chrome's own
+declarativeNetRequest engine — focus sessions with badge countdown, one-click
+"block this site", wildcard subdomains, calm local fence page. Free fences 7
+sites; $15 one-time Pro adds unlimited sites, weekly schedules (overnight
+spans included), strict mode, path patterns, custom block message.
+
+```bash
+cd products/focusfence
+npm install
+npm test        # 58 tests: rules/schedule engine + real-blocking smoke suite
+npm run icons && npm run shots && npm run tiles
+npm run build   # produce the uploadable zip in dist/
+```
+
 All products share the same factory: Playwright test harnesses, generated
 store assets, listing kits, and a `release/` folder carrying the current
 store-upload zip.

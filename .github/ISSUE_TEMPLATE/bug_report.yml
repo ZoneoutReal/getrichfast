@@ -12,6 +12,7 @@ body:
         - MockFill (test data form filler)
         - CopyMark (copy as Markdown)
         - JSONPeek (JSON viewer & formatter)
+        - FocusFence (site blocker & focus)
     validations:
       required: true
   - type: textarea

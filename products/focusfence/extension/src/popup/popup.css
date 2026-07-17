@@ -1,0 +1,161 @@
+body {
+  width: 320px;
+  margin: 0;
+  padding: 14px;
+  font-family: var(--font);
+  background: var(--bg);
+  color: var(--text);
+}
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+.brand b {
+  font-size: 15px;
+  letter-spacing: -0.01em;
+}
+.badge {
+  font-size: 10px;
+  font-weight: 800;
+  color: #fff;
+  background: linear-gradient(135deg, #dc2626, #ea580c);
+  border-radius: 999px;
+  padding: 2px 8px;
+}
+.dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  margin-left: auto;
+}
+.dot.on {
+  background: #16a34a;
+  box-shadow: 0 0 0 3px rgba(22, 163, 74, 0.2);
+}
+.dot.off {
+  background: var(--border);
+}
+.lab {
+  font-size: 11.5px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--muted);
+  margin-bottom: 8px;
+}
+.session {
+  text-align: center;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 16px;
+  margin-bottom: 12px;
+}
+.session .big {
+  font-size: 34px;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  font-variant-numeric: tabular-nums;
+}
+.session .lab {
+  margin: 2px 0 10px;
+}
+.strictnote {
+  margin-top: 10px;
+  font-size: 12px;
+  color: var(--muted);
+}
+.sessrow {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+button {
+  font-family: var(--font);
+  cursor: pointer;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--text);
+  font-size: 13px;
+  padding: 8px 12px;
+}
+button.sess {
+  flex: 1;
+  font-weight: 700;
+  background: linear-gradient(135deg, #dc2626, #ea580c);
+  color: #fff;
+  border: none;
+}
+button.ghost {
+  background: transparent;
+}
+button.ghost.danger {
+  color: var(--danger);
+  border-color: var(--danger);
+}
+button.ghost.accent {
+  color: var(--accent);
+  border-color: var(--accent);
+}
+.always {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  font-size: 13px;
+  margin: 4px 0 14px;
+}
+.quickadd {
+  border-top: 1px solid var(--border);
+  padding-top: 12px;
+}
+.counttag {
+  text-transform: none;
+  letter-spacing: 0;
+  font-weight: 600;
+}
+.siterow {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  margin-bottom: 8px;
+}
+.host {
+  font-family: var(--mono);
+  font-size: 12px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  flex: 1;
+}
+.sites {
+  max-height: 120px;
+  overflow-y: auto;
+  margin-bottom: 10px;
+}
+.siteitem {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--mono);
+  font-size: 12px;
+  padding: 3px 0;
+}
+.siteitem button {
+  border: none;
+  background: none;
+  color: var(--danger);
+  font-size: 13px;
+  padding: 0 4px;
+  margin-left: auto;
+}
+.row {
+  display: flex;
+  gap: 8px;
+  margin-top: 6px;
+}
+.row button {
+  flex: 1;
+}
