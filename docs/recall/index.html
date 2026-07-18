@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Recall — Search Your Browsing History by Content. 100% local, pay once.</title>
+  <meta name="description" content="Chrome history only matches titles and URLs. Recall indexes the text of pages you read so you can search your history by any word on the page. 100% local. $15 once." />
+  <style>
+    :root {
+      --accent: #0ea5a3; --accent2: #2563eb; --text: #16182d; --muted: #5b6070;
+      --border: #e3e6ef; --soft: #ccfbf1; --ok: #0ea5a3;
+    }
+    * { box-sizing: border-box; margin: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      color: var(--text); line-height: 1.6;
+      background:
+        radial-gradient(1000px 500px at 100% -5%, #ccfbf1 0%, transparent 55%),
+        radial-gradient(800px 400px at -5% 20%, #dbeafe 0%, transparent 50%),
+        #f6f7fb;
+    }
+    .wrap { max-width: 1020px; margin: 0 auto; padding: 0 24px; }
+    header { display: flex; align-items: center; gap: 10px; padding: 22px 0; }
+    .mark {
+      width: 34px; height: 34px; border-radius: 10px; position: relative; flex: none;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      display: flex; align-items: center; justify-content: center;
+      color: #fff; font-size: 18px; font-weight: 800; font-family: ui-monospace, Menlo, monospace;
+    }
+    header b { font-size: 19px; }
+    header nav { margin-left: auto; display: flex; gap: 22px; }
+    header a { color: var(--muted); text-decoration: none; font-weight: 550; font-size: 15px; }
+    header a:hover { color: var(--text); }
+
+    .hero { text-align: center; padding: 52px 0 30px; }
+    h1 { font-size: 50px; line-height: 1.08; letter-spacing: -0.025em; margin-bottom: 18px; }
+    .hl { background: linear-gradient(135deg, var(--accent), var(--accent2)); -webkit-background-clip: text; background-clip: text; color: transparent; }
+    .sub { font-size: 19px; color: var(--muted); margin: 0 auto 28px; max-width: 620px; }
+    .cta-row { display: flex; gap: 12px; align-items: center; justify-content: center; flex-wrap: wrap; }
+    .btn {
+      display: inline-block; padding: 13px 22px; border-radius: 12px; font-weight: 650;
+      text-decoration: none; font-size: 16px; transition: filter .12s ease;
+    }
+    .btn-primary { background: linear-gradient(135deg, var(--accent), var(--accent2)); color: #fff; box-shadow: 0 10px 24px rgba(37,99,235,.32); }
+    .btn-primary:hover { filter: brightness(1.07); }
+    .btn-ghost { color: var(--text); border: 1px solid var(--border); background: #fff; }
+    .note { font-size: 13.5px; color: var(--muted); margin-top: 12px; }
+    .shot { border-radius: 18px; border: 1px solid var(--border); box-shadow: 0 30px 70px rgba(14,165,163,.22); width: 100%; height: auto; background:#fff; margin-top: 40px; }
+
+    section { padding: 56px 0; }
+    h2 { font-size: 32px; letter-spacing: -0.02em; margin-bottom: 10px; }
+    .lead { color: var(--muted); font-size: 17px; max-width: 640px; margin-bottom: 36px; }
+    .grid3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+    @media (max-width: 820px) { .grid3 { grid-template-columns: 1fr; } h1 { font-size: 38px; } }
+    .feat { background: #fff; border: 1px solid var(--border); border-radius: 16px; padding: 22px; }
+    .feat .ico { font-size: 22px; margin-bottom: 10px; }
+    .feat h3 { font-size: 16.5px; margin-bottom: 6px; }
+    .feat p { color: var(--muted); font-size: 14.5px; }
+
+    .pricing { display: flex; gap: 22px; justify-content: center; flex-wrap: wrap; }
+    .plan { background: #fff; border: 1px solid var(--border); border-radius: 18px; padding: 28px; width: 320px; }
+    .plan.pro { outline: 3px solid var(--accent); outline-offset: -3px; }
+    .plan .name { font-weight: 700; color: var(--muted); margin-bottom: 4px; }
+    .plan .price { font-size: 40px; font-weight: 780; letter-spacing: -0.02em; margin-bottom: 14px; }
+    .plan .price small { font-size: 15px; color: var(--muted); font-weight: 600; }
+    .plan ul { list-style: none; padding: 0; }
+    .plan li { padding: 5px 0; font-size: 15px; }
+    .plan li::before { content: "✓  "; color: var(--ok); font-weight: 800; }
+
+    details { background: #fff; border: 1px solid var(--border); border-radius: 12px; padding: 16px 20px; margin-bottom: 10px; }
+    summary { font-weight: 620; cursor: pointer; font-size: 15.5px; }
+    details p { color: var(--muted); padding-top: 8px; font-size: 15px; }
+
+    footer.site { padding: 40px 0 56px; color: var(--muted); font-size: 14px; display: flex; gap: 18px; flex-wrap: wrap; }
+    footer.site a { color: inherit; }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <div class="mark">R</div><b>Recall</b>
+      <nav>
+        <a href="#features">Features</a>
+        <a href="#privacy">Privacy</a>
+        <a href="#pricing">Pricing</a>
+        <a href="#faq">FAQ</a>
+      </nav>
+    </header>
+
+    <div class="hero">
+      <h1>Find that page by <span class="hl">what it said.</span></h1>
+      <p class="sub">Chrome's history only matches titles and URLs. Recall indexes the <em>text</em> of every page you read, so you can search your browsing by any word that was on the page — and it all stays on your device.</p>
+      <div class="cta-row">
+        <!-- ADD_TO_CHROME: replace href with the Chrome Web Store URL after the listing is approved -->
+        <a class="btn btn-primary" id="install" href="#pricing">Add to Chrome — Free</a>
+        <a class="btn btn-ghost" href="#features">How it works</a>
+      </div>
+      <p class="note">Free forever for the last 14 days of reading · Pro is $15 once — no subscription, ever</p>
+      <img class="shot" src="popup.png" alt="Recall popup showing a content search for &quot;quantum&quot; with ranked results and highlighted snippets" style="max-width:420px" />
+    </div>
+
+    <section id="features">
+      <h2>Your history knows the title. Recall knows the page.</h2>
+      <p class="lead">You remembered a phrase from the article, not its headline. That's the search the built-in history can't do — and the whole reason Recall exists.</p>
+      <div class="grid3">
+        <div class="feat"><div class="ico">🔍</div><h3>Full-text content search</h3><p>Search the actual body text of pages you've read — titles, descriptions and paragraphs — not just their URLs.</p></div>
+        <div class="feat"><div class="ico">🧠</div><h3>Indexes as you browse</h3><p>Every readable page you open is quietly added to a local index. No saving, no bookmarks, no setup.</p></div>
+        <div class="feat"><div class="ico">⚡</div><h3>Ranked results + snippets</h3><p>Get the best matches first, each with a snippet where your terms are highlighted. Click to reopen.</p></div>
+        <div class="feat"><div class="ico">🔒</div><h3>100% local</h3><p>No servers, no account, no analytics — literally zero network calls. Your reading stays yours.</p></div>
+        <div class="feat"><div class="ico">🛡️</div><h3>Sensitive pages skipped</h3><p>Logins, banking and checkout pages are never indexed. Pause anytime or ignore any site.</p></div>
+        <div class="feat"><div class="ico">🗂️</div><h3>A manager for your memory</h3><p>Browse what's indexed, filter by site &amp; date (Pro), export to JSON (Pro), or clear it all in one click.</p></div>
+      </div>
+      <img class="shot" src="aha.png" alt="Side by side: Chrome history finds nothing for a body word, Recall finds the page" style="margin-top:40px" />
+    </section>
+
+    <section id="privacy" style="padding-top:12px">
+      <h2>The privacy promise, in plain terms.</h2>
+      <p class="lead">Recall's index is built and searched entirely inside your browser. There is no backend to send anything to — and we made that literally testable.</p>
+      <div class="grid3">
+        <div class="feat"><div class="ico">🚫</div><h3>Zero network</h3><p>The extension makes no requests to any server. Its automated test suite fails if a single non-local request is made.</p></div>
+        <div class="feat"><div class="ico">📴</div><h3>No account, ever</h3><p>Nothing to sign up for. The only optional network touch is the one-time Pro payment, handled by Stripe via ExtensionPay.</p></div>
+        <div class="feat"><div class="ico">🧹</div><h3>You're in control</h3><p>Pause indexing, keep a per-site ignore list, and wipe the whole index whenever you like.</p></div>
+      </div>
+    </section>
+
+    <section id="pricing">
+      <h2 style="text-align:center">Pay once. Remember forever.</h2>
+      <p class="lead" style="text-align:center; margin-left:auto; margin-right:auto;">The free tier covers most people. Pro is an impulse price, once.</p>
+      <div class="pricing">
+        <div class="plan">
+          <div class="name">Free</div>
+          <div class="price">$0</div>
+          <ul>
+            <li>Full-text content search</li>
+            <li>Last 14 days · up to 2,000 pages</li>
+            <li>Ranked results &amp; snippets</li>
+            <li>100% local &amp; private</li>
+          </ul>
+        </div>
+        <div class="plan pro">
+          <div class="name">Pro</div>
+          <div class="price">$15 <small>one-time</small></div>
+          <ul>
+            <li>Everything in Free</li>
+            <li>Unlimited history &amp; page count</li>
+            <li>Filter by site &amp; date range</li>
+            <li>Export your index as JSON</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section id="faq">
+      <h2>Questions, answered.</h2>
+      <p class="lead"></p>
+      <details>
+        <summary>Does Recall send my browsing anywhere?</summary>
+        <p>No. Recall builds and searches its index entirely on your device using Chrome's local storage. It makes no network requests at all — the only exception is the optional one-time Pro purchase, processed by Stripe via ExtensionPay.</p>
+      </details>
+      <details>
+        <summary>How is this different from Chrome's history?</summary>
+        <p>Chrome history only matches the title and URL of pages you visited. Recall reads the readable text of each page and indexes it, so you can search by any word that appeared in the body — "that article about teleportation" — even when it's nowhere in the title.</p>
+      </details>
+      <details>
+        <summary>What pages does it index?</summary>
+        <p>Normal http(s) pages you actually read. It automatically skips pages that look sensitive (logins, banking, checkout), and you can pause indexing or add any site to an ignore list. It never touches page content for anything other than your local index.</p>
+      </details>
+      <details>
+        <summary>Will it slow down my browser or fill up my disk?</summary>
+        <p>No. Indexing happens after a page settles and only stores a compact set of tokens plus a short excerpt. The free tier keeps the last 14 days (up to 2,000 pages) and drops the oldest automatically; Pro keeps everything.</p>
+      </details>
+      <details>
+        <summary>Is Pro really one-time?</summary>
+        <p>Yes. $15 once, all Pro features forever, every future update included. Payments are processed by Stripe via ExtensionPay; we never see your card details.</p>
+      </details>
+    </section>
+
+    <footer class="site">
+      <span>© 2026 Recall</span>
+      <a href="privacy.html">Privacy policy</a>
+      <a href="https://github.com/ZoneoutReal/getrichfast/issues">Support</a>
+      <a href="../">All tools</a>
+    </footer>
+  </div>
+</body>
+</html>

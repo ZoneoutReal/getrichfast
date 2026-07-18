@@ -23,6 +23,9 @@ human interaction in the sales loop.
 | 5 | [JSONPeek](products/jsonpeek/) | JSON viewer & formatter | $12 | 44 |
 | 6 | [FocusFence](products/focusfence/) | Site blocker & focus | $15 | 58 |
 | 7 | [PagePulse](products/pagepulse/) | Auto refresh & monitor | $9 | 42 |
+| 8 | [TypeVault](products/typevault/) | Draft & version recovery | $12 | 58 |
+| 9 | [Recall](products/recall/) | Search history by content | $15 | 73 |
+| 10 | [ClipStack](products/clipstack/) | Clipboard history | $9 | 58 |
 
 ### 1. SnipKey — Text Expander & Snippets (`products/snipkey/`)
 
@@ -135,6 +138,54 @@ with per-site opt-in permissions.
 cd products/pagepulse
 npm install
 npm test        # 42 tests: timing engine + real observed-reloads smoke suite
+npm run icons && npm run shots && npm run tiles
+npm run build   # produce the uploadable zip in dist/
+```
+
+### 8. TypeVault — Draft & Version Recovery (`products/typevault/`)
+
+Chrome extension (Manifest V3). Content script snapshots a version history of
+everything you type into any field; the popup timeline scrubs versions with a
+word-level diff and one-click restore back into the live field. Passwords are
+never captured; everything is on-device. Free: 24h / 5 versions per field; $12
+one-time Pro adds full cross-site history, unlimited timeline + diff, and JSON
+export.
+
+```bash
+cd products/typevault
+npm install
+npm test        # 58 tests: diff/versioning logic + real-extension smoke suite
+npm run icons && npm run shots && npm run tiles
+npm run build   # produce the uploadable zip in dist/
+```
+
+### 9. Recall — Search History by Content (`products/recall/`)
+
+Chrome extension (Manifest V3). A content script indexes the readable text of
+pages you visit into a local inverted index, so you can search your own browsing
+memory by page content — not just title/URL like Chrome history. 100% on-device,
+zero network (proven by test). Free: last 14 days / 2000 pages; $15 one-time Pro
+adds unlimited history, site/date filters, and JSON export.
+
+```bash
+cd products/recall
+npm install
+npm test        # 73 tests: index/search engine + real-extension smoke suite
+npm run icons && npm run shots && npm run tiles
+npm run build   # produce the uploadable zip in dist/
+```
+
+### 10. ClipStack — Clipboard History (`products/clipstack/`)
+
+Chrome extension (Manifest V3). Captures copy/cut events into a searchable,
+pinnable clipboard history stored entirely locally — paste from many copies ago,
+click to copy back. Free text history capped at 50; $9 one-time Pro adds
+unlimited history, pinned collections, image clips, and JSON export.
+
+```bash
+cd products/clipstack
+npm install
+npm test        # 58 tests: history-store logic + real-extension smoke suite
 npm run icons && npm run shots && npm run tiles
 npm run build   # produce the uploadable zip in dist/
 ```

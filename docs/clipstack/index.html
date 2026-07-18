@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>ClipStack — Private Clipboard History for Chrome. Pay once, own it forever.</title>
+  <meta name="description" content="A searchable history of everything you copy, kept 100% locally. Paste from 20 copies ago, pin favorites. Pro adds unlimited history, image clips & JSON export. $9 once." />
+  <style>
+    :root {
+      --accent: #f59e0b; --accent2: #ec4899; --text: #1a1420; --muted: #5b5560;
+      --border: #f0d9e4; --soft: #fbcfe8; --ok: #db2777;
+    }
+    * { box-sizing: border-box; margin: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      color: var(--text); line-height: 1.6;
+      background:
+        radial-gradient(1000px 500px at 100% -5%, #fde68a 0%, transparent 55%),
+        radial-gradient(800px 400px at -5% 20%, #fbcfe8 0%, transparent 50%),
+        #fdf6f8;
+    }
+    .wrap { max-width: 1020px; margin: 0 auto; padding: 0 24px; }
+    header { display: flex; align-items: center; gap: 10px; padding: 22px 0; }
+    .mark {
+      width: 34px; height: 34px; border-radius: 10px; position: relative; flex: none;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      display: flex; align-items: center; justify-content: center;
+      color: #fff; font-size: 19px; font-weight: 700;
+    }
+    header b { font-size: 19px; }
+    header nav { margin-left: auto; display: flex; gap: 22px; }
+    header a { color: var(--muted); text-decoration: none; font-weight: 550; font-size: 15px; }
+    header a:hover { color: var(--text); }
+
+    .hero { text-align: center; padding: 52px 0 30px; }
+    h1 { font-size: 50px; line-height: 1.08; letter-spacing: -0.025em; margin-bottom: 18px; }
+    .hl { background: linear-gradient(135deg, var(--accent), var(--accent2)); -webkit-background-clip: text; background-clip: text; color: transparent; }
+    .sub { font-size: 19px; color: var(--muted); margin: 0 auto 28px; max-width: 620px; }
+    .cta-row { display: flex; gap: 12px; align-items: center; justify-content: center; flex-wrap: wrap; }
+    .btn {
+      display: inline-block; padding: 13px 22px; border-radius: 12px; font-weight: 650;
+      text-decoration: none; font-size: 16px; transition: filter .12s ease;
+    }
+    .btn-primary { background: linear-gradient(135deg, var(--accent), var(--accent2)); color: #fff; box-shadow: 0 10px 24px rgba(236,72,153,.35); }
+    .btn-primary:hover { filter: brightness(1.07); }
+    .btn-ghost { color: var(--text); border: 1px solid var(--border); background: #fff; }
+    .note { font-size: 13.5px; color: var(--muted); margin-top: 12px; }
+    .shot { border-radius: 18px; border: 1px solid var(--border); box-shadow: 0 30px 70px rgba(236,72,153,.22); width: 100%; height: auto; background:#fff; margin-top: 40px; }
+
+    section { padding: 56px 0; }
+    h2 { font-size: 32px; letter-spacing: -0.02em; margin-bottom: 10px; }
+    .lead { color: var(--muted); font-size: 17px; max-width: 620px; margin-bottom: 36px; }
+    .grid3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+    @media (max-width: 820px) { .grid3 { grid-template-columns: 1fr; } h1 { font-size: 38px; } }
+    .feat { background: #fff; border: 1px solid var(--border); border-radius: 16px; padding: 22px; }
+    .feat .ico { font-size: 22px; margin-bottom: 10px; }
+    .feat h3 { font-size: 16.5px; margin-bottom: 6px; }
+    .feat p { color: var(--muted); font-size: 14.5px; }
+
+    .pricing { display: flex; gap: 22px; justify-content: center; flex-wrap: wrap; }
+    .plan { background: #fff; border: 1px solid var(--border); border-radius: 18px; padding: 28px; width: 320px; }
+    .plan.pro { outline: 3px solid var(--accent2); outline-offset: -3px; }
+    .plan .name { font-weight: 700; color: var(--muted); margin-bottom: 4px; }
+    .plan .price { font-size: 40px; font-weight: 780; letter-spacing: -0.02em; margin-bottom: 14px; }
+    .plan .price small { font-size: 15px; color: var(--muted); font-weight: 600; }
+    .plan ul { list-style: none; padding: 0; }
+    .plan li { padding: 5px 0; font-size: 15px; }
+    .plan li::before { content: "✓  "; color: var(--ok); font-weight: 800; }
+
+    details { background: #fff; border: 1px solid var(--border); border-radius: 12px; padding: 16px 20px; margin-bottom: 10px; }
+    summary { font-weight: 620; cursor: pointer; font-size: 15.5px; }
+    details p { color: var(--muted); padding-top: 8px; font-size: 15px; }
+
+    footer.site { padding: 40px 0 56px; color: var(--muted); font-size: 14px; display: flex; gap: 18px; flex-wrap: wrap; }
+    footer.site a { color: inherit; }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <div class="mark">❐</div><b>ClipStack</b>
+      <nav>
+        <a href="#features">Features</a>
+        <a href="#pricing">Pricing</a>
+        <a href="#faq">FAQ</a>
+      </nav>
+    </header>
+
+    <div class="hero">
+      <h1>Never lose what you <span class="hl">copied.</span></h1>
+      <p class="sub">ClipStack keeps a searchable history of everything you copy — text now, images with Pro — so you can paste something from 20 copies ago in one click. Stored 100% on your device.</p>
+      <div class="cta-row">
+        <!-- ADD_TO_CHROME: replace href with the Chrome Web Store URL after the listing is approved -->
+        <a class="btn btn-primary" id="install" href="#pricing">Add to Chrome — Free</a>
+        <a class="btn btn-ghost" href="#features">How it works</a>
+      </div>
+      <p class="note">Free forever, last 50 clips · Pro is $9 once — no subscription, no account, ever</p>
+      <img class="shot" src="popup.png" alt="ClipStack popup showing a searchable clipboard history with pinned items" style="max-width:400px" />
+    </div>
+
+    <section id="features">
+      <h2>Your clipboard has a memory now.</h2>
+      <p class="lead">Copy is a one-slot bucket — the next copy wipes the last. ClipStack turns it into a searchable stack you can scroll back through, so nothing you copied is ever really gone.</p>
+      <div class="grid3">
+        <div class="feat"><div class="ico">📋</div><h3>Automatic history</h3><p>Every copy is saved with its source site and time. Click any clip to copy it straight back to your clipboard.</p></div>
+        <div class="feat"><div class="ico">🔎</div><h3>Instant search</h3><p>Type a word and filter your whole history live — across the text and the site. Arrow keys to move, Enter to copy.</p></div>
+        <div class="feat"><div class="ico">📌</div><h3>Pin favorites</h3><p>Keep your signature, address, or a support macro on top. Pinned clips are never auto-evicted.</p></div>
+        <div class="feat"><div class="ico">🔒</div><h3>100% local</h3><p>History lives only in your browser's local storage. No cloud, no account, no servers — nothing to leak.</p></div>
+        <div class="feat"><div class="ico">🚫</div><h3>Pause &amp; ignore-list</h3><p>Pause capture with one click, and add sites like your bank so they're never recorded in the first place.</p></div>
+        <div class="feat"><div class="ico">🖼️</div><h3>Image clips <small>(Pro)</small></h3><p>Copy a small image and ClipStack keeps it too — saved locally as a data URL, right alongside your text.</p></div>
+      </div>
+      <img class="shot" src="manager.png" alt="ClipStack manager showing full history, search, pin, and capture settings" style="max-width:760px" />
+    </section>
+
+    <section id="pricing">
+      <h2 style="text-align:center">Pay once. Remember forever.</h2>
+      <p class="lead" style="text-align:center; margin-left:auto; margin-right:auto;">The free tier covers most people. Pro is an impulse price, once.</p>
+      <div class="pricing">
+        <div class="plan">
+          <div class="name">Free</div>
+          <div class="price">$0</div>
+          <ul>
+            <li>Automatic copy history</li>
+            <li>Last 50 text clips</li>
+            <li>Search, pin &amp; paste back</li>
+            <li>Pause &amp; ignore-list</li>
+          </ul>
+        </div>
+        <div class="plan pro">
+          <div class="name">Pro</div>
+          <div class="price">$9 <small>one-time</small></div>
+          <ul>
+            <li>Everything in Free</li>
+            <li>Unlimited history</li>
+            <li>Image clips</li>
+            <li>Export history as JSON</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section id="faq">
+      <h2>Questions, answered.</h2>
+      <p class="lead"></p>
+      <details>
+        <summary>Where is my clipboard history stored?</summary>
+        <p>Only on your device, in Chrome's local extension storage. It is never uploaded, never synced to a server, and never sent to us — there are no servers and no account. Uninstalling the extension removes it.</p>
+      </details>
+      <details>
+        <summary>Does ClipStack read my open pages or watch my clipboard in the background?</summary>
+        <p>No. It listens for the browser's own copy/cut events and reads only the text you actually copied, at the moment you copy it. It doesn't scrape page content and it doesn't poll the system clipboard.</p>
+      </details>
+      <details>
+        <summary>How do I keep sensitive things out of my history?</summary>
+        <p>Add a site to the ignore list (your bank, your password manager) and copies made there are never recorded. You can also pause capturing entirely, delete any single clip, or clear everything in one click.</p>
+      </details>
+      <details>
+        <summary>What's the difference between Free and Pro?</summary>
+        <p>Free keeps your most recent 50 text clips — plenty for everyday use. Pro removes the cap for unlimited history, adds image clips, pinned collections, and one-click JSON export of your whole history.</p>
+      </details>
+      <details>
+        <summary>Is Pro really one-time?</summary>
+        <p>Yes. $9 once, all Pro features forever, every future update included. Payments are processed by Stripe via ExtensionPay; we never see your card details.</p>
+      </details>
+    </section>
+
+    <footer class="site">
+      <span>© 2026 ClipStack</span>
+      <a href="privacy.html">Privacy policy</a>
+      <a href="https://github.com/ZoneoutReal/getrichfast/issues">Support</a>
+      <a href="../">All tools</a>
+    </footer>
+  </div>
+</body>
+</html>

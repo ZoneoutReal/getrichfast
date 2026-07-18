@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <link rel="stylesheet" href="../lib/ui.css" />
+  <link rel="stylesheet" href="popup.css" />
+</head>
+<body>
+  <header class="brand">
+    <img src="../../icons/icon48.png" width="26" height="26" alt="" />
+    <b>Recall</b>
+    <span id="proBadge" class="badge" hidden>PRO</span>
+    <label class="pause" title="Pause indexing new pages">
+      <span class="switch"><input type="checkbox" id="pauseToggle" /><span class="track"></span></span>
+      <span class="pauselab">Pause</span>
+    </label>
+  </header>
+
+  <div class="search-row">
+    <input type="search" id="q" placeholder="Search everything you've read…" autocomplete="off" spellcheck="false" autofocus />
+  </div>
+
+  <ul id="results" class="results"></ul>
+
+  <div id="empty" class="state" hidden>
+    <div class="state-ic">🧠</div>
+    <p class="state-title">Search your browsing by content</p>
+    <p class="muted small">As you read pages, Recall builds a private full-text index on this device. Later, find that article by any word that was <em>in the body</em> — not just its title. Nothing ever leaves your machine.</p>
+  </div>
+
+  <div id="noresults" class="state" hidden>
+    <div class="state-ic">🔍</div>
+    <p class="state-title">No pages match “<span id="noQ"></span>”</p>
+    <p class="muted small">Try a different word, or keep browsing — pages index as you read them.</p>
+  </div>
+
+  <footer class="foot">
+    <span class="small muted" id="countLabel">0 pages indexed</span>
+    <button id="upgradeBtn" class="btn btn-ghost accent small" hidden>Pro — <span id="price"></span></button>
+    <a href="#" id="manageLink" class="small">Full search ↗</a>
+  </footer>
+
+  <script src="../lib/config.js"></script>
+  <script src="../lib/ExtPay.js"></script>
+  <script src="../lib/payments.js"></script>
+  <script src="../lib/index.js"></script>
+  <script src="popup.js"></script>
+</body>
+</html>

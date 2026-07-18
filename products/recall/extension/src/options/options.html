@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Recall — Search Your Browsing</title>
+  <link rel="stylesheet" href="../lib/ui.css" />
+  <link rel="stylesheet" href="options.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">
+      <span class="logo-mark reca">R</span>
+      <h1>Recall</h1>
+      <span class="chip" id="planBadge">Free</span>
+    </div>
+    <nav class="small">
+      <a href="#" id="homeLink" target="_blank" rel="noreferrer">Help &amp; docs ↗</a>
+    </nav>
+  </header>
+
+  <div class="welcome card" id="welcome" hidden>
+    <div>
+      <h2>Recall is remembering as you browse 🧠</h2>
+      <p class="muted">
+        Every readable page you open gets indexed <b>locally</b> — the words in the body,
+        not just the title. Come back here (or the toolbar popup) and search your own
+        reading by any phrase you remember. Nothing is ever uploaded.
+      </p>
+    </div>
+    <button class="btn btn-ghost" id="welcomeClose" title="Dismiss">✕</button>
+  </div>
+
+  <main class="layout">
+    <section class="manager card">
+      <div class="toolbar">
+        <input type="search" id="q" placeholder="Search the full text of everything you've read…" autocomplete="off" spellcheck="false" autofocus />
+      </div>
+
+      <div class="filters" id="filters">
+        <span class="flabel">Filters <i class="protag" id="filtersPro" data-protag>PRO</i></span>
+        <select id="siteFilter" title="Filter by site">
+          <option value="">All sites</option>
+        </select>
+        <label class="datewrap">from <input type="date" id="fromDate" /></label>
+        <label class="datewrap">to <input type="date" id="toDate" /></label>
+        <button class="btn btn-ghost small" id="clearFilters" hidden>Clear</button>
+      </div>
+
+      <ul id="results" class="results"></ul>
+      <div class="empty muted" id="resultsEmpty" hidden>
+        Nothing indexed yet. Browse a few articles, then search here.
+      </div>
+    </section>
+
+    <aside class="side">
+      <div class="card pad" id="statusCard">
+        <h3>At a glance</h3>
+        <div class="stat-row"><span class="muted">Pages indexed</span><strong id="statDocs">0</strong></div>
+        <div class="stat-row"><span class="muted">Sites</span><strong id="statSites">0</strong></div>
+        <div class="stat-row"><span class="muted">Indexed words</span><strong id="statTokens">0</strong></div>
+        <div class="stat-row"><span class="muted">Oldest page</span><strong id="statOldest">—</strong></div>
+      </div>
+
+      <div class="card pad pro" id="proCard" hidden>
+        <h3>Recall Pro</h3>
+        <p class="muted small">
+          Unlimited history &amp; page count, filter by site &amp; date, and JSON export.
+          Pay once, own it forever — no subscription.
+        </p>
+        <button class="btn btn-primary wide" id="payBtn">Upgrade — <span id="priceLabel"></span></button>
+        <a href="#" class="small" id="restoreLink">Already paid? Restore purchase</a>
+        <p id="proUnavailable" class="muted small" hidden>Pro isn't purchasable in this build yet — it activates in a future update. Everything free stays free.</p>
+      </div>
+
+      <div class="card pad">
+        <h3>Settings</h3>
+        <label class="field row">
+          <span>Pause indexing</span>
+          <span class="switch"><input type="checkbox" id="pauseToggle" /><span class="track"></span></span>
+        </label>
+        <div class="field">
+          <span>Retention</span>
+          <div class="muted small" id="retentionInfo"></div>
+        </div>
+        <div class="field">
+          <span>Ignore these sites</span>
+          <div class="addrow">
+            <input type="text" id="ignoreInput" placeholder="example.com" spellcheck="false" />
+            <button class="btn" id="ignoreAdd">Add</button>
+          </div>
+          <div class="ignorelist" id="ignoreList"></div>
+          <p class="muted small">Pages on these hosts are never indexed.</p>
+        </div>
+      </div>
+
+      <div class="card pad">
+        <h3>Your data</h3>
+        <p class="muted small">Everything lives on this device only. No account, no cloud, no tracking.</p>
+        <div class="btn-row">
+          <button class="btn" id="exportBtn">Export JSON <i class="protag" data-protag>PRO</i></button>
+          <button class="btn btn-danger" id="clearBtn">Clear all</button>
+        </div>
+      </div>
+    </aside>
+  </main>
+
+  <dialog id="upgrade">
+    <h2>Recall Pro</h2>
+    <p id="dlgFeature" class="muted"></p>
+    <ul class="prolist">
+      <li>Unlimited history — beyond the free 14 days / 2,000 pages</li>
+      <li>Filter results by site and date range</li>
+      <li>Export your whole index as JSON</li>
+    </ul>
+    <div class="editor-actions">
+      <span class="muted small" id="dlgNote"></span>
+      <button type="button" class="btn btn-ghost" id="dlgClose">Close</button>
+      <button type="button" class="btn btn-primary" id="dlgBuy">Upgrade — <span id="dlgPrice"></span></button>
+    </div>
+  </dialog>
+
+  <div class="toast" id="toast">Saved</div>
+
+  <script src="../lib/config.js"></script>
+  <script src="../lib/ExtPay.js"></script>
+  <script src="../lib/payments.js"></script>
+  <script src="../lib/index.js"></script>
+  <script src="options.js"></script>
+</body>
+</html>

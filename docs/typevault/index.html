@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>TypeVault — Draft & Version Recovery for Chrome. Never lose what you typed.</title>
+  <meta name="description" content="TypeVault auto-saves versioned drafts of every field you type into, on-device. Scrub the timeline, diff versions, restore in one click. 100% local. $12 once." />
+  <style>
+    :root {
+      --accent: #6366f1; --accent2: #8b5cf6; --text: #16182d; --muted: #5b6070;
+      --border: #e3e6ef; --soft: #e0e7ff; --ok: #10b981;
+    }
+    * { box-sizing: border-box; margin: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      color: var(--text); line-height: 1.6;
+      background:
+        radial-gradient(1000px 500px at 100% -5%, #ede9fe 0%, transparent 55%),
+        radial-gradient(800px 400px at -5% 20%, #e0e7ff 0%, transparent 50%),
+        #f6f7fb;
+    }
+    .wrap { max-width: 1020px; margin: 0 auto; padding: 0 24px; }
+    header { display: flex; align-items: center; gap: 10px; padding: 22px 0; }
+    .mark {
+      width: 34px; height: 34px; border-radius: 10px; flex: none;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      display: flex; align-items: center; justify-content: center;
+    }
+    .mark span { display: block; width: 17px; height: 17px; border-radius: 4px; background: #fff; position: relative; }
+    .mark span::before { content: ""; position: absolute; left: 3px; right: 3px; top: 4px; height: 2px; border-radius: 2px;
+                         background: var(--accent); box-shadow: 0 4px 0 var(--accent), 0 8px 0 var(--accent2); }
+    header b { font-size: 19px; }
+    header nav { margin-left: auto; display: flex; gap: 22px; }
+    header a { color: var(--muted); text-decoration: none; font-weight: 550; font-size: 15px; }
+    header a:hover { color: var(--text); }
+
+    .hero { text-align: center; padding: 52px 0 30px; }
+    h1 { font-size: 50px; line-height: 1.08; letter-spacing: -0.025em; margin-bottom: 18px; }
+    .hl { background: linear-gradient(135deg, var(--accent), var(--accent2)); -webkit-background-clip: text; background-clip: text; color: transparent; }
+    .sub { font-size: 19px; color: var(--muted); margin: 0 auto 28px; max-width: 620px; }
+    .cta-row { display: flex; gap: 12px; align-items: center; justify-content: center; flex-wrap: wrap; }
+    .btn {
+      display: inline-block; padding: 13px 22px; border-radius: 12px; font-weight: 650;
+      text-decoration: none; font-size: 16px; transition: filter .12s ease;
+    }
+    .btn-primary { background: linear-gradient(135deg, var(--accent), var(--accent2)); color: #fff; box-shadow: 0 10px 24px rgba(99,102,241,.35); }
+    .btn-primary:hover { filter: brightness(1.07); }
+    .btn-ghost { color: var(--text); border: 1px solid var(--border); background: #fff; }
+    .note { font-size: 13.5px; color: var(--muted); margin-top: 12px; }
+    .shot { border-radius: 18px; border: 1px solid var(--border); box-shadow: 0 30px 70px rgba(99,102,241,.22); width: 100%; height: auto; background:#fff; margin-top: 40px; }
+
+    section { padding: 56px 0; }
+    h2 { font-size: 32px; letter-spacing: -0.02em; margin-bottom: 10px; }
+    .lead { color: var(--muted); font-size: 17px; max-width: 640px; margin-bottom: 36px; }
+    .grid3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+    @media (max-width: 820px) { .grid3 { grid-template-columns: 1fr; } h1 { font-size: 38px; } }
+    .feat { background: #fff; border: 1px solid var(--border); border-radius: 16px; padding: 22px; }
+    .feat .ico { font-size: 22px; margin-bottom: 10px; }
+    .feat h3 { font-size: 16.5px; margin-bottom: 6px; }
+    .feat p { color: var(--muted); font-size: 14.5px; }
+    .feat small { color: var(--accent); font-weight: 700; }
+
+    .split { display: grid; grid-template-columns: 1fr 1fr; gap: 34px; align-items: center; }
+    @media (max-width: 820px) { .split { grid-template-columns: 1fr; } }
+    .split img { width: 100%; border-radius: 16px; border: 1px solid var(--border); box-shadow: 0 24px 60px rgba(99,102,241,.20); background: #fff; }
+
+    .pricing { display: flex; gap: 22px; justify-content: center; flex-wrap: wrap; }
+    .plan { background: #fff; border: 1px solid var(--border); border-radius: 18px; padding: 28px; width: 320px; }
+    .plan.pro { outline: 3px solid var(--accent); outline-offset: -3px; }
+    .plan .name { font-weight: 700; color: var(--muted); margin-bottom: 4px; }
+    .plan .price { font-size: 40px; font-weight: 780; letter-spacing: -0.02em; margin-bottom: 14px; }
+    .plan .price small { font-size: 15px; color: var(--muted); font-weight: 600; }
+    .plan ul { list-style: none; padding: 0; }
+    .plan li { padding: 5px 0; font-size: 15px; }
+    .plan li::before { content: "✓  "; color: var(--ok); font-weight: 800; }
+
+    details { background: #fff; border: 1px solid var(--border); border-radius: 12px; padding: 16px 20px; margin-bottom: 10px; }
+    summary { font-weight: 620; cursor: pointer; font-size: 15.5px; }
+    details p { color: var(--muted); padding-top: 8px; font-size: 15px; }
+
+    footer.site { padding: 40px 0 56px; color: var(--muted); font-size: 14px; display: flex; gap: 18px; flex-wrap: wrap; }
+    footer.site a { color: inherit; }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <div class="mark"><span></span></div><b>TypeVault</b>
+      <nav>
+        <a href="#features">Features</a>
+        <a href="#pricing">Pricing</a>
+        <a href="#faq">FAQ</a>
+      </nav>
+    </header>
+
+    <div class="hero">
+      <h1>Never lose <span class="hl">what you typed.</span></h1>
+      <p class="sub">TypeVault quietly saves versioned snapshots of every field you type into — emails, forms, editors, comments. Clear a form or crash a tab, then scrub the timeline and restore any version. Nothing ever leaves your machine.</p>
+      <div class="cta-row">
+        <!-- ADD_TO_CHROME: replace href with the Chrome Web Store URL after the listing is approved -->
+        <a class="btn btn-primary" id="install" href="#pricing">Add to Chrome — Free</a>
+        <a class="btn btn-ghost" href="#features">How it works</a>
+      </div>
+      <p class="note">Free forever: last 24h &amp; 5 versions per field on the current site · Pro is $12 once — no subscription, ever</p>
+      <img class="shot" src="popup.png" alt="TypeVault popup listing the drafts saved on the current page with version counts" style="max-width:400px" />
+    </div>
+
+    <section id="features">
+      <h2>Your work, quietly backed up as you type.</h2>
+      <p class="lead">TypeVault watches the fields you write in and snapshots them whenever the text meaningfully changes — so a cleared form, a crashed tab, or an accidental "select all + delete" is a non-event.</p>
+      <div class="grid3">
+        <div class="feat"><div class="ico">🗂️</div><h3>Automatic version history</h3><p>Every input, textarea and rich editor gets its own timeline of debounced snapshots — go back to the paragraph you deleted 20 minutes ago.</p></div>
+        <div class="feat"><div class="ico">⏪</div><h3>Word-level diff</h3><p>Compare any version to the one before it — additions in green, removals struck through — so you can find the exact wording you had.</p></div>
+        <div class="feat"><div class="ico">↩️</div><h3>One-click restore</h3><p>Put a saved version back into the live field (React-safe), or copy it out if you've moved on to another page.</p></div>
+        <div class="feat"><div class="ico">🔒</div><h3>100% local</h3><p>Everything lives in your browser's local storage. No account, no cloud, no analytics. Password fields are always ignored.</p></div>
+        <div class="feat"><div class="ico">🌐</div><h3>Cross-site vault <small>(Pro)</small></h3><p>One searchable manager for your drafts across every site, grouped by origin, with per-site history.</p></div>
+        <div class="feat"><div class="ico">⚙️</div><h3>Yours to control</h3><p>Choose how many versions to keep, pause capturing on any site or everywhere, and export the whole vault as JSON.</p></div>
+      </div>
+    </section>
+
+    <section id="timeline" style="padding-top:0">
+      <div class="split">
+        <div>
+          <h2>Rewind any field.</h2>
+          <p class="lead" style="margin-bottom:16px">Open a field's timeline to see every saved version with a timestamp and a word-level diff against the previous one. Restore the version you want, or copy it out — all without leaving the page.</p>
+          <p class="note">Additions show in green, removals struck through. Free covers the current site's last 24 hours; Pro unlocks the full history and cross-site vault.</p>
+        </div>
+        <img src="timeline.png" alt="TypeVault version timeline showing three saved versions of an email with a word-level diff between them" />
+      </div>
+    </section>
+
+    <section id="pricing">
+      <h2 style="text-align:center">Pay once. Own it forever.</h2>
+      <p class="lead" style="text-align:center; margin-left:auto; margin-right:auto;">The free tier recovers what most people need. Pro is an impulse price, once.</p>
+      <div class="pricing">
+        <div class="plan">
+          <div class="name">Free</div>
+          <div class="price">$0</div>
+          <ul>
+            <li>Auto-save drafts on every site</li>
+            <li>Restore the last 24 hours</li>
+            <li>Up to 5 versions per field</li>
+            <li>Current-site timeline &amp; diff</li>
+          </ul>
+        </div>
+        <div class="plan pro">
+          <div class="name">Pro</div>
+          <div class="price">$12 <small>one-time</small></div>
+          <ul>
+            <li>Everything in Free</li>
+            <li>Full cross-site history</li>
+            <li>Unlimited versions &amp; retention</li>
+            <li>JSON export</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section id="faq">
+      <h2>Questions, answered.</h2>
+      <p class="lead"></p>
+      <details>
+        <summary>Does TypeVault send my drafts anywhere?</summary>
+        <p>No. Everything is saved in your browser's local storage (chrome.storage.local) and stays on your device. There are no servers, no accounts, and no analytics. Your drafts are never uploaded.</p>
+      </details>
+      <details>
+        <summary>Does it capture passwords?</summary>
+        <p>Never. TypeVault explicitly skips password fields, and it ignores very short scraps of text. It only snapshots real content you type into normal text fields, textareas and rich editors.</p>
+      </details>
+      <details>
+        <summary>How does restore get the text back into the field?</summary>
+        <p>For inputs and textareas it re-injects through the native value setter and fires an input event, so even React/Vue-controlled fields notice the change. For rich (contenteditable) editors it sets the text and dispatches an input event. If the field is gone, TypeVault copies the version to your clipboard instead.</p>
+      </details>
+      <details>
+        <summary>Won't it fill up my storage?</summary>
+        <p>No. TypeVault keeps a capped number of versions per field (you choose), stores only meaningful changes, and prunes the least-recently-edited fields to stay well within Chrome's limits.</p>
+      </details>
+      <details>
+        <summary>Is Pro really one-time?</summary>
+        <p>Yes. $12 once, all Pro features forever, every future update included. Payments are processed by Stripe via ExtensionPay; we never see your card details.</p>
+      </details>
+    </section>
+
+    <footer class="site">
+      <span>© 2026 TypeVault</span>
+      <a href="privacy.html">Privacy policy</a>
+      <a href="https://github.com/ZoneoutReal/getrichfast/issues">Support</a>
+      <a href="../">All tools</a>
+    </footer>
+  </div>
+</body>
+</html>
