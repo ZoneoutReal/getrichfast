@@ -20,6 +20,17 @@ session** — it does not need and must never ask for your password.
 > 2. In the dashboard's **Account** tab, a contact email must be present and
 >    **verified**. If not, stop and tell me.
 >
+> **PagePulse payment setup (do this BEFORE uploading PagePulse):** PagePulse's
+> zip is pre-wired for the ExtensionPay ID `pagepulse`, but that ID must be
+> registered for Pro purchases to work. Go to https://extensionpay.com → sign
+> in to my account (Stripe is already connected) → **"Add extension"** →
+> **Extension ID: `pagepulse`** → payment plan **one-time, $9**, plan nickname
+> `pro` → **Register**. If ExtensionPay says `pagepulse` is already taken,
+> **STOP and tell me** — the uploaded zip is wired for exactly `pagepulse`, so
+> a different ID means Claude must re-wire and rebuild the zip before you
+> upload it. (The other payments-live products — TypeVault, Recall, ClipStack,
+> SnipKey — are already registered; skip this step for them.)
+>
 > **Submit the following item(s)** (I'll tell you which — default: PagePulse):
 > for each one, download its ZIP, create a new item, fill every field by
 > copy-pasting from its Listing Kit URL, upload its images, complete the
@@ -86,7 +97,7 @@ Replace `main` in URLs is unnecessary — these point at the merged `main` branc
 
 | Product | Download ZIP | Listing Kit (raw) | Screenshots folder | Price | Payments |
 |---------|--------------|-------------------|--------------------|-------|----------|
-| **PagePulse** (auto refresh) | [zip](https://github.com/ZoneoutReal/getrichfast/raw/main/products/pagepulse/release/pagepulse-v1.0.0.zip) | [listing.md](https://raw.githubusercontent.com/ZoneoutReal/getrichfast/main/products/pagepulse/store/listing.md) | [screenshots](https://github.com/ZoneoutReal/getrichfast/tree/main/products/pagepulse/store/screenshots) | $9 | free-only\* |
+| **PagePulse** (auto refresh) | [zip](https://github.com/ZoneoutReal/getrichfast/raw/main/products/pagepulse/release/pagepulse-v1.0.0.zip) | [listing.md](https://raw.githubusercontent.com/ZoneoutReal/getrichfast/main/products/pagepulse/store/listing.md) | [screenshots](https://github.com/ZoneoutReal/getrichfast/tree/main/products/pagepulse/store/screenshots) | $9 | wired `pagepulse` — **register it first** (see prompt) |
 | **TypeVault** (draft recovery) | [zip](https://github.com/ZoneoutReal/getrichfast/raw/main/products/typevault/release/typevault-v1.0.0.zip) | [listing.md](https://raw.githubusercontent.com/ZoneoutReal/getrichfast/main/products/typevault/store/listing.md) | [screenshots](https://github.com/ZoneoutReal/getrichfast/tree/main/products/typevault/store/screenshots) | $12 | **live** |
 | **Recall** (content history search) | [zip](https://github.com/ZoneoutReal/getrichfast/raw/main/products/recall/release/recall-v1.0.0.zip) | [listing.md](https://raw.githubusercontent.com/ZoneoutReal/getrichfast/main/products/recall/store/listing.md) | [screenshots](https://github.com/ZoneoutReal/getrichfast/tree/main/products/recall/store/screenshots) | $15 | **live** |
 | **ClipStack** (clipboard history) | [zip](https://github.com/ZoneoutReal/getrichfast/raw/main/products/clipstack/release/clipstack-v1.0.0.zip) | [listing.md](https://raw.githubusercontent.com/ZoneoutReal/getrichfast/main/products/clipstack/store/listing.md) | [screenshots](https://github.com/ZoneoutReal/getrichfast/tree/main/products/clipstack/store/screenshots) | $9 | **live** |
