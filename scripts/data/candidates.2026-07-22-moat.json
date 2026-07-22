@@ -1,0 +1,73 @@
+[
+  {
+    "slug": "screencache",
+    "name": "Private Screen Recorder (local, pay-once)",
+    "category": "Screen recording",
+    "pitch": "Record your screen to a local file — no upload, no account, no cloud. A pay-once alternative to Loom/Screencastify.",
+    "_evidence": "Counts are order-of-magnitude estimates from public sources; confirm on the store before building. Incumbents are PAID CLOUD tools that upload every recording — the local + pay-once wedge is genuine and on-brand.",
+    "competitors": [
+      { "name": "Screencastify", "users": 10000000, "model": "freemium", "priceUsd": 7, "period": "mo", "freeCap": "5 min/video, 30/mo, watermark", "complaints": ["upload", "price"] },
+      { "name": "Loom", "users": 4000000, "model": "subscription", "priceUsd": 12, "period": "mo", "freeCap": "5 min/video, 25 videos", "complaints": ["upload", "price", "account"] },
+      { "name": "Awesome Screenshot & Recorder", "users": 2000000, "model": "freemium", "priceUsd": 5, "period": "mo", "freeCap": "length + cloud limits", "complaints": ["price", "upload"] }
+    ],
+    "build": { "localOnly": true, "needsServer": false, "needsOAuth": false, "needsScraping": false, "estDays": 3, "inBrowserML": false },
+    "tosClean": true,
+    "tosNotes": "Records the user's own screen via getDisplayMedia; touches no third-party platform or account.",
+    "supportRisk": "medium",
+    "supportNotes": "getDisplayMedia/MediaRecorder audio + codec edge cases — scope tight (tab/screen + mic → webm download) to keep support low.",
+    "moat": "medium",
+    "priceHintUsd": 19
+  },
+  {
+    "slug": "local-ocr",
+    "name": "Local OCR / Screenshot-to-Text",
+    "category": "OCR",
+    "pitch": "Extract text from any image or screenshot, 100% local.",
+    "_evidence": "Shelf is dominated by FREE local OCR tools (Copyfish, Text Capture OCR, Image-to-Text). No paid incumbent with painful limits — expect gate #2 to fail.",
+    "competitors": [
+      { "name": "Copyfish", "users": 700000, "model": "free", "freeCap": "", "complaints": ["accuracy"] },
+      { "name": "Text Capture OCR", "users": 100000, "model": "free", "freeCap": "", "complaints": [] },
+      { "name": "Image to Text (OCR)", "users": 200000, "model": "free", "freeCap": "", "complaints": [] }
+    ],
+    "build": { "localOnly": true, "needsServer": false, "needsOAuth": false, "needsScraping": false, "estDays": 3, "inBrowserML": true },
+    "tosClean": true,
+    "supportRisk": "medium",
+    "moat": "high",
+    "priceHintUsd": 15
+  },
+  {
+    "slug": "exif-remover",
+    "name": "Local EXIF / Metadata Remover",
+    "category": "Photo privacy",
+    "pitch": "Strip GPS + camera metadata from photos before you share them, 100% local.",
+    "_evidence": "Real privacy wedge, but the shelf is mostly FREE (Metadata Remover, EXIF Remover, Remove Metadata Online). Pay-once monetization is contested.",
+    "competitors": [
+      { "name": "Metadata Remover", "users": 40000, "model": "free", "freeCap": "", "complaints": [] },
+      { "name": "EXIF Remover", "users": 20000, "model": "free", "freeCap": "", "complaints": [] },
+      { "name": "Remove Metadata Online", "users": 10000, "model": "free", "freeCap": "", "complaints": [] },
+      { "name": "AI Metadata Cleaner", "users": 15000, "model": "freemium", "freeCap": "10 images/batch free", "complaints": ["price"] }
+    ],
+    "build": { "localOnly": true, "needsServer": false, "needsOAuth": false, "needsScraping": false, "estDays": 2, "inBrowserML": false },
+    "tosClean": true,
+    "supportRisk": "low",
+    "moat": "low",
+    "priceHintUsd": 9
+  },
+  {
+    "slug": "qr-local",
+    "name": "Local QR Generator + Reader",
+    "category": "QR codes",
+    "pitch": "Make and scan QR codes locally — static only, no tracking redirects, no dashboard.",
+    "_evidence": "Big category but the popular extensions are FREE with zero permissions; paid incumbents are web SaaS (dynamic/tracking QR). Pay-once wedge is contested by free clones.",
+    "competitors": [
+      { "name": "QR Code Generator", "users": 700000, "model": "free", "freeCap": "", "complaints": ["tracking"] },
+      { "name": "The QR Code Generator", "users": 700000, "model": "free", "freeCap": "", "complaints": ["tracking"] },
+      { "name": "qr-code-generator.com (web SaaS)", "users": 300000, "model": "subscription", "priceUsd": 12, "period": "mo", "freeCap": "dynamic QR + analytics paywalled", "complaints": ["price", "privacy"] }
+    ],
+    "build": { "localOnly": true, "needsServer": false, "needsOAuth": false, "needsScraping": false, "estDays": 2, "inBrowserML": false },
+    "tosClean": true,
+    "supportRisk": "low",
+    "moat": "low",
+    "priceHintUsd": 9
+  }
+]
