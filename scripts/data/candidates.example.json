@@ -1,0 +1,87 @@
+[
+  {
+    "slug": "pdf-toolkit",
+    "name": "Local PDF Toolkit",
+    "category": "PDF tools",
+    "pitch": "Merge, split, redact and compress PDFs 100% in the browser — your documents never upload.",
+    "competitors": [
+      { "name": "Smallpdf", "users": 5000000, "model": "subscription", "priceUsd": 12, "period": "mo", "freeCap": "2 tasks/day", "complaints": ["price", "upload"] },
+      { "name": "iLovePDF", "users": 3000000, "model": "subscription", "priceUsd": 7, "period": "mo", "freeCap": "task + size limits", "complaints": ["privacy", "price", "upload"] },
+      { "name": "Sejda PDF", "users": 40000, "model": "freemium", "freeCap": "3 tasks/hour", "complaints": ["upload"] }
+    ],
+    "build": { "localOnly": true, "needsServer": false, "needsOAuth": false, "needsScraping": false, "estDays": 3, "inBrowserML": false },
+    "tosClean": true,
+    "tosNotes": "Operates only on files the user opens locally; touches no third-party platform.",
+    "supportRisk": "low",
+    "supportNotes": "Deterministic file operations — no per-site DOM breakage.",
+    "moat": "medium",
+    "priceHintUsd": 15
+  },
+  {
+    "slug": "image-forge",
+    "name": "Local Image Converter",
+    "category": "Image tools",
+    "pitch": "HEIC→JPG, WebP, resize and EXIF/GPS strip — all WASM, nothing leaves the device.",
+    "competitors": [
+      { "name": "Cloud Convert", "users": 900000, "model": "subscription", "priceUsd": 9, "period": "mo", "freeCap": "25 conversions/day", "complaints": ["price", "upload"] },
+      { "name": "Image Converter X", "users": 500000, "model": "freemium", "freeCap": "watermark on free", "complaints": ["privacy"] },
+      { "name": "HEIC Helper", "users": 60000, "model": "free", "freeCap": "", "complaints": ["ads"] }
+    ],
+    "build": { "localOnly": true, "needsServer": false, "needsOAuth": false, "needsScraping": false, "estDays": 2, "inBrowserML": false },
+    "tosClean": true,
+    "tosNotes": "Pure client-side codecs; no external services.",
+    "supportRisk": "low",
+    "supportNotes": "Format edge cases only; no site-specific behavior.",
+    "moat": "medium",
+    "priceHintUsd": 12
+  },
+  {
+    "slug": "devtoolbox",
+    "name": "Offline Dev Toolbox",
+    "category": "Developer tools",
+    "pitch": "Regex, cron, JWT, timestamp, base64, color — an offline pocket toolbox that pairs with JSONPeek.",
+    "competitors": [
+      { "name": "DevUtils (mac)", "users": 200000, "model": "one-time", "priceUsd": 30, "period": "once", "freeCap": "trial only", "complaints": ["price"] },
+      { "name": "IT-Tools clones", "users": 300000, "model": "free", "freeCap": "", "complaints": ["privacy"] },
+      { "name": "Web Dev Utilities", "users": 15000, "model": "freemium", "freeCap": "limited tools free", "complaints": [] }
+    ],
+    "build": { "localOnly": true, "needsServer": false, "needsOAuth": false, "needsScraping": false, "estDays": 3, "inBrowserML": false },
+    "tosClean": true,
+    "tosNotes": "Self-contained utilities; no network.",
+    "supportRisk": "low",
+    "moat": "low",
+    "priceHintUsd": 12
+  },
+  {
+    "slug": "linkedin-autoconnect",
+    "name": "LinkedIn Auto-Connect (REJECT EXAMPLE)",
+    "category": "Social automation",
+    "pitch": "Bulk-send connection requests automatically. Included to show gate #4 catching it.",
+    "competitors": [
+      { "name": "Dux-Soup", "users": 400000, "model": "subscription", "priceUsd": 15, "period": "mo", "freeCap": "limited actions", "complaints": ["price", "bans"] },
+      { "name": "LinkedHelper", "users": 300000, "model": "subscription", "priceUsd": 15, "period": "mo", "freeCap": "trial", "complaints": ["bans"] },
+      { "name": "Octopus CRM", "users": 200000, "model": "subscription", "priceUsd": 10, "period": "mo", "freeCap": "trial", "complaints": ["bans"] }
+    ],
+    "build": { "localOnly": false, "needsServer": false, "needsOAuth": false, "needsScraping": true, "estDays": 3 },
+    "tosClean": false,
+    "tosNotes": "Automates actions on a third-party platform against its ToS — listings get pulled, accounts banned. Whole business gone.",
+    "supportRisk": "high",
+    "supportNotes": "Breaks every time LinkedIn changes its DOM.",
+    "priceHintUsd": 15
+  },
+  {
+    "slug": "thin-niche",
+    "name": "Ultra-Niche Tool (REJECT EXAMPLE)",
+    "category": "Niche",
+    "pitch": "Only one real competitor at scale. Included to show gate #1 (proven demand) catching it.",
+    "competitors": [
+      { "name": "The Only Incumbent", "users": 80000, "model": "subscription", "priceUsd": 5, "period": "mo", "freeCap": "limited", "complaints": ["price"] },
+      { "name": "Tiny A", "users": 900, "model": "free", "freeCap": "", "complaints": [] },
+      { "name": "Tiny B", "users": 300, "model": "free", "freeCap": "", "complaints": [] }
+    ],
+    "build": { "localOnly": true, "needsServer": false, "needsOAuth": false, "needsScraping": false, "estDays": 2 },
+    "tosClean": true,
+    "supportRisk": "low",
+    "priceHintUsd": 12
+  }
+]

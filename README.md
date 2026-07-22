@@ -11,6 +11,7 @@ human interaction in the sales loop.
 | [RESEARCH.md](RESEARCH.md) | The evidence: why "fast automated money" strategies measurably lose, and why shipping products is the lane with positive expected value |
 | [PLAYBOOK.md](PLAYBOOK.md) | The operating system: weekly ship loop, niche checklist, pricing, kill/feed rules |
 | [FOUNDER_SETUP.md](FOUNDER_SETUP.md) | The ~60 minutes of one-time human steps (accounts, uploads) |
+| [SCOUT_RUNBOOK.md](SCOUT_RUNBOOK.md) | The weekly automation: niche scout + scoreboard autopilot that draft build/kill/feed issues |
 
 ## Products
 
@@ -193,6 +194,24 @@ npm run build   # produce the uploadable zip in dist/
 All products share the same factory: Playwright test harnesses, generated
 store assets, listing kits, and a `release/` folder carrying the current
 store-upload zip.
+
+## Factory operations (`scripts/`)
+
+The weekly decisions run on deterministic engines so hope never overrides the
+math — see [SCOUT_RUNBOOK.md](SCOUT_RUNBOOK.md) for the operator flow.
+
+```bash
+npm run scout          # score candidate niches vs the PLAYBOOK checklist → build issue
+npm run scoreboard     # apply kill/feed rules to weekly stats → feed/iterate/archive issues
+npm run check          # Chrome Web Store submission-readiness validator
+npm test               # 44 engine tests (scout + scoreboard)
+```
+
+- `scripts/lib/` — the pure scoring engines (`scout.mjs`, `scoreboard.mjs`)
+- `scripts/data/*.example.json` — the input schemas, filled with worked examples
+- `scripts/tests/` — the engine test suites
+- Generated issue bodies land in `scout-out/` (gitignored), ready to file via
+  the GitHub MCP or paste by hand.
 
 Site: `docs/` (GitHub Pages) — portfolio page, per-product landing pages and
 privacy policies. Support: GitHub issue templates in `.github/ISSUE_TEMPLATE/`.

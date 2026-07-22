@@ -1,0 +1,13 @@
+{
+  "name": "getrichfast",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Product-factory operations: niche scout + scoreboard autopilot that turn evidence into build/kill/feed GitHub issues.",
+  "type": "module",
+  "scripts": {
+    "scout": "node scripts/niche-scout.mjs",
+    "scoreboard": "node scripts/scoreboard.mjs",
+    "check": "node scripts/check-release.mjs",
+    "test": "node scripts/tests/scout.test.mjs && node scripts/tests/scoreboard.test.mjs"
+  }
+}

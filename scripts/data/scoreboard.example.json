@@ -1,0 +1,68 @@
+[
+  {
+    "product": "focusfence",
+    "liveSince": "2026-06-01",
+    "indexed": true,
+    "installs": 820,
+    "weeklyUsers": 310,
+    "proSalesThisWeek": 7,
+    "revenueTotal": 540,
+    "listingIteratedAt": null,
+    "_note": "≥5 Pro sales this week → FEED"
+  },
+  {
+    "product": "copymark",
+    "liveSince": "2026-06-10",
+    "indexed": true,
+    "installs": 22,
+    "weeklyUsers": 5,
+    "proSalesThisWeek": 0,
+    "revenueTotal": 0,
+    "listingIteratedAt": null,
+    "_note": "42d live, flat, never iterated → ITERATE_LISTING (one shot before archive)"
+  },
+  {
+    "product": "snipshot",
+    "liveSince": "2026-05-20",
+    "indexed": true,
+    "installs": 31,
+    "weeklyUsers": 3,
+    "proSalesThisWeek": 0,
+    "revenueTotal": 0,
+    "listingIteratedAt": "2026-06-25",
+    "_note": "iterated 27d ago, still flat → ARCHIVE (no sunk-cost polishing)"
+  },
+  {
+    "product": "pagepulse",
+    "liveSince": "2026-06-15",
+    "indexed": true,
+    "installs": 40,
+    "weeklyUsers": 8,
+    "proSalesThisWeek": 0,
+    "revenueTotal": 0,
+    "listingIteratedAt": "2026-07-15",
+    "_note": "iterated 7d ago → HOLD until the 14d grace period ends"
+  },
+  {
+    "product": "jsonpeek",
+    "liveSince": "2026-07-14",
+    "indexed": true,
+    "installs": 12,
+    "weeklyUsers": 6,
+    "proSalesThisWeek": 1,
+    "revenueTotal": 12,
+    "listingIteratedAt": null,
+    "_note": "only 8d live → HOLD (pre-30d window, too early to judge)"
+  },
+  {
+    "product": "snipkey",
+    "liveSince": "2026-05-01",
+    "indexed": true,
+    "installs": 240,
+    "weeklyUsers": 62,
+    "proSalesThisWeek": 2,
+    "revenueTotal": 90,
+    "listingIteratedAt": null,
+    "_note": "above kill floor, converting slowly → HOLD"
+  }
+]
