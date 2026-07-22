@@ -13,22 +13,31 @@ import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { evaluateBoard, renderScoreboard, renderActionIssue, actionableRows } from "./lib/scoreboard.mjs";
+import { parseArgs } from "./lib/cli.mjs";
 
 const root = path.dirname(path.dirname(fileURLToPath(import.meta.url)));
-const args = process.argv.slice(2);
-const jsonOut = args.includes("--json");
-const outIdx = args.indexOf("--out");
-const outDir = outIdx >= 0 ? args[outIdx + 1] : path.join(root, "scout-out");
-const dateIdx = args.indexOf("--date");
-const now = dateIdx >= 0 ? new Date(args[dateIdx + 1] + "T12:00:00Z") : new Date();
-const consumed = new Set([args[outIdx + 1], args[dateIdx + 1]]);
-const inputArg = args.find((a) => !a.startsWith("--") && !consumed.has(a));
-const inputPath = inputArg || path.join(root, "scripts", "data", "scoreboard.example.json");
+const opts = parseArgs(process.argv.slice(2), ["--out", "--date"]);
 
+if (opts.help) {
+  console.log("Usage: node scripts/scoreboard.mjs [stats.json] [--json] [--out DIR] [--date YYYY-MM-DD]");
+  console.log("  stats.json       array of product stats (schema: scripts/data/scoreboard.example.json)");
+  console.log("  --json           print the evaluated rows as JSON, write no files");
+  console.log("  --out DIR        where to write action-*.md issue bodies (default: scout-out/)");
+  console.log("  --date YYYY-MM-DD  pin 'today' for a reproducible run (default: now)");
+  process.exit(0);
+}
+if (opts.unknown.length) {
+  console.error(`✗ unknown option(s): ${opts.unknown.join(", ")} (try --help)`);
+  process.exit(2);
+}
+
+const outDir = opts.out || path.join(root, "scout-out");
+const now = opts.date ? new Date(opts.date + "T12:00:00Z") : new Date();
 if (Number.isNaN(now.getTime())) {
   console.error("✗ --date must be YYYY-MM-DD");
   process.exit(2);
 }
+const inputPath = opts._[0] || path.join(root, "scripts", "data", "scoreboard.example.json");
 
 let products;
 try {
@@ -41,19 +50,19 @@ try {
 
 const rows = evaluateBoard(products, now);
 
-if (jsonOut) {
+if (opts.json) {
   console.log(JSON.stringify(rows, null, 2));
   process.exit(0);
 }
 
+console.log(`(scored ${path.relative(root, inputPath)} as of ${now.toISOString().slice(0, 10)})\n`);
 console.log(renderScoreboard(rows));
 
 const acting = actionableRows(rows);
 if (acting.length) {
   fs.mkdirSync(outDir, { recursive: true });
   for (const r of acting) {
-    const file = path.join(outDir, `action-${r.action.toLowerCase()}-${r.product}.md`);
-    fs.writeFileSync(file, renderActionIssue(r) + "\n");
+    fs.writeFileSync(path.join(outDir, `action-${r.action.toLowerCase()}-${r.product}.md`), renderActionIssue(r) + "\n");
   }
   console.log(`\n↳ ${acting.length} action issue(s) written to ${path.relative(root, outDir)}/`);
 } else {
