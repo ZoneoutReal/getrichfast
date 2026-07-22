@@ -74,6 +74,25 @@ check("bigger proven market scores higher", evaluateCandidate(strong).score > ev
 const highMoat = { ...strong, slug: "moat", moat: "high" };
 check("higher moat scores higher", evaluateCandidate(highMoat).score > evaluateCandidate(strong).score, `${evaluateCandidate(highMoat).score} vs ${evaluateCandidate(strong).score}`);
 
+// free-clone saturation — a shelf full of free tools discounts the wedge
+const contested = {
+  ...strong,
+  slug: "contested",
+  competitors: [
+    { name: "Paid Inc", users: 3000000, model: "subscription", freeCap: "limits", complaints: ["privacy", "price"] },
+    { name: "Free Clone A", users: 200000, model: "free", complaints: [] },
+    { name: "Free Clone B", users: 80000, model: "free", complaints: [] },
+  ],
+};
+const contestedEval = evaluateCandidate(contested);
+check("free clones at scale → monetizationRisk high", contestedEval.monetizationRisk === "high", `${contestedEval.monetizationRisk} (freeAtScale=${contestedEval.freeAtScale})`);
+check("still qualifies (paid incumbent clears gate #2)", contestedEval.qualified === true, JSON.stringify(contestedEval.failedGates));
+const uncontested = { ...contested, slug: "uncontested", competitors: contested.competitors.map((c) => (c.model === "free" ? { ...c, model: "freemium" } : c)) };
+check("free-clone saturation lowers the score vs freemium rivals", evaluateCandidate(uncontested).score > contestedEval.score, `${evaluateCandidate(uncontested).score} vs ${contestedEval.score}`);
+check("gate #2 detail flags the contested shelf", contestedEval.gates[1].detail.includes("free competitor"), contestedEval.gates[1].detail);
+check("issue body warns on monetization risk", renderIssue(contestedEval).includes("Monetization risk"), "");
+check("no free clones → risk low", evaluateCandidate(strong).monetizationRisk === "low", evaluateCandidate(strong).monetizationRisk);
+
 // ranking — qualified before disqualified, higher score first
 const ranked = rankCandidates([thinDemand, strong, highMoat]);
 check("ranking puts qualified first", ranked[0].qualified && ranked[ranked.length - 1].qualified === false, ranked.map((r) => r.slug).join(","));

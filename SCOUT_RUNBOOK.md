@@ -73,6 +73,13 @@ The 5 gates are all-or-nothing; the opportunity score (0–100) only ranks the
 candidates that already passed. Weights: demand .30, wedge .25, build .15,
 support .15, moat .15.
 
+**Monetization risk:** a paid incumbent clears gate #2, but if the shelf is
+already full of *free* local clones (competitors priced `free` at ≥10k
+installs), the pay-once wedge is contested. Those discount the wedge score and
+raise a `monetizationRisk: medium|high` flag in the build issue — the trap
+commodity local niches (PDF, HEIC) fall into. A high-risk candidate should only
+be built with a capability the free clones lack, not on price alone.
+
 ---
 
 ## Part B — Scoreboard autopilot (the kill/feed call)

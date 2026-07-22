@@ -43,6 +43,12 @@ function evaluateGates(c) {
   const wedge = wedgeSignals(competitors);
   const wedgeCount = Object.values(wedge).filter(Boolean).length;
   const support = (c.supportRisk || "").toLowerCase();
+  // Free-clone saturation: a paid incumbent clears gate #2, but if the shelf
+  // is already full of *free* local tools at scale, a pay-once wedge is
+  // contested no matter how the incumbent prices. Surfaced in scoring/rendering
+  // as monetization risk — the exact trap that commodity local niches (PDF,
+  // HEIC) fall into once every capability has a free clone.
+  const freeAtScale = competitors.filter((x) => x.model === "free" && (x.users || 0) >= DEMAND_MIN_USERS).length;
 
   const gates = [
     {
@@ -56,9 +62,10 @@ function evaluateGates(c) {
       name: "Monetization wedge",
       pass: wedgeCount >= 1,
       detail:
-        wedgeCount >= 1
+        (wedgeCount >= 1
           ? "wedge: " + Object.entries(wedge).filter(([, v]) => v).map(([k]) => k).join(", ")
-          : "no subscription / painful limit / privacy-or-price complaint found",
+          : "no subscription / painful limit / privacy-or-price complaint found") +
+        (freeAtScale > 0 ? ` · ⚠ ${freeAtScale} free competitor(s) ≥ ${DEMAND_MIN_USERS.toLocaleString()} installs (contested)` : ""),
     },
     {
       id: 3,
@@ -88,7 +95,7 @@ function evaluateGates(c) {
     },
   ];
 
-  return { gates, qualifying, wedge, wedgeCount, support };
+  return { gates, qualifying, wedge, wedgeCount, support, freeAtScale };
 }
 
 // --- opportunity score (only meaningful once all gates pass) ---------------
@@ -100,7 +107,10 @@ function scoreParts(c, ev) {
   const totalQualUsers = ev.qualifying.reduce((s, x) => s + (x.users || 0), 0);
   // 10k → 0, 10M → 1 on a log scale (BlockSite-at-5M lands ~0.9).
   const demand = totalQualUsers > 0 ? clamp((Math.log10(totalQualUsers) - 4) / 3, 0, 1) : 0;
-  const wedge = ev.wedgeCount / 4;
+  // Free-clone saturation discounts the wedge: a shelf full of free local
+  // tools halves what a pay-once angle is worth, even with a paid incumbent.
+  const freePressure = clamp((ev.freeAtScale || 0) / 3, 0, 1);
+  const wedge = (ev.wedgeCount / 4) * (1 - 0.5 * freePressure);
   const estDays = (c.build && c.build.estDays) || MAX_BUILD_DAYS;
   const build = clamp((MAX_BUILD_DAYS + 1 - estDays) / MAX_BUILD_DAYS, 0, 1); // 1d→1, 3d→0.33
   const support = ev.support === "low" ? 1 : ev.support === "medium" ? 0.5 : 0;
@@ -135,6 +145,8 @@ export function evaluateCandidate(c) {
     wedge: ev.wedge,
     qualified,
     failedGates: failed.map((g) => `#${g.id} ${g.name}`),
+    monetizationRisk: ev.freeAtScale >= 2 ? "high" : ev.freeAtScale === 1 ? "medium" : "low",
+    freeAtScale: ev.freeAtScale,
     scoreParts: parts && Object.fromEntries(Object.entries(parts).map(([k, v]) => [k, round2(v)])),
     score,
   };
@@ -192,6 +204,14 @@ export function renderIssue(e) {
     "### Opportunity score",
     `\`${e.score}/100\` = demand ${parts.demand} · wedge ${parts.wedge} · build ${parts.build} · support ${parts.support} · moat ${parts.moat} (weighted)`,
     "",
+  );
+  if (e.monetizationRisk && e.monetizationRisk !== "low") {
+    out.push(
+      `> ⚠️ **Monetization risk: ${e.monetizationRisk}.** ${e.freeAtScale} free competitor(s) already at scale — the pay-once wedge is contested. Only build if you can lead hard on a capability the free clones lack (else this is a commodity race to the bottom).`,
+      "",
+    );
+  }
+  out.push(
     "### Definition of done (from PLAYBOOK)",
     `- [ ] Clone the SnipKey factory structure into \`products/${slug}/\``,
     "- [ ] Core feature working, 100% local (no server / OAuth / scraping)",
