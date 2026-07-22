@@ -15,7 +15,10 @@ winner**. Claude Code makes each shot cost hours instead of weeks.
 ## The weekly loop
 
 **Monday — pick (or skip).** Scan for a niche using the checklist below. No
-qualified niche = no build this week; polish a winner instead.
+qualified niche = no build this week; polish a winner instead. The
+**niche scout** (`npm run scout`) automates this: feed it evidence about
+candidate niches and it scores them against the checklist below and drafts a
+"build this" issue for the top qualifier — see `SCOUT_RUNBOOK.md`.
 
 **Tuesday–Thursday — build.** Clone the SnipKey structure
 (`products/snipkey/` is the template: extension + tests + icon/screenshot
@@ -27,6 +30,9 @@ Never wait for a review to start the next cycle.
 
 **Every Monday — read the scoreboard.** Store stats for each live product:
 impressions, installs, weekly users, Pro conversions. Apply kill/feed rules.
+The **scoreboard autopilot** (`npm run scoreboard`) does this mechanically:
+paste the week's dashboard numbers and it applies the kill/feed rules below and
+drafts a Feed/Iterate/Archive issue per product that needs one.
 
 ## Niche qualification checklist (all must pass)
 
